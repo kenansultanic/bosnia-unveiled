@@ -1,0 +1,11 @@
+@import "../../scss/themes";
+
+.destination-card-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 40%;
+    @include themify($themes) {
+        border: 3px solid themed("secondaryColor");
+        box-shadow: themed("shadowColor") 0px 3px 8px;
+    }
+}

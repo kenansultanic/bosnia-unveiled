@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./scss/app.scss";
+import { useState } from "react";
+import Router from "./router";
+import Navigation from "./components/Navigation";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const [theme, setTheme] = useState("light");
+
+    return (
+        <div className={`theme-${theme}`}>
+            <div className="app-container">
+                <Navigation theme={theme} setTheme={setTheme} />
+                <Router />
+            </div>
+        </div>
+    )
 }
 
 export default App;

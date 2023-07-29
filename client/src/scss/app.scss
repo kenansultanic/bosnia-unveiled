@@ -1,0 +1,18 @@
+@import "./themes.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.app-container {
+    @include themify($themes) {
+        background-color: themed("backgroundColor");
+        color: themed("textColor");
+    }
+}
+.app-container > div:not(.navigation-container) {
+    min-height: 100vh;
+    padding: 150px 125px;
+}
