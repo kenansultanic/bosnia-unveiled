@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
     origin: [process.env.ORIGIN!],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-    credentials: true
+    credentials: true,
 }));
 
 app.use('/', indexRouter);
