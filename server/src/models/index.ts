@@ -3,7 +3,7 @@ import { Model, Sequelize, DataTypes } from 'sequelize';
 export default class User extends Model {
     public id?: number;
     public name!: string;
-}
+};
 
 export const UserMap = async (sequelize: Sequelize) => {
     try {
