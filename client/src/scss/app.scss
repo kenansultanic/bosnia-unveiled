@@ -7,12 +7,22 @@
 }
 
 .app-container {
+    background: {
+        image: url("../assets/pexels-ajdin-coric-16135959.jpg");
+        position: center;
+        repeat: no-repeat;
+        size: cover;
+        attachment: fixed;
+    }
+    font-family: "Roboto", sans-serif;
     @include themify($themes) {
-        background-color: themed("backgroundColor");
         color: themed("textColor");
     }
 }
 .app-container > div:not(.navigation-container) {
     min-height: 100vh;
-    padding: 150px 125px;
+}
+
+h1, h2, h3 {
+    font-family: "Abril Fatface", cursive;
 }

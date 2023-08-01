@@ -1,0 +1,45 @@
+@import "../../scss/themes";
+
+.search-bar-container {
+    position: fixed;
+    bottom: 10vh;
+    width: calc(100% - 300px);
+    height: 90px;
+    border-radius: 35px;
+    transition: transform 250ms;
+    overflow: hidden;
+    @include themify($themes) {
+        background-color: themed("backgroundColor");
+    }
+}
+.search-bar-snap-scrolled {
+    transform: translateY(-70vh);
+}
+
+.search-bar-form {
+    height: 100%;
+    display: flex;
+}
+.search-bar-inputs {
+    flex-basis: 100%;
+    margin: 10px;
+    border-radius: 25px;
+    @include themify($themes) {
+        background-color: themed("secondaryColor");
+    }
+}
+.search-bar-submit-button {
+    all: unset;
+    flex-basis: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    @include themify($themes) {
+        background-color: themed("primaryColor");
+    }
+}
+.search-bar-submit-button-icon {
+    font-size: 30px;
+    margin-right: 5px;
+}

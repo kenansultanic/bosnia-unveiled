@@ -10,6 +10,7 @@
     height: 75px;
     font-family: sans-serif;
     @include themify($themes) {
+        background-color: themed("secondaryColor");
         border-bottom: 5px solid themed("secondaryColor");
     }
 }
