@@ -4,13 +4,31 @@ import upload from 'express-fileupload';
 import cors from "cors";
 import bodyParser from 'body-parser';
 import { config } from "dotenv";
-import connect from './utils/db-connection';
+import connect, {sequelize} from './utils/db-connection';
 import indexRouter from "./routes/index";
+
+import 'dotenv/config';
+import { createAgent } from '@forestadmin/agent';
+import { createSequelizeDataSource } from '@forestadmin/datasource-sequelize';
 
 connect();
 config();
 
+
 const app = express();
+
+createAgent({
+    authSecret: process.env.FOREST_AUTH_SECRET!,
+    envSecret: process.env.FOREST_ENV_SECRET!,
+    isProduction: process.env.NODE_ENV === 'production',
+    typingsPath: './typings.ts',
+    typingsMaxDepth: 5,
+
+})
+    .addDataSource(createSequelizeDataSource(sequelize))
+    .mountOnExpress(app)
+    .start();
+
 const port = process.env.PORT ?? 4000;
 
 app.use(cookies());
@@ -23,6 +41,7 @@ app.use(cors({
     credentials: true,
 }));
 
+
 app.use('/', indexRouter);
 
 app.all('*', async (req: Request, res: Response, next: NextFunction) => {
@@ -32,6 +51,7 @@ app.all('*', async (req: Request, res: Response, next: NextFunction) => {
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res.json({ message: err.message || "an unknown error occurred" });
 });
+
 
 app.listen(port, () => {
     console.info(`Server is listening on port ${port}`);

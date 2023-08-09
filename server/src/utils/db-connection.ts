@@ -4,7 +4,7 @@ import { UserMap } from "../models";
 
 config();
 
-const sequelize = new Sequelize(process.env.DB_URI!, { logging: false });
+export const sequelize = new Sequelize(process.env.DB_URI!, { logging: false });
 
 const connect = async () => {
     try {
