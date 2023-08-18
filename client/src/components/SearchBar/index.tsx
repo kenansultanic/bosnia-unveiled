@@ -8,7 +8,7 @@ const SearchBar = () => {
     const cn = `search-bar${isSnapScrolled ? "-snap-scrolled" : ""}`;
 
     return (
-        <div className={`search-bar-container ${cn}`}>
+        <div className={`search-bar-container`}>
             <form className="search-bar-form">
                 <div className="search-bar-inputs"></div>
                 <button className="search-bar-submit-button">

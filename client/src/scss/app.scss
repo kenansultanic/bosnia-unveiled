@@ -1,4 +1,4 @@
-@import "./themes.scss";
+@import "../scss/variables";
 
 * {
     margin: 0;
@@ -6,23 +6,37 @@
     box-sizing: border-box;
 }
 
-.app-container {
-    background: {
-        image: url("../assets/pexels-ajdin-coric-16135959.jpg");
-        position: center;
-        repeat: no-repeat;
-        size: cover;
-        attachment: fixed;
-    }
-    font-family: "Roboto", sans-serif;
-    @include themify($themes) {
-        color: themed("textColor");
-    }
-}
-.app-container > div:not(.navigation-container) {
-    min-height: 100vh;
+html {
+    scroll-snap-type: y mandatory;
 }
 
-h1, h2, h3 {
-    font-family: "Abril Fatface", cursive;
+.app-container {
+    font-family: "Roboto", sans-serif;
+    color: $textColor1;
+}
+.app-container > div:not(.navigation-container) {
+    //min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: $bgColor2;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $bgColor2;
+    border-radius: $borderRadius1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $bgColor2;
 }

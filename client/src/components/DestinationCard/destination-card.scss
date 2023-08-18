@@ -1,9 +1,7 @@
-@import "../../scss/themes";
+@import "../../scss/variables";
 
 .destination-card-container {
-    border-radius: 45px;
-    @include themify($themes) {
-        border: 3px solid themed("secondaryColor");
-        box-shadow: themed("shadowColor") 0px 3px 8px;
-    }
+    //border-radius: $borderRadius2;
+    // border: 1px solid white;
+    //box-shadow: #0f0f0f 0px 3px 8px;
 }

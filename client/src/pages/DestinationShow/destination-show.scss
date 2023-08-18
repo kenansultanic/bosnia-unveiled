@@ -1,0 +1,269 @@
+@import "../../scss/variables";
+
+.dest-show {
+    display: flex;
+    justify-content: center;
+    padding: 120px 25px 50px 25px;
+    color: $textColor1;
+    background-color: $bgColor2;
+}
+.dest-show-container {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    grid-template-rows: 20vw 1fr auto;
+    gap: 10px;
+    max-width: 1920px;
+}
+
+.dest-heading-section, .dest-image-section, .dest-main-section {
+    border-radius: $borderRadius1;
+}
+
+.dest-heading-section {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 75px;
+    background: linear-gradient(160deg, #cee3f5 30%, #e1936f 75%, #dd4444);
+}
+.dest-heading-section::after {
+    content: "";
+    position: absolute;
+    bottom: calc($borderRadius1 * 2 * -1 - 9px);
+    right: 0;
+    width: calc($borderRadius1 * 2);
+    height: calc($borderRadius1 * 2);
+    border-radius: 50% 50% 0 0;
+    box-shadow: 52px -25px $bgColor2;
+}
+.dest-heading {
+    //background-color: red;
+}
+.dest-cta {
+    all: unset;
+    display: flex;
+    border-radius: $borderRadius1;
+    padding: 20px 30px;
+    font-size: 20px;
+    background-color: #deff58;
+}
+.dest-cta > span:first-child {
+    padding-right: 5px;
+}
+.dest-main-heading {
+    font-size: 84px;
+    font-weight: 900;
+    line-height: 1;
+}
+.dest-sub-heading {
+    font-size: 24px;
+}
+
+.dest-image-section {
+    position: relative;
+    height: 30vw;
+    outline: 10px solid $bgColor2;
+    background-color: #deff58;
+}
+.dest-main-image {
+    position: absolute;
+    inset: 15px;
+    border-radius: calc($borderRadius1 - 10px);
+    overflow: hidden;
+}
+.dest-main-image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+}
+.dest-gallery-open {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 40px;
+    outline: 15px solid #deff58;
+    border-radius: 50%;
+    color: $textColor2;
+    background-color: rgba(0, 0, 0, .9);
+}
+.dest-gallery-open > span {
+    font-size: 45px;
+}
+.dest-gallery-open::before {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: -56px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 25px 20px #deff58;
+}
+.dest-gallery-open::after {
+    content: "";
+    position: absolute;
+    top: -57px;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 20px 25px #deff58;
+}
+
+.dest-main-section {
+    grid-column: 1 / 3;
+    border-radius: $borderRadius1;
+    background: url("../../assets/scatter.png"), linear-gradient(155deg, #D3926C, #2E405B);
+}
+.dest-main-section-wrapper {
+    position: relative;
+    padding: 40px;
+}
+.dest-main-section-wrapper::after {
+    content: "";
+    position: absolute;
+    top: calc(10vw - 1px);
+    right: 0;
+    width: calc($borderRadius1 * 2);
+    height: calc($borderRadius1 * 2);
+    border-radius: $borderRadius1 $borderRadius1     0 0;
+    box-shadow: 50px -23px $bgColor2;
+}
+.dest-main-section-first-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.dest-description {
+    width: 53%;
+    min-height: 500px;
+    padding: 50px 25px;
+    font-size: $bodyFontSize;
+    line-height: 1.5;
+    border-radius: $borderRadius1;
+    color: $textColor2;
+    background-color: rgba(55, 55, 55, .75);
+}
+.dest-icon {
+    padding: 25px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, .5);
+}
+.dest-description > span:not(.dest-icon) {
+    display: block;
+    padding: 15px 0;
+}
+
+.dest-quick-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 375px 375px;
+    justify-content: space-between;
+    gap: 40px;
+    width: 42%;
+    height: auto;
+    margin-top: 10vw;
+}
+.dest-quick-info-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 25px 25px;
+    color: $textColor2;
+    line-height: 1.5;
+    border-radius: $borderRadius1;
+    background-color: rgba(55, 55, 55, .75);
+}
+.dest-quick-info-card-heading {
+    font-size: 20px;
+    font-weight: 600;
+}
+.dest-quick-info-card-paragraph {
+    font-size: $bodyFontSize;
+    margin-top: 15px;
+}
+.dest-quick-info-card-sub-paragraph {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: $borderRadius1;
+    background-color: rgba(0, 0, 0, .25);
+}
+
+
+.dest-main-section-second-part {
+    display: flex;
+    justify-content: space-between;
+}
+.dest-map-container {
+    flex-basis: 53%;
+    margin-top: -50px;
+}
+.dest-map {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: $borderRadius1;
+}
+.dest-bus-schedules {
+    flex-basis: 42%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 50px;
+    padding: 25px;
+    color: $textColor2;
+    border-radius: $borderRadius1;
+    background-color: rgba(55, 55, 55, .75);
+}
+.dest-bus-schedules-heading {
+    font-size: 20px;
+    font-weight: 600;
+}
+.dest-bus-schedule-line {
+    width: 100%;
+    height: 1px;
+    margin-top: 45px;
+    background-color: $textColor2;
+}
+
+.dest-main-section-suggested {
+    margin-top: 50px;
+}
+.dest-suggested-heading {
+    font-size: 48px;
+    color: $textColor2;
+}
+.dest-suggested-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 15px;
+}
+.dest-suggested-card {
+    height: 300px;
+    flex-basis: 100%;
+    border-radius: $borderRadius1;
+    background-color: rgba(55, 55, 55, .75);
+}
+
+
+.dest-footer {
+    grid-column: 1 / 3;
+    display: grid;
+    place-items: center;
+    height: 300px;
+    margin-top: 10px;
+    border-radius: $borderRadius1;
+    background-color: #deff58;
+}
+.dest-footer-heading {
+    font-size: 48px;
+}
