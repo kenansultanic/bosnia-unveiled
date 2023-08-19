@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('',include("panel.urls")),
     path('proba/', include("panel.urls")),
     path('admin/', admin.site.urls),
 ]
