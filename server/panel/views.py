@@ -1,12 +1,12 @@
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
-
-from panel.models import Destination
+from .models import Destination
 
 
 def index(request):
     return HttpResponse("Hello, world. You're at the panel index.")
+
 
 @api_view(['GET'])
 def getAllDestionations(request):
@@ -22,6 +22,7 @@ def getAllDestionations(request):
             'description': fields.description
         })
     return JsonResponse(data, safe=False)
+
 
 @api_view(['GET'])
 def getDestionation(request, destination_id):
