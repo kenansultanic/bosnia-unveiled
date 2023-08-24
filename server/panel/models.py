@@ -15,6 +15,11 @@ class OpenTime(models.Model):
     def __str__(self) -> str:
         return self.title
 
+    def to_dict(self):
+        return {
+            'title': self.title,
+            'sub_title': self.sub_title
+        }
 
 class PublicTransportLine(models.Model):
 
@@ -31,6 +36,14 @@ class PublicTransportLine(models.Model):
         default=TransportationType.BUS
     )
 
+    def to_dict(self):
+        return {
+            'departure_from': self.departure_from,
+            'departure_time': self.departure_time,
+            'arrival_time': self.arrival_time,
+            'transportation_type': self.transportation_type
+        }
+
 
 
 class Location(models.Model):
@@ -40,6 +53,11 @@ class Location(models.Model):
     def __str__(self) -> str:
         return f'{self.latitude}, {self.longitude}'
 
+    def to_dict(self):
+        return {
+            'latitude': self.latitude,
+            'longitude': self.longitude
+        }
 
 class Destination(models.Model):
     title = models.CharField(max_length=200, blank=False, unique=True) #unique=true
