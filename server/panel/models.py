@@ -34,8 +34,8 @@ class PublicTransportLine(models.Model):
 
 
 class Location(models.Model):
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(blank=False) #min_value=-90.0, max_value=90.0
+    longitude = models.FloatField(blank=False)
 
     def __str__(self) -> str:
         return f'{self.latitude}, {self.longitude}'
@@ -46,9 +46,10 @@ class Destination(models.Model):
     sub_title = models.CharField(max_length=200, unique=True) #unique=true
     description = models.TextField(max_length=1000, blank=False)
     image = models.ImageField(upload_to='images/', max_length=255, blank=False)
+    location = models.OneToOneField(Location, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category, blank=False)
-    open_time = models.ForeignKey(OpenTime, on_delete=models.CASCADE) 
-    public_transport_schedules = models.ForeignKey(PublicTransportLine, on_delete=models.CASCADE)
+    open_time = models.ForeignKey(OpenTime, on_delete=models.CASCADE)
+    public_transport_schedules = models.OneToOneField(PublicTransportLine, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.title
