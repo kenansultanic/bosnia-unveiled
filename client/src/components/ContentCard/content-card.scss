@@ -1,0 +1,87 @@
+@import "../../scss/variables";
+
+.content-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 30px;
+    line-height: 1.5;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: $borderRadiusChild;
+    background-color: $elementBgColor;
+}
+.content-card-icon {
+    padding: 25px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    border-radius: 50%;
+    background-color: $elementHighlightBgColor;
+}
+.content-card-heading {
+    font-size: 20px;
+    font-weight: 600;
+}
+.content-card-paragraph {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: $bodyFontSize;
+    margin-top: 15px;
+}
+.content-card-category {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 15px 5px 10px;
+    margin-top: 5px;
+    border-radius: $borderRadiusParent;
+    background-color: $elementHighlightBgColor;
+}
+.dest-description > h3 {
+    font-size: 24px;
+}
+.dest-description > .content-card-paragraph > p {
+    padding: 15px 0;
+}
+
+// Media queries
+@media screen and (max-width: 1440px) {
+    .content-card {
+        padding: 25px;
+    }
+    .content-card-icon {
+        padding: 20px;
+        margin-bottom: 25px;
+        font-size: 25px;
+    }
+    .content-card-heading {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 1280px) {
+    .content-card {
+        padding: 30px;
+    }
+    .content-card-category {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 960px) {
+    .content-card {
+        padding: 30px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .content-card-icon {
+        padding: 15px;
+        margin-bottom: 15px;
+        font-size: 20px;
+    }
+    .content-card-heading {
+        font-size: 18px;
+    }
+    .content-card-paragraph {
+        font-size: 16px;
+    }
+}

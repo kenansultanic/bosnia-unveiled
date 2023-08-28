@@ -1,0 +1,93 @@
+@import "../../scss/variables";
+
+.button {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: $borderRadiusChild;
+    padding: 15px 25px;
+    font-size: $bodyFontSize;
+}
+.button:not(.button-dest-gallery-open) > span:first-child {
+    font-size: 24px;
+    padding-right: 7px;
+}
+
+.button-primary {
+    background-color: $primaryColor;
+}
+
+.button-secondary {
+    background-color: $secondaryColor;
+}
+
+.button-submit {
+    background-color: red;
+}
+
+.button-dest-gallery-open {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 45px;
+    outline: 15px solid $primaryColor;
+    border: none;
+    border-radius: 50%;
+    color: $elementTextColor;
+    background-color: rgba(0, 0, 0, .75);
+}
+.button-dest-gallery-open > span { font-size: 35px; }
+.button-dest-gallery-open::before { // inverted border radius
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: -56px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 25px 20px $primaryColor;
+}
+.button-dest-gallery-open::after { // inverted border radius
+    content: "";
+    position: absolute;
+    top: -57px;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 20px 25px $primaryColor;
+    //background-color: red;
+}
+
+
+// Media queries
+@media screen and (max-width: 960px) {
+    .button-dest-gallery-open {
+        padding: 35px;
+    }
+    .button-dest-gallery-open > span {
+        font-size: 30px;
+    }
+    .button-dest-gallery-open::before, .button-dest-gallery-open::after {
+        width: 40px;
+        height: 40px;
+    }
+    .button-dest-gallery-open::before {
+        bottom: 1px;
+        left: -49px;
+        box-shadow: 20px 15px $primaryColor;
+    }
+    .button-dest-gallery-open::after {
+        top: -49px;
+        right: 0;
+        box-shadow: 15px 20px $primaryColor;
+    }
+}
+@media screen and (max-width: 560px) {
+    .button-dest-gallery-open {
+        padding: 30px;
+    }
+    .button-dest-gallery-open > span {
+        font-size: 25px;
+    }
+}

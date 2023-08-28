@@ -1,20 +1,29 @@
 // COLOURS
-$primaryColor: #A9E23D;
+// $primaryColor: #deff58;
+$primaryColor: #FFD53D;
 $secondaryColor: #fff;
 $accentColor: #d41d6d;
-$bgColor1: #eeeff3;
-$bgColor2: #000;
-$textColor1: #262626;
-$textColor2: #fbfbfb;
+
+// $bgColor: #eeeff3;
+$bgColor: #fff7ef;
+// $elementBgColor: rgba(238, 239, 243, .2);
+$elementBgColor: rgba(0, 0, 0, .45);
+$elementHighlightBgColor: rgba(0, 0, 0, .45);
+
+$textColor: #262626;
+$elementTextColor: #fbfbfb;
 
 
 // FONT SIZES
 $mainHeadingFontSize: 72px;
+$subHeadingFontSize: 24px;
+
 $h1FontSize: 32px;
 $h2FontSize: 28px;
+$h3FontSize: 24px;
 $bodyFontSize: 18px;
 
 
 // BORDER RADIUS
-$borderRadius1: 48px;
-$borderRadius2: 30px;
+$borderRadiusParent: 72px;
+$borderRadiusChild: 62px;
