@@ -32,7 +32,6 @@ class PublicTransportLine(models.Model):
     )
 
 
-
 class Location(models.Model):
     latitude = models.FloatField(blank=False) #min_value=-90.0, max_value=90.0
     longitude = models.FloatField(blank=False)

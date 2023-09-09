@@ -2,6 +2,7 @@ from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from .models import Destination
+from dotenv import load_dotenv
 
 
 def index(request):
@@ -9,13 +10,13 @@ def index(request):
 
 
 @api_view(['GET'])
-def getAllDestionations(request):
-    list_of_destionations = Destination.objects.all()
-    res = serializers.serialize('json',list_of_destionations)
+def get_all_destinations(request):
+    list_of_destinations = Destination.objects.all()
+    res = serializers.serialize('json', list_of_destinations)
 
     data = []
-    for destionation in serializers.deserialize('json',res):
-        fields = destionation.object
+    for destination in serializers.deserialize('json', res):
+        fields = destination.object
         data.append({
             'id': fields.pk,
             'name': fields.name,
@@ -25,12 +26,12 @@ def getAllDestionations(request):
 
 
 @api_view(['GET'])
-def getDestionation(request, destination_id):
+def get_destination(request, destination_id):
     destination = Destination.objects.get(pk=destination_id)
-    res = serializers.serialize('json',[destination, ])
+    res = serializers.serialize('json', [destination])
 
     data = []
-    for destination1 in serializers.deserialize('json',res):
+    for destination1 in serializers.deserialize('json', res):
         fields = destination1.object
         data.append({
             'id': fields.pk,
