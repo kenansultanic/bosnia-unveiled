@@ -1,24 +1,23 @@
 import "./destination-card.scss";
 import Tilt from "react-parallax-tilt";
 
-interface DestinationCardProps {
-    width: string,
-    height: string,
-    className?: string
+interface Props {
+    className?: string,
+    orientation: string,
+    image: string
 }
 
-const DestinationCard = ({ width, height, className }: DestinationCardProps) => {
+const DestinationCard = ({ className, orientation, image }: Props) => {
     return (
         <Tilt
             tiltMaxAngleX={3}
             tiltMaxAngleY={3}
             perspective={500}
-            className={`destination-card-container ${className}`}
-            style={{
-                width,
-                height
-            }}>
-            DestinationCard
+            className={`dest-card ${className}`}>
+            <div className="dest-card-img">
+                <img src={image} />
+            </div>
+            <div className="dest-card-description"></div>
         </Tilt>
     );
 };

@@ -25,9 +25,9 @@ const Home = () => {
                     <div className="home-picks-section-wrapper">
                         <h2 className="home-picks-heading">Our Top Picks</h2>
                         <div className="home-picks-container">
+                            {/* <DestinationCard width="7vw" height="10vw" className="home-picks-card" />
                             <DestinationCard width="7vw" height="10vw" className="home-picks-card" />
-                            <DestinationCard width="7vw" height="10vw" className="home-picks-card" />
-                            <DestinationCard width="7vw" height="10vw" className="home-picks-card" />
+                            <DestinationCard width="7vw" height="10vw" className="home-picks-card" /> */}
                         </div>
                     </div>
                 </div>
