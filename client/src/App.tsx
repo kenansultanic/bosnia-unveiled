@@ -4,11 +4,9 @@ import Navigation from "./components/Navigation";
 
 const App = () => {
     return (
-        <div>
-            <div className="app-container">
-                <Navigation />
-                <Router />
-            </div>
+        <div className="app-container">
+            <Navigation />
+            <Router />
         </div>
     )
 }

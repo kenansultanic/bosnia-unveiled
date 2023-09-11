@@ -12,7 +12,7 @@ html {
 
 .app-container {
     font-family: "Roboto", sans-serif;
-    color: $textColor1;
+    color: $textColor;
 }
 .app-container > div:not(.navigation-container) {
     //min-height: 100vh;
@@ -29,14 +29,14 @@ h3 {
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    background: $bgColor2;
+    background: $bgColor;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: $bgColor2;
-    border-radius: $borderRadius1;
+    background: $bgColor;
+    border-radius: $borderRadiusParent;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: $bgColor2;
+    background: $bgColor;
 }

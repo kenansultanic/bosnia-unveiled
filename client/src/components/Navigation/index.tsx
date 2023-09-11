@@ -2,11 +2,12 @@ import "./navigation.scss";
 
 const Navigation = () => {
     return (
-        <div className="navigation-container">
+        <header className="navigation-container">
+            {/* <nav></nav> */}
             <div>[ NAVIGATION ]<button>hehe</button></div>
             <div className="navigation-logo">[ LOGO ]</div>
             <div>[ NAVIGATION ]</div>
-        </div>
+        </header>
     );
 };
 
