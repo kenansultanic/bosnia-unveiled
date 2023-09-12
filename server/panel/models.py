@@ -72,6 +72,7 @@ class PublicTransportLine(models.Model):
 
     def to_dict(self):
         return {
+            'departure_for': self.departure_for,
             'departure_from': self.departure_from,
             'departure_time': self.departure_time,
             'arrival_time': self.arrival_time,

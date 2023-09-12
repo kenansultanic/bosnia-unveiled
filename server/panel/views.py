@@ -1,12 +1,18 @@
 import json
+from cmath import asin, sqrt
+
 from django.core import serializers
+from django.db.models.functions import Sin, Cos, Radians
 from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
-from .models import Destination
-from django.db.models import Q, Count
+from .models import Destination, Location, Category
+from django.db.models import Q, F, Count, ExpressionWrapper, FloatField
 from dotenv import load_dotenv
 import os
 import requests
+from django.http import JsonResponse
+from django.db.models import Q
+from geopy.distance import geodesic
 
 load_dotenv()
 
@@ -112,3 +118,75 @@ def search_destinations(request):
     data = [{'title': item.title, 'sub_title': item.sub_title} for item in results]
 
     return JsonResponse(data, safe=False)
+
+
+# @api_view(['GET'])
+# def find_closest_destinations(request):
+#     # spasim id od lokacije koju je korisnik izabrao
+#     selected_location_id = int(request.GET.get('selected_location_id'))
+#     # i onda nadjem tu lokaciju
+#     selected_location = Location.objects.get(pk=selected_location_id)
+#
+#     selected_category_id = int(request.GET.get('selected_category_id'))
+#     selected_category = Category.objects.get(pk=selected_category_id)
+#
+#     destinations = Destination.objects.filter(Q(categories__name__in=[selected_category]))
+#     #udaljenost sto izabere korisnik
+#     max_distance_km = 1000
+#
+#
+#     # racuna najblizu destinaciju
+#     closest_destinations = destinations
+#     return JsonResponse(closest_destinations, safe=False)
+
+
+@api_view(['GET'])
+def find_closest_destinations(request):
+    # Parse request parameters
+    selected_location_id = int(request.GET.get('selected_location_id'))
+    categories = request.GET.get('categories','')
+    categories = categories.split(',')
+    distance = int(request.GET.get('distance'))
+
+    try:
+        # Retrieve the selected location and category objects
+        selected_location = Location.objects.get(pk=selected_location_id)
+        #selected_category = Category.objects.filter(Q())
+
+        # Filter destinations by category
+        destinations = Destination.objects.filter(Q(categories__name__in=categories))
+
+        # def foo(dest):
+        #     x = geodesic(
+        #     (selected_location.latitude, selected_location.longitude),
+        #     (dest.location.latitude, dest.location.longitude)
+        # ).kilometers
+        #     print(x)
+        #     return x < distance
+       # Calculate distances and sort destinations by distance
+        closest_destinations = filter(lambda dest: geodesic(
+            (selected_location.latitude, selected_location.longitude),
+            (dest.location.latitude, dest.location.longitude)
+        ).kilometers < distance , destinations)
+
+        serialized_destinations = []
+        for destination in closest_destinations :
+            serialized_destination = {
+                'title': destination.title,
+                'sub_title': destination.sub_title,
+                'description': destination.description,
+                'image': request.build_absolute_uri(destination.image.url) if destination.image else None,
+                'location': destination.location.to_dict() if destination.location else None,
+                'open_time': destination.open_time.to_dict() if destination.open_time else None,
+            }
+            categories_list = list(destination.categories.values_list('name', flat=True))
+            serialized_destination['categories'] = categories_list
+
+            serialized_destinations.append(serialized_destination)
+        return JsonResponse({'closest_destinations': serialized_destinations}, safe=False)
+
+    except (Location.DoesNotExist, Category.DoesNotExist):
+        return JsonResponse({'error': 'Location or category not found'}, status=400)
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
