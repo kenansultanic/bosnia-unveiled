@@ -4,7 +4,7 @@ from cmath import asin, sqrt
 from django.core import serializers
 from django.db.models.functions import Sin, Cos, Radians
 from django.http import HttpResponse, JsonResponse
-from drf_yasg import openapi
+from drf_yasg.openapi import Parameter, IN_QUERY, TYPE_STRING, TYPE_NUMBER, TYPE_ARRAY, TYPE_INTEGER, Items
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -17,39 +17,35 @@ from django.http import JsonResponse
 from django.db.models import Q
 from geopy.distance import geodesic
 
+from .schemas import get_destination_schema, search_for_destinations_schema, get_all_destinations_schema
+
 load_dotenv()
 
 WEATHER_API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
 
 
+@swagger_auto_schema(method='get', responses={200: get_all_destinations_schema})
 @api_view(['GET'])
 def get_all_destinations(request):
-
+    """
+        Returns all destinations from the database
+    """
     destinations = Destination.objects.all()
-
     serialized_destinations = []
+
     for destination in destinations:
-        serialized_destination = {
-            'id': destination.pk,
-            'title': destination.title,
-            'sub_title': destination.sub_title,
-            'description': destination.description,
-            'image': request.build_absolute_uri(destination.image.url) if destination.image else None,
-            'location': destination.location.to_dict() if destination.location else None,
-            'open_time': destination.open_time.to_dict() if destination.open_time else None,
-            'public_transport_schedules': destination.public_transport_schedules.to_dict() if destination.public_transport_schedules else None
-        }
-        categories_list = list(destination.categories.values_list('name', flat=True))
-        serialized_destination['categories'] = categories_list
+        serialized_destinations.append(destination.to_dict(request))
 
-        serialized_destinations.append(serialized_destination)
-
-    return Response(serialized_destinations, safe=False)
+    return Response(serialized_destinations)
 
 
+@swagger_auto_schema(method='get', responses={200: get_destination_schema})
 @api_view(['GET'])
 def get_destination(request, destination_id):
-
+    """
+        Gets destination based on it's ID, a weather forecast for the area, a public transport schedule
+        (if defined) and 3 most similar destinations based on the count of shared categories
+    """
     destination = Destination.objects.get(pk=destination_id)
     all_destinations = Destination.objects.exclude(id=destination_id)
     public_transport_schedule = destination.departures.all()
@@ -59,58 +55,46 @@ def get_destination(request, destination_id):
 
     # use /forecast for 5-day forecast
     api_url = f'https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={WEATHER_API_KEY}'
-    response = requests.request('get', api_url)
+    api_response = requests.request('get', api_url)
 
     similar_destinations = all_destinations.annotate(
         common_category_count=Count('categories', filter=Q(categories__in=destination.categories.all()))
     ).order_by('-common_category_count')[:3]
 
-    if response.status_code == 200:
+    if api_response.status_code == 200:
         print('response.json()')
 
+    serialized_destination = destination.to_dict(request)
     serialized_similar_destinations = []
 
     for destination in similar_destinations:
-        serialized_destination = {
-            'id': destination.pk,
-            'title': destination.title,
-            'sub_title': destination.sub_title,
-            'description': destination.description,
-            'image': request.build_absolute_uri(destination.image.url) if destination.image else None,
-            'location': destination.location.to_dict() if destination.location else None,
-            'open_time': destination.open_time.to_dict() if destination.open_time else None,
+        serialized_similar_destinations.append(destination.to_dict(request))
+
+    serialized_transport_schedule = [
+        {
+            'departure_for': schedule.departure_for.title,
+            'departure_from': schedule.departure_from,
+            'departure_time': schedule.departure_time.strftime('%H:%M:%S'),
+            'arrival_time': schedule.arrival_time.strftime('%H:%M:%S'),
+            'transportation_type': schedule.get_transportation_type_display(),
         }
-        categories_list = list(destination.categories.values_list('name', flat=True))
-        serialized_destination['categories'] = categories_list
+        for schedule in public_transport_schedule
+    ]
 
-        serialized_similar_destinations.append(serialized_destination)
-
-    serialized_destination = {
-        'id': destination.pk,
-        'title': destination.title,
-        'sub_title': destination.sub_title,
-        'description': destination.description,
-        'image': request.build_absolute_uri(destination.image.url) if destination.image else None,
-        'location': destination.location.to_dict() if destination.location else None,
-        'open_time': destination.open_time.to_dict() if destination.open_time else None,
-        'weather': response.json(),
+    response = {
+        'destination': serialized_destination,
+        'weather': api_response.json(),
+        'public_transport_schedule': serialized_transport_schedule,
         'similar_destinations': serialized_similar_destinations
     }
 
-    categories_list = list(destination.categories.values_list('name', flat=True))
-    serialized_destination['categories'] = categories_list
-
-    transport_schedule = serializers.serialize('json', list(public_transport_schedule), fields=(
-    'departure_for', 'departure_from', 'departure_time', 'arrival_time', 'transportation_type'))
-    serialized_destination['public_transport_schedule'] = json.loads(transport_schedule)
-
-    return Response(serialized_destination)
+    return Response(response)
 
 
-query_param = openapi.Parameter('query', openapi.IN_QUERY, description="String to search by", type=openapi.TYPE_STRING)
+query_param = Parameter('query', IN_QUERY, description="String to search by", type=TYPE_STRING, required=True)
 
 
-@swagger_auto_schema(method='get', manual_parameters=[query_param])
+@swagger_auto_schema(method='get', manual_parameters=[query_param], responses={200: search_for_destinations_schema})
 @api_view(['GET'])
 def search_destinations(request):
     """
@@ -143,10 +127,24 @@ def search_destinations(request):
 #     return JsonResponse(closest_destinations, safe=False)
 
 
+location_id = Parameter('location_id', IN_QUERY, description='Selected location ID', type=TYPE_INTEGER, required=True)
+max_distance = Parameter('distance', IN_QUERY, description='Maximum distance from location', type=TYPE_NUMBER, required=True)
+search_categories = Parameter(
+    'categories',
+    IN_QUERY,
+    description='Categories to search by',
+    type=TYPE_ARRAY,
+    items=Items(type=TYPE_STRING)
+)
+
+
+@swagger_auto_schema(method='get', manual_parameters=[location_id, max_distance, search_categories])
 @api_view(['GET'])
 def find_closest_destinations(request):
-    # Parse request parameters
-    selected_location_id = int(request.GET.get('selected_location_id'))
+    """
+        Returns closest destinations based on a max distance relative to a specific location and matching categories
+    """
+    selected_location_id = int(request.GET.get('location_id'))
     categories = request.GET.get('categories', '')
     categories = categories.split(',')
     distance = int(request.GET.get('distance'))
