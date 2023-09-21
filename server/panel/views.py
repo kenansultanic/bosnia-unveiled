@@ -1,19 +1,12 @@
-import json
-from cmath import asin, sqrt
-
-from django.core import serializers
-from django.db.models.functions import Sin, Cos, Radians
-from django.http import HttpResponse, JsonResponse
 from drf_yasg.openapi import Parameter, IN_QUERY, TYPE_STRING, TYPE_NUMBER, TYPE_ARRAY, TYPE_INTEGER, Items
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Destination, Location, Category
-from django.db.models import Q, F, Count, ExpressionWrapper, FloatField
+from django.db.models import Count
 from dotenv import load_dotenv
 import os
 import requests
-from django.http import JsonResponse
 from django.db.models import Q
 from geopy.distance import geodesic
 
@@ -106,25 +99,6 @@ def search_destinations(request):
     data = [{'title': item.title, 'sub_title': item.sub_title} for item in results]
 
     return Response(data)
-
-# @api_view(['GET'])
-# def find_closest_destinations(request):
-#     # spasim id od lokacije koju je korisnik izabrao
-#     selected_location_id = int(request.GET.get('selected_location_id'))
-#     # i onda nadjem tu lokaciju
-#     selected_location = Location.objects.get(pk=selected_location_id)
-#
-#     selected_category_id = int(request.GET.get('selected_category_id'))
-#     selected_category = Category.objects.get(pk=selected_category_id)
-#
-#     destinations = Destination.objects.filter(Q(categories__name__in=[selected_category]))
-#     #udaljenost sto izabere korisnik
-#     max_distance_km = 1000
-#
-#
-#     # racuna najblizu destinaciju
-#     closest_destinations = destinations
-#     return JsonResponse(closest_destinations, safe=False)
 
 
 location_id = Parameter('location_id', IN_QUERY, description='Selected location ID', type=TYPE_INTEGER, required=True)
