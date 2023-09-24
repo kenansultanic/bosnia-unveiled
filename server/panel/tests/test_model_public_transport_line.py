@@ -1,6 +1,7 @@
 from django.test import TestCase
 
-from panel.models import  Location, OpenTime, Destination, PublicTransportLine
+from panel.models import Location, OpenTime, Destination, PublicTransportLine
+
 
 class PublicTransportLineModelTest(TestCase):
     @classmethod
@@ -11,8 +12,8 @@ class PublicTransportLineModelTest(TestCase):
             longitude=18.345,
         )
         open_time = OpenTime.objects.create(
-            title='Testno',
-            sub_title='testic'
+            title='Test',
+            sub_title='test'
         )
         destination = Destination.objects.create(
             title="Your Destination Title",
@@ -34,22 +35,22 @@ class PublicTransportLineModelTest(TestCase):
     def test_departure_for_label(self):
         transport = PublicTransportLine.objects.get(id=1)
         field_departure_for = transport._meta.get_field('departure_for').verbose_name
-        self.assertEqual(field_departure_for,'departure for')
+        self.assertEqual(field_departure_for, 'departure for')
 
     def test_departure_from_label(self):
         transport = PublicTransportLine.objects.get(id=1)
         field_departure_from = transport._meta.get_field('departure_from').verbose_name
-        self.assertEqual(field_departure_from,'departure from')
+        self.assertEqual(field_departure_from, 'departure from')
 
     def test_departure_from_max_length(self):
         transport = PublicTransportLine.objects.get(id=1)
         max_length = transport._meta.get_field('departure_from').max_length
-        self.assertEqual(max_length,20)
+        self.assertEqual(max_length, 20)
 
     def test_departure_from_blank(self):
         transport = PublicTransportLine.objects.get(id=1)
         blank = transport._meta.get_field('departure_from').blank
-        self.assertEqual(blank,False)
+        self.assertEqual(blank, False)
 
     def test_departure_time_label(self):
         transport = PublicTransportLine.objects.get(id=1)
@@ -59,7 +60,7 @@ class PublicTransportLineModelTest(TestCase):
     def test_departure_time_blank(self):
         transport = PublicTransportLine.objects.get(id=1)
         blank = transport._meta.get_field('departure_time').blank
-        self.assertEqual(blank,False)
+        self.assertEqual(blank, False)
 
     def test_arrival_time_label(self):
         transport = PublicTransportLine.objects.get(id=1)
@@ -69,9 +70,9 @@ class PublicTransportLineModelTest(TestCase):
     def test_arrival_time_blank(self):
         transport = PublicTransportLine.objects.get(id=1)
         blank = transport._meta.get_field('arrival_time').blank
-        self.assertEqual(blank,False)
+        self.assertEqual(blank, False)
 
     def test_transport_type_max_length(self):
         transport = PublicTransportLine.objects.get(id=1)
         max_length = transport._meta.get_field('transportation_type').max_length
-        self.assertEqual(max_length,2)
+        self.assertEqual(max_length, 2)
