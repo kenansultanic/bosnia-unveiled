@@ -217,3 +217,12 @@ search_for_destinations_schema = openapi.Schema(
         required=['title', 'sub_title']
     )
 )
+
+
+# closest destinations search schema
+closest_destinations_schema = openapi.Schema(
+    type=openapi.TYPE_ARRAY,
+    items=destination_schema,
+    max_items=3
+)
+

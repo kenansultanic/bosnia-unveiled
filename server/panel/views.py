@@ -1,23 +1,17 @@
-import json
-from cmath import asin, sqrt
-
-from django.core import serializers
-from django.db.models.functions import Sin, Cos, Radians
-from django.http import HttpResponse, JsonResponse
-from drf_yasg.openapi import Parameter, IN_QUERY, TYPE_STRING, TYPE_NUMBER, TYPE_ARRAY, TYPE_INTEGER, Items
+from drf_yasg.openapi import Parameter, IN_QUERY, TYPE_STRING, TYPE_NUMBER, TYPE_ARRAY, TYPE_INTEGER, Items, Schema
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Destination, Location, Category
-from django.db.models import Q, F, Count, ExpressionWrapper, FloatField
+from django.db.models import Count
 from dotenv import load_dotenv
 import os
 import requests
-from django.http import JsonResponse
 from django.db.models import Q
 from geopy.distance import geodesic
 
-from .schemas import get_destination_schema, search_for_destinations_schema, get_all_destinations_schema
+from .schemas import get_destination_schema, search_for_destinations_schema, get_all_destinations_schema, \
+    closest_destinations_schema
 
 load_dotenv()
 
@@ -39,56 +33,67 @@ def get_all_destinations(request):
     return Response(serialized_destinations)
 
 
-@swagger_auto_schema(method='get', responses={200: get_destination_schema})
+@swagger_auto_schema(
+    method='get',
+    responses={
+        200: get_destination_schema,
+        404: 'Destination with that ID does not exit',
+        500: 'Error message'
+    }
+)
 @api_view(['GET'])
 def get_destination(request, destination_id):
     """
         Gets destination based on it's ID, a weather forecast for the area, a public transport schedule
         (if defined) and 3 most similar destinations based on the count of shared categories
     """
-    destination = Destination.objects.get(pk=destination_id)
-    all_destinations = Destination.objects.exclude(id=destination_id)
-    public_transport_schedule = destination.departures.all()
+    try:
+        destination = Destination.objects.get(pk=destination_id)
+        all_destinations = Destination.objects.exclude(id=destination_id)
+        public_transport_schedule = destination.departures.all()
 
-    latitude = destination.location.latitude
-    longitude = destination.location.longitude
+        latitude = destination.location.latitude
+        longitude = destination.location.longitude
 
-    # use /forecast for 5-day forecast
-    api_url = f'https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={WEATHER_API_KEY}'
-    api_response = requests.request('get', api_url)
+        # use /forecast for 5-day forecast
+        api_url = f'https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={WEATHER_API_KEY}'
+        api_response = requests.get(api_url)
 
-    similar_destinations = all_destinations.annotate(
-        common_category_count=Count('categories', filter=Q(categories__in=destination.categories.all()))
-    ).order_by('-common_category_count')[:3]
+        similar_destinations = all_destinations.annotate(
+            common_category_count=Count('categories', filter=Q(categories__in=destination.categories.all()))
+        ).order_by('-common_category_count')[:3]
 
-    if api_response.status_code == 200:
-        print('response.json()')
+        serialized_destination = destination.to_dict(request)
+        serialized_similar_destinations = []
 
-    serialized_destination = destination.to_dict(request)
-    serialized_similar_destinations = []
+        for destination in similar_destinations:
+            serialized_similar_destinations.append(destination.to_dict(request))
 
-    for destination in similar_destinations:
-        serialized_similar_destinations.append(destination.to_dict(request))
+        serialized_transport_schedule = [
+            {
+                'departure_for': schedule.departure_for.title,
+                'departure_from': schedule.departure_from,
+                'departure_time': schedule.departure_time.strftime('%H:%M:%S'),
+                'arrival_time': schedule.arrival_time.strftime('%H:%M:%S'),
+                'transportation_type': schedule.get_transportation_type_display(),
+            }
+            for schedule in public_transport_schedule
+        ]
 
-    serialized_transport_schedule = [
-        {
-            'departure_for': schedule.departure_for.title,
-            'departure_from': schedule.departure_from,
-            'departure_time': schedule.departure_time.strftime('%H:%M:%S'),
-            'arrival_time': schedule.arrival_time.strftime('%H:%M:%S'),
-            'transportation_type': schedule.get_transportation_type_display(),
+        response = {
+            'destination': serialized_destination,
+            'weather': api_response.json() if api_response.status_code == 200 else None,
+            'public_transport_schedule': serialized_transport_schedule,
+            'similar_destinations': serialized_similar_destinations
         }
-        for schedule in public_transport_schedule
-    ]
 
-    response = {
-        'destination': serialized_destination,
-        'weather': api_response.json(),
-        'public_transport_schedule': serialized_transport_schedule,
-        'similar_destinations': serialized_similar_destinations
-    }
+        return Response(response)
 
-    return Response(response)
+    except Destination.DoesNotExist:
+        return Response({'message': 'Destination with that ID does not exit'}, status=404)
+
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
 
 
 query_param = Parameter('query', IN_QUERY, description="String to search by", type=TYPE_STRING, required=True)
@@ -100,31 +105,15 @@ def search_destinations(request):
     """
         Search for destination based on a query parameter
     """
-    query = request.GET.get('query', '')
+    query = request.GET.get('query')
+
+    if not query:
+        return Response({'error': 'Missing query parameter'}, status=400)
 
     results = Destination.objects.filter(Q(title__contains=query) | Q(categories__name__contains=query))
     data = [{'title': item.title, 'sub_title': item.sub_title} for item in results]
 
     return Response(data)
-
-# @api_view(['GET'])
-# def find_closest_destinations(request):
-#     # spasim id od lokacije koju je korisnik izabrao
-#     selected_location_id = int(request.GET.get('selected_location_id'))
-#     # i onda nadjem tu lokaciju
-#     selected_location = Location.objects.get(pk=selected_location_id)
-#
-#     selected_category_id = int(request.GET.get('selected_category_id'))
-#     selected_category = Category.objects.get(pk=selected_category_id)
-#
-#     destinations = Destination.objects.filter(Q(categories__name__in=[selected_category]))
-#     #udaljenost sto izabere korisnik
-#     max_distance_km = 1000
-#
-#
-#     # racuna najblizu destinaciju
-#     closest_destinations = destinations
-#     return JsonResponse(closest_destinations, safe=False)
 
 
 location_id = Parameter('location_id', IN_QUERY, description='Selected location ID', type=TYPE_INTEGER, required=True)
@@ -138,7 +127,14 @@ search_categories = Parameter(
 )
 
 
-@swagger_auto_schema(method='get', manual_parameters=[location_id, max_distance, search_categories])
+@swagger_auto_schema(
+    method='get',
+    manual_parameters=[location_id, max_distance, search_categories],
+    responses={
+        200: closest_destinations_schema,
+        404: 'Location or category not found'
+    }
+)
 @api_view(['GET'])
 def find_closest_destinations(request):
     """
@@ -161,23 +157,16 @@ def find_closest_destinations(request):
 
         serialized_destinations = []
         for destination in closest_destinations:
-            serialized_destination = {
-                'title': destination.title,
-                'sub_title': destination.sub_title,
-                'description': destination.description,
-                'image': request.build_absolute_uri(destination.image.url) if destination.image else None,
-                'location': destination.location.to_dict() if destination.location else None,
-                'open_time': destination.open_time.to_dict() if destination.open_time else None,
-            }
+            serialized_destination = destination.to_dict(request)
             categories_list = list(destination.categories.values_list('name', flat=True))
             serialized_destination['categories'] = categories_list
 
             serialized_destinations.append(serialized_destination)
+
         return Response({'closest_destinations': serialized_destinations})
 
     except (Location.DoesNotExist, Category.DoesNotExist):
-        return Response({'error': 'Location or category not found'}, status=400)
+        return Response({'message': 'Location or category not found'}, status=400)
 
     except Exception as e:
         return Response({'error': str(e)}, status=500)
-
