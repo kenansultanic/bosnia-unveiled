@@ -1,51 +1,44 @@
 import "./home.scss";
-import bihBordersDark from "../../assets/bihBordersDark.svg";
-import bihBordersLight from "../../assets/bihBordersLight.svg";
-import Tilt from "react-parallax-tilt";
+import pickImg1 from "../../assets/background2.jpg";
+import pickImg2 from "../../assets/background4.jpg";
+import pickImg3 from "../../assets/background5.jpg";
+import SearchBar from "./SearchBar";
+import Footer from "components/Footer";
 import DestinationCard from "components/DestinationCard";
-import SearchBar from "components/SearchBar";
-import useSnapScrolled from "hooks/useSnapScrolled";
 
 const Home = () => {
-    const snapScrolled = useSnapScrolled();
-    const secondScreenOpacity = snapScrolled ? 1 : 0;
-
-    // tiltMaxAngleX = { 1}
-    // tiltMaxAngleY = { 1}
-    // perspective = { 500}
-
     return (
-        <div className="home-container">
-            <div className="home-first-screen">
-                <div className="home-heading-section">
+        <main className="home">
+            <div className="home-container">
+                <header className="home-heading">
                     <h1 className="home-main-heading">App Name</h1>
-                    <p className="home-main-moto">Explore hidden places of Bosnia & Herzegovina</p>
-                </div>
-                <div className="home-picks-section">
-                    <div className="home-picks-section-wrapper">
-                        <h2 className="home-picks-heading">Our Top Picks</h2>
-                        <div className="home-picks-container">
-                            {/* <DestinationCard width="7vw" height="10vw" className="home-picks-card" />
-                            <DestinationCard width="7vw" height="10vw" className="home-picks-card" />
-                            <DestinationCard width="7vw" height="10vw" className="home-picks-card" /> */}
-                        </div>
+                    <p className="home-sub-heading">Explore hidden destinations of Bosnia & Herzegovina</p>
+                </header>
+                <SearchBar />
+                <section className="home-top-picks-section">
+                    <h2>Our top <span>picks</span></h2>
+                    <div className="home-top-picks">
+                        <DestinationCard
+                            className="pick-card"
+                            orientation="vertical"
+                            image={pickImg1} />
+                        <DestinationCard
+                            className="pick-card"
+                            orientation="vertical"
+                            image={pickImg2} />
+                        <DestinationCard
+                            className="pick-card"
+                            orientation="vertical"
+                            image={pickImg3} />
                     </div>
-                </div>
-                <div className="home-main-section">
-                    {/* <div className="home-bg-wrapper"> */}
-                        <div className="home-search-bar"></div>
-                    {/* </div> */}
-                </div>
-            </div>
+                </section>
+                <section className="home-center-image-section"></section>
 
-            <div className="home-second-screen">
-                <div
-                    className="home-second-screen-desc"
-                    style={{ opacity: secondScreenOpacity }}>
-                    [Second Screen Content]
-                </div>
+                <section className="home-main-section"></section>
+
+                <Footer className="home-footer" />
             </div>
-        </div>
+        </main>
     );
 };
 

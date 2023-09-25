@@ -1,23 +1,56 @@
 @import "../../scss/variables";
 
-.dest-card {
+.dest-card-horizontal, .dest-card-vertical {
     display: flex;
-    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, .25);
     border-radius: $borderRadiusChild;
-    background-color: $elementBgColor;
+    background-color: $elementBgColorTransparent;
+}
+.dest-card-horizontal {
+    padding: 15px;
+}
+.dest-card-vertical {
+    flex-direction: column;
+}
+.dest-card-vertical-container {
+    height: 100%;
+    padding: 15px;
+    border-radius: inherit;
 }
 .dest-suggested-card {
     height: 300px;
     width: 100%;
 }
+.dest-suggested-card:hover {
+    border-color: rgba(255, 255, 255, .95);
+}
+.pick-card {
+    position: relative;
+    display: inline-block;
+    width: calc(33% - 5px);
+    height: 100%;
+    border: 1px solid;
+    border-color: rgba(100, 100, 100, .3);
+    background-color: #fff;
+}
+.pick-card:hover {
+    border-color: rgba(100, 100, 100, .95);
+}
 
-.dest-card-img {
+.dest-card-horizontal-img {
     flex-basis: 45%;
 }
-.dest-card-img > img {
+.dest-card-horizontal-img > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: calc($borderRadiusChild - 10px);
+    border-radius: calc($borderRadiusChild - 12px);
+}
+.dest-card-vertical-img > img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: calc($borderRadiusChild - 14px);
 }

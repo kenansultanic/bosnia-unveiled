@@ -1,4 +1,6 @@
 import "./destination-show.scss";
+import { useGetDestinationQuery } from "store/destinationsApi";
+import { useSearchParams } from "react-router-dom";
 import mainImage from "../../assets/main-section-image.jpg";
 import destImg1 from "../../assets/background2.jpg";
 import destImg2 from "../../assets/background4.jpg";
@@ -6,8 +8,12 @@ import destImg3 from "../../assets/background5.jpg";
 import Button from "components/Button";
 import ContentCard from "components/ContentCard";
 import DestinationCard from "components/DestinationCard";
+import Footer from "components/Footer";
 
 const DestinationShow = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    //const { data, error, isLoading } = useGetDestinationQuery("99");
+
     return (
         <main className="dest-show">
             <div className="dest-show-container">
@@ -114,10 +120,7 @@ const DestinationShow = () => {
                         </section>
                     </div>
                 </section>
-
-                <footer className="dest-footer">
-                    <h2 className="dest-footer-heading">Footer</h2>
-                </footer>
+                <Footer className="dest-footer" />
             </div>
         </main>
     );

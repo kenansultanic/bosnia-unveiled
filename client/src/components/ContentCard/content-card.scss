@@ -6,13 +6,18 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding: 30px;
+    padding-bottom: 40px;
     line-height: 1.5;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: $textColor;
+    border: 1px solid rgba(255, 255, 255, .25);
     border-radius: $borderRadiusChild;
-    background-color: $elementBgColor;
+    background-color: $elementBgColorTransparent;
 }
 .content-card-icon {
-    padding: 25px;
+    display: grid;
+    place-items: center;
+    width: 75px;
+    height: 75px;
     margin-bottom: 30px;
     font-size: 30px;
     border-radius: 50%;
@@ -24,7 +29,8 @@
 }
 .content-card-paragraph {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
     align-items: flex-start;
     font-size: $bodyFontSize;
     margin-top: 15px;
@@ -49,9 +55,11 @@
 @media screen and (max-width: 1440px) {
     .content-card {
         padding: 25px;
+        padding-bottom: 35px;
     }
     .content-card-icon {
-        padding: 20px;
+        width: 65px;
+        height: 65px;
         margin-bottom: 25px;
         font-size: 25px;
     }
@@ -62,6 +70,7 @@
 @media screen and (max-width: 1280px) {
     .content-card {
         padding: 30px;
+        padding-bottom: 40px;
     }
     .content-card-category {
         font-size: 16px;
@@ -70,11 +79,13 @@
 @media screen and (max-width: 960px) {
     .content-card {
         padding: 30px;
+        padding-bottom: 40px;
     }
 }
 @media screen and (max-width: 560px) {
     .content-card-icon {
-        padding: 15px;
+        width: 50px;
+        height: 50px;
         margin-bottom: 15px;
         font-size: 20px;
     }
