@@ -11,3 +11,4 @@ requests~=2.31.0
 geopy~=2.4.0
 coreapi~=2.3.3
 drf-yasg~=1.21.7
+gunicorn~=21.2.0

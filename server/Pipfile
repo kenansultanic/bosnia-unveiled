@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+asgiref = "*"
+Django = "*"
+django-cors-headers = "*"
+djangorestframework = "*"
+pytz = "*"
+sqlparse = "*"
+tzdata = "*"
+Pillow = "*"
+python-dotenv = "*"
+requests = "*"
+geopy = "*"
+coreapi = "*"
+drf-yasg = "*"
+gunicorn = "*"
+
+[requires]
+python_version = "3.11"
