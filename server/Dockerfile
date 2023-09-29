@@ -1,9 +1,7 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Set environment variables (you may customize these)
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Set environment variables
 ENV OPENWEATHERMAP_API_KEY da50f290f9078585fba4030d988569c5
 
 # Create and set the working directory in the container
