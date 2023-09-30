@@ -25,15 +25,15 @@ category_schema = openapi.Schema(
 )
 
 # Schema for the Image model
-image_schema = openapi.Schema(
-    type=openapi.TYPE_OBJECT,
-    properties={
-        'image': openapi.Schema(
-            type=openapi.TYPE_STRING
-        ),
-    },
-    required=['image']
-)
+# image_schema = openapi.Schema(
+#     type=openapi.TYPE_OBJECT,
+#     properties={
+#         'image': openapi.Schema(
+#             type=openapi.TYPE_STRING
+#         ),
+#     },
+#     required=['image']
+# )
 
 # Schema for the OpenTime model
 open_time_schema = openapi.Schema(
@@ -239,7 +239,7 @@ closest_destinations_schema = openapi.Schema(
 )
 
 # all images schema
-get_all_images_schema = openapi.Schema(
-    type=openapi.TYPE_ARRAY,
-    items=image_schema
-)
+# get_all_images_schema = openapi.Schema(
+#     type=openapi.TYPE_ARRAY,
+#     items=image_schema
+# )

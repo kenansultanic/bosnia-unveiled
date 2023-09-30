@@ -12,7 +12,7 @@ from django.db.models import Q
 from geopy.distance import geodesic
 
 from .schemas import get_destination_schema, search_for_destinations_schema, get_all_destinations_schema, \
-    closest_destinations_schema, get_all_images_schema
+    closest_destinations_schema
 
 load_dotenv()
 
@@ -33,7 +33,8 @@ def get_all_destinations(request):
 
     return Response(serialized_destinations)
 
-@swagger_auto_schema(method='get', responses={200: get_all_images_schema})
+
+# @swagger_auto_schema(method='get', responses={200: get_all_images_schema})
 @api_view(['GET'])
 def get_all_images(request,destination_id):
     """
@@ -48,7 +49,6 @@ def get_all_images(request,destination_id):
         serialized_images.append(image.to_dict(request))
 
     return Response(serialized_images)
-
 
 
 @swagger_auto_schema(
