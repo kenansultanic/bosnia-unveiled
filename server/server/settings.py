@@ -28,6 +28,8 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
 
+CSRF_TRUSTED_ORIGINS = ['https://project-production-149b.up.railway.app']
+
 # Application definition
 
 INSTALLED_APPS = [
