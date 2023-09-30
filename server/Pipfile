@@ -20,6 +20,7 @@ geopy = "*"
 coreapi = "*"
 drf-yasg = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.11"
