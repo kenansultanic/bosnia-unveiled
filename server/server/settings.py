@@ -142,7 +142,7 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, images)
-STATIC_URL = '/staticfiles/'  # bilo /static
+STATIC_URL = '/staticfiles/'
 
 # Additional directories where static files are located
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
