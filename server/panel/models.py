@@ -73,7 +73,7 @@ class Destination(models.Model):
     location = models.OneToOneField(Location, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category, blank=False)
     open_time = models.ForeignKey(OpenTime, on_delete=models.CASCADE)
-    image = models.ManyToManyField(Image)
+    images = models.ManyToManyField(Image)
 
     def __str__(self) -> str:
         return self.title
