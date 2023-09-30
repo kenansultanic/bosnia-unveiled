@@ -8,13 +8,15 @@ ENV NODE_ENV production
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files to the container
-COPY ./package*.json ./
-
+COPY package.json ./
+COPY package-lock.json ./
+COPY ./ ./
 # Install project dependencies
 RUN npm install
+COPY ./ ./
+
 
 # Copy the rest of your application code to the container
-COPY . .
 
 # Expose the port your React app will run on (e.g., 3000)
 EXPOSE 3000
