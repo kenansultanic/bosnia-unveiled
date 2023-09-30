@@ -21,6 +21,7 @@ coreapi = "*"
 drf-yasg = "*"
 gunicorn = "*"
 whitenoise = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.11"

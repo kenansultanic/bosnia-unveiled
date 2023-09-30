@@ -109,3 +109,4 @@ class PublicTransportLine(models.Model):
             'arrival_time': self.arrival_time,
             'transportation_type': self.transportation_type
         }
+
