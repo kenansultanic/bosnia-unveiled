@@ -110,3 +110,18 @@ class PublicTransportLine(models.Model):
             'transportation_type': self.transportation_type
         }
 
+
+class Image(models.Model):
+    image = models.ImageField(upload_to='images/')
+
+    def to_dict(self,request):
+        serialized_image = {
+            'image': self.get_image_url(request),
+        }
+        return serialized_image
+
+    def get_image_url(self, request):
+        if self.image:
+            return request.build_absolute_uri(self.image.url)
+        return None
+

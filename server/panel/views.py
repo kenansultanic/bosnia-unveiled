@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from drf_yasg.openapi import Parameter, IN_QUERY, TYPE_STRING, TYPE_NUMBER, TYPE_ARRAY, TYPE_INTEGER, Items, Schema
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
@@ -11,7 +12,7 @@ from django.db.models import Q
 from geopy.distance import geodesic
 
 from .schemas import get_destination_schema, search_for_destinations_schema, get_all_destinations_schema, \
-    closest_destinations_schema
+    closest_destinations_schema, get_all_images_schema
 
 load_dotenv()
 
@@ -31,6 +32,23 @@ def get_all_destinations(request):
         serialized_destinations.append(destination.to_dict(request))
 
     return Response(serialized_destinations)
+
+@swagger_auto_schema(method='get', responses={200: get_all_images_schema})
+@api_view(['GET'])
+def get_all_images(request,destination_id):
+    """
+      Returns all images for specific destination
+    """
+    destination = Destination.objects.get(pk=destination_id)
+    images = destination.images.all()
+
+    serialized_images = []
+
+    for image in images:
+        serialized_images.append(image.to_dict(request))
+
+    return Response(serialized_images)
+
 
 
 @swagger_auto_schema(
