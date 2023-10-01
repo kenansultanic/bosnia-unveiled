@@ -110,13 +110,17 @@
 }
 
 .dest-map-container {
-    flex-basis: 53%;
+    border-radius: $borderRadiusChild;
+    transition: border-radius 250ms;
+    overflow: hidden;
+}
+.dest-map-container:hover {
+    border-radius: 10px;
 }
 .dest-map {
     width: 100%;
     height: 500px;
     border: none;
-    border-radius: $borderRadiusChild;
 }
 .dest-bus-schedules {
     flex-basis: 450px;

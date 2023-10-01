@@ -1,9 +1,28 @@
+@import "../../scss/variables";
 
-.mapboxgl-popup-content {
-  border-radius: 10px;
-  padding: 1px;
+.map-custom-popup-container {
+    width: 150px;
+    height: auto;
+}
+.map-custom-popup-header {
+    font-size: 18px;
+}
+.map-custom-popup-paragraph {
+    padding-top: 10px;
+    font-size: 12px;
+    line-height: 1.2;
+}
+.map-custom-popup-coords {
+    padding-top: 20px;
+}
+.mapboxgl-popup-close-button {
+    padding: 2px;
 }
 
-.mapboxgl-popup-close-button {
-  padding: 2px;
+.map-custom-marker {
+    width: 35px;
+    height: 35px;
+    border: 10px solid $primaryColor;
+    border-radius: 50%;
+    background-color: white;
 }

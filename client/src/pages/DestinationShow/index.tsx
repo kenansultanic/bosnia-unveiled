@@ -8,6 +8,7 @@ import destImg3 from "../../assets/background5.jpg";
 import Button from "components/Button";
 import ContentCard from "components/ContentCard";
 import DestinationCard from "components/DestinationCard";
+import Map from "components/Map";
 import Footer from "components/Footer";
 import Gallery from "components/Gallery";
 
@@ -17,7 +18,7 @@ const DestinationShow = () => {
 
     return (
         <main className="dest-show">
-            <Gallery />
+            {/* <Gallery /> */}
             <div className="dest-show-container">
                 <header className="dest-heading">
                     <p className="dest-sub-heading">Picturesque waterfalls near city of Ljubuški</p>
@@ -92,14 +93,7 @@ const DestinationShow = () => {
 
                             </ContentCard>
                             <div className="dest-map-container">
-                                <iframe
-                                    title="Destination pinned on Google Maps"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2910.5478145133848!2d17.60552617669852!3d43.15602388444385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134b0dbd11aad181%3A0xf6bd890e2045e895!2sVodopad%20Kravica!5e0!3m2!1sbs!2sba!4v1692364988165!5m2!1sbs!2sba"
-                                    allowFullScreen={false}
-                                    loading="lazy"
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                    className="dest-map">
-                                </iframe>
+                                <Map />
                                 {/* <a href="#" target="_blank">Link to Google Maps</a> */}
                                 {/* Link above is for users who cannot interact with map */}
                             </div>
