@@ -14,7 +14,7 @@ export const destinationsApi = createApi({
                 }
             }),
             getDestination: builder.query({
-                query: (destId: string) => {
+                query: (destId: number) => {
                     return {
                         url: `/destination/${destId}/`,
                         method: "GET"

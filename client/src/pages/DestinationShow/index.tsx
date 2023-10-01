@@ -9,13 +9,15 @@ import Button from "components/Button";
 import ContentCard from "components/ContentCard";
 import DestinationCard from "components/DestinationCard";
 import Footer from "components/Footer";
+import Gallery from "components/Gallery";
 
 const DestinationShow = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    //const { data, error, isLoading } = useGetDestinationQuery("99");
+    //const { data, error, isLoading } = useGetDestinationQuery(2);
 
     return (
         <main className="dest-show">
+            <Gallery />
             <div className="dest-show-container">
                 <header className="dest-heading">
                     <p className="dest-sub-heading">Picturesque waterfalls near city of Ljubuški</p>
@@ -26,7 +28,9 @@ const DestinationShow = () => {
                 <section className="dest-image-section">
                     <div className="dest-main-image">
                         <img src={mainImage} alt="Alt provided by API" />
-                        <Button className="dest-gallery-open" icon="photo_library" iconAriaLabel="Open gallery"></Button>
+                        <Button
+                            onClick={() => console.log("hehe")}
+                            className="dest-gallery-open" icon="photo_library" iconAriaLabel="Open gallery"></Button>
                     </div>
                 </section>
                 <section className="dest-main-section">
