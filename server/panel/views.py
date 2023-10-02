@@ -34,23 +34,6 @@ def get_all_destinations(request):
     return Response(serialized_destinations)
 
 
-# @swagger_auto_schema(method='get', responses={200: get_all_images_schema})
-@api_view(['GET'])
-def get_all_images(request,destination_id):
-    """
-      Returns all images for specific destination
-    """
-    destination = Destination.objects.get(pk=destination_id)
-    images = destination.images.all()
-
-    serialized_images = []
-
-    for image in images:
-        serialized_images.append(image.to_dict(request))
-
-    return Response(serialized_images)
-
-
 @swagger_auto_schema(
     method='get',
     responses={
@@ -69,6 +52,7 @@ def get_destination(request, destination_id):
         destination = Destination.objects.get(pk=destination_id)
         all_destinations = Destination.objects.exclude(id=destination_id)
         public_transport_schedule = destination.departures.all()
+        images = destination.images.all()
 
         latitude = destination.location.latitude
         longitude = destination.location.longitude
@@ -98,11 +82,17 @@ def get_destination(request, destination_id):
             for schedule in public_transport_schedule
         ]
 
+        serialized_images = []
+
+        for image in images:
+            serialized_images.append(image.to_dict(request))
+
         response = {
             'destination': serialized_destination,
             'weather': api_response.json() if api_response.status_code == 200 else None,
             'public_transport_schedule': serialized_transport_schedule,
-            'similar_destinations': serialized_similar_destinations
+            'similar_destinations': serialized_similar_destinations,
+            'images': serialized_images
         }
 
         return Response(response)
