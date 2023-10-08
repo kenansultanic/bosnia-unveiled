@@ -10,7 +10,7 @@
     line-height: 1.5;
     color: $textColor;
     border: 1px solid rgba(255, 255, 255, .25);
-    border-radius: $borderRadiusChild;
+    border-radius: calc($borderRadiusChild - 10px);
     background-color: $elementBgColorTransparent;
 }
 .content-card-icon {

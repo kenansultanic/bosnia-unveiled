@@ -10,18 +10,29 @@ interface Props {
 }
 
 const Button = ({ children, className, icon, iconAriaHidden, iconAriaLabel, ...rest }: Props & ButtonHTMLAttributes<HTMLButtonElement>) => {
-    return (
-        <button
-            className={`button button-${className}`}
-            {...rest}>
-            {icon &&
+    const buttonContent = (
+        <span className="button-content">
+            {
+                icon &&
                 <span
                     className="material-symbols-outlined"
                     aria-hidden={iconAriaHidden}
                     aria-label={iconAriaLabel}>
                     {icon}
-                </span>}
-            {children}
+                </span>
+            }
+            <span>{children}</span>
+        </span>
+    );
+
+    return (
+        <button
+            onClick={() => console.log("hehe")}
+            className={`button button-${className}`}
+            {...rest}>
+            <span className="button-hover-overlay"></span>
+            {buttonContent}
+            {buttonContent}
         </button>
     );
 };

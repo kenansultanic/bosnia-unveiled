@@ -1,13 +1,89 @@
 @import "../../scss/variables";
 
 .footer {
-    display: grid;
-    place-items: center;
-    height: 450px;
+    padding: 50px 0 50px;
     border-radius: $borderRadiusParent;
     background-color: $primaryColor;
 }
-
+.footer-logo {
+    padding-bottom: 15px;
+    text-align: center;
+}
+.footer-logo > img {
+    width: 75px;
+}
+div.hr {
+    width: 50%;
+    height: 1px;
+    margin: auto;
+    margin-bottom: 35px;
+    background-color: rgba(0, 0, 0, .1);
+}
+.footer-section {
+    display: flex;
+    justify-content: space-evenly;
+    //background-color: red;
+}
+.footer-section > div {
+    display: flex;
+    flex-direction: column;
+    width: 275px;
+    font-size: $bodyFontSize;
+}
+.footer-about-paragraph {
+    line-height: 1.4;
+}
 .footer-heading {
-    font-size: 48px;
+    padding-bottom: 30px;
+    font-size: $h2FontSize;
+}
+.footer-email > div:nth-child(1),
+.footer-github > div:nth-child(1),
+.footer-donation > div:nth-child(1) {
+    font-size: 20px;
+    font-weight: 900;
+    padding-bottom: 5px;
+}
+.footer-email > div:nth-child(2),
+.footer-github > div:nth-child(2),
+.footer-donation > div:nth-child(2) {
+    display: inline-block;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+
+@media screen and (max-width: 960px) {
+    .footer-section {
+        flex-direction: column;
+        padding: 0 50px;
+    }
+    .footer-section > div {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 30px;
+        margin-bottom: 25px;
+        width: unset;
+    }
+    .footer-section > div > div:first-child {
+        margin-top: 5px;
+    }
+    .footer-heading {
+        min-width: 175px;
+    }
+}
+@media screen and (max-width: 680px) {
+    .footer-logo > img {
+        width: 50px;
+    }
+    .footer-heading {
+        font-size: 24px;
+        min-width: 130px;
+        padding-bottom: 15px;
+    }
+    .footer-section > div {
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 50px;
+    }
 }

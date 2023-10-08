@@ -1,4 +1,5 @@
 import "./destination-show.scss";
+import { useState } from "react";
 import { useGetDestinationQuery } from "store/destinationsApi";
 import { useSearchParams } from "react-router-dom";
 import mainImage from "../../assets/main-section-image.jpg";
@@ -13,12 +14,13 @@ import Footer from "components/Footer";
 import Gallery from "components/Gallery";
 
 const DestinationShow = () => {
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
     //const { data, error, isLoading } = useGetDestinationQuery(2);
 
     return (
         <main className="dest-show">
-            {/* <Gallery /> */}
+            {isGalleryOpen && <Gallery isGalleryOpen={isGalleryOpen} setIsGalleryOpen={setIsGalleryOpen} />}
             <div className="dest-show-container">
                 <header className="dest-heading">
                     <p className="dest-sub-heading">Picturesque waterfalls near city of Ljubuški</p>
@@ -30,7 +32,7 @@ const DestinationShow = () => {
                     <div className="dest-main-image">
                         <img src={mainImage} alt="Alt provided by API" />
                         <Button
-                            onClick={() => console.log("hehe")}
+                            onClick={() => setIsGalleryOpen(true)}
                             className="dest-gallery-open" icon="photo_library" iconAriaLabel="Open gallery"></Button>
                     </div>
                 </section>
