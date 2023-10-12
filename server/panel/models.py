@@ -8,6 +8,11 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def to_dict(self):
+        return {
+            'name': self.name
+        }
+
 
 class OpenTime(models.Model):
     title = models.CharField(max_length=100, blank=False)
