@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
 import useScrollPos from "hooks/useScrollPos";
 import Button from "components/Button";
+import { useGetClosestDestinationsQuery} from "../../store/destinationsApi";
 
 const SearchBar = () => {
     const [animatePositionUp, setAnimatePositionUp] = useState(true);
     const [positionStyle, setPositionStyle] = useState({});
     const scrollPos = useScrollPos(50);
+
+    const [location, setLocation] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState([''])
+    const [distance, setDistance] = useState(10)
+
+    const res = useGetClosestDestinationsQuery({locationID: 1, distance: 10, categories: ['grad', 'selo']})
+    console.info(res)
 
     useEffect(() => {
         if (scrollPos > 700) {
@@ -39,8 +47,14 @@ const SearchBar = () => {
                 style={!animatePositionUp ? { border: "none", height: "180px" } : {}}
                 className={`home-search-container ${applyBorderFixes ? "home-search-container-border-fix" : ""}`}>
                 <form>
-                    <div className="search-form-inputs"></div>
+                    <div className="search-form-inputs">
+                        <input onChange={e => setLocation(e.target.value)}/>
+                        <input onChange={e => setSelectedCategories([...selectedCategories, e.target.value])}/>
+                        <input type="range" onChange={e => setDistance(Number(e.target.value))} />
+                    </div>
                     <Button
+                        onClick={() => {
+                        }}
                         className="primary search-form-submit-button"
                         icon="search"
                         iconAriaLabel="Search">

@@ -66,7 +66,6 @@ const Map = () => {
             >
                 <CustomMarker latitude={45.42006386841473} longitude={-75.67117355462116} />
 
-                <CustomPopup latitude={45.42006386841473} longitude={-75.67117355462116} />
             </ReactMapGL>
         </div>
     );

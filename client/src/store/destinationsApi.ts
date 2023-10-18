@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const destinationsApi = createApi({
     reducerPath: "destinationsApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://project-production-149b.up.railway.app" }),
     endpoints(builder) {
         return {
             fetchDestinations: builder.query({
@@ -22,16 +22,13 @@ export const destinationsApi = createApi({
                 }
             }),
             getClosestDestinations: builder.query({
-                query: ({ destId, distance, categories }) => {
-                    // MODIFY
-                    const categoriesStr = JSON.stringify(categories);
-
+                query: ({ locationID, distance, categories }) => {
                     return {
                         url: "/destinations/closest",
                         params: {
-                            location_id: destId,
+                            location_id: locationID,
                             distance: distance,
-                            categories: categoriesStr
+                            categories: categories.join(',')
                         },
                         method: "GET"
                     };
@@ -41,4 +38,4 @@ export const destinationsApi = createApi({
     }
 });
 
-export const { useFetchDestinationsQuery, useGetDestinationQuery } = destinationsApi;
+export const { useFetchDestinationsQuery, useGetDestinationQuery, useGetClosestDestinationsQuery } = destinationsApi;
