@@ -3,7 +3,7 @@
 .dest-show {
     display: flex;
     justify-content: center; // center content on resolutions wider than 1920px
-    padding: 120px 20px 20px;
+    padding: 225px 20px 20px;
     color: $textColor;
     background-color: $bgColor;
 }
@@ -110,13 +110,17 @@
 }
 
 .dest-map-container {
-    flex-basis: 53%;
+    border-radius: $borderRadiusChild;
+    transition: border-radius 250ms;
+    overflow: hidden;
+}
+.dest-map-container:hover {
+    border-radius: 10px;
 }
 .dest-map {
     width: 100%;
     height: 500px;
     border: none;
-    border-radius: $borderRadiusChild;
 }
 .dest-bus-schedules {
     flex-basis: 450px;
@@ -289,15 +293,6 @@
     }
     .dest-main-heading {
         font-size: calc($mainHeadingFontSize - 22px);
-    }
-    .dest-main-cta {
-        align-self: stretch;
-        justify-content: center;
-        font-size: 16px !important;
-    }
-    .dest-main-cta > span {
-        font-size: 20px !important;
-        padding-right: 5px !important;
     }
     .dest-main-image {
         border-radius: calc($borderRadiusChild - 20px);

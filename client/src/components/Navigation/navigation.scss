@@ -7,11 +7,17 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height: 75px;
+    //height: 75px;
+    padding-top: 10px;
     font-family: sans-serif;
     color: $textColor;
+    z-index: 9999999;
 }
 
 .navigation-logo {
     font-size: 50px;
+    width: 100px;
+}
+.navigation-logo > img {
+    width: 100%;
 }

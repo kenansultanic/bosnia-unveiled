@@ -1,17 +1,56 @@
 @import "../../scss/variables";
 
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
     border: none;
     border-radius: $borderRadiusChild;
     padding: 15px 25px;
-    font-size: $bodyFontSize;
+}
+.button:not(.button-dest-gallery-open) {
+    overflow: hidden;
 }
 .button:not(.button-dest-gallery-open) > span:first-child {
     font-size: 24px;
     padding-right: 7px;
+}
+.button-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 150ms 50ms ease-out;
+}
+.button-content:nth-child(2) {
+    position: absolute;
+    bottom: -60px;
+    z-index: 99;
+}
+.button-content > span:nth-child(2) {
+    font-size: $bodyFontSize;
+    padding-left: 7px;
+}
+.button:hover > .button-content {
+    transform: translateY(-75px);
+}
+
+.button-dest-gallery-open:hover > .button-content {
+    transform: none;
+}
+.button-dest-gallery-open > .button-content:nth-child(2) {
+    color: $textColor;
+}
+
+.button-hover-overlay {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    border-radius: 50% 50% 0 0;
+    transition: height 150ms, width 150ms, border-color 150ms;
+    background-color: #fff;
+}
+.button:not(.button-dest-gallery-open):hover > .button-hover-overlay {
+    height: 100px;
 }
 
 .button-primary {
@@ -36,6 +75,17 @@
     border-radius: 50%;
     color: $elementTextColor;
     background-color: rgba(0, 0, 0, 0.75);
+    transition: color 150ms, background-color 150ms;
+}
+.button-dest-gallery-open:hover {
+    color: $textColor;
+    background-color: #fff;
+}
+.button-dest-gallery-open:hover > span > span {
+    transition: transform 150ms;
+}
+.button-dest-gallery-open:hover > span > span {
+    transform: scale(1.5);
 }
 .button-dest-gallery-open > span {
     font-size: 35px;
@@ -69,6 +119,9 @@
     .button-dest-gallery-open {
         padding: 35px;
     }
+    .button-dest-gallery-open:hover > .button-content {
+        transform: translateY(-95px);
+    }
     .button-dest-gallery-open > span {
         font-size: 30px;
     }
@@ -89,8 +142,14 @@
     }
 }
 @media screen and (max-width: 560px) {
+    .dest-main-cta {
+        width: 100%;
+    }
     .button-dest-gallery-open {
         padding: 30px;
+    }
+    .button-dest-gallery-open:hover > .button-content {
+        transform: translateY(-90px);
     }
     .button-dest-gallery-open > span {
         font-size: 25px;
