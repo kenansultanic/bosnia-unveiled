@@ -14,8 +14,7 @@
 }
 .dest-card-vertical-container {
     height: 100%;
-    padding: 15px;
-    border-radius: inherit;
+    padding: 10px;
 }
 .dest-suggested-card {
     height: 300px;
@@ -30,11 +29,34 @@
     width: calc(33% - 5px);
     height: 100%;
     border: 1px solid;
-    border-color: rgba(100, 100, 100, .3);
-    background-color: #fff;
+    border-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, .75);
 }
 .pick-card:hover {
+    background-color: #fff;
     border-color: rgba(100, 100, 100, .95);
+}
+
+.dest-card-vertical-description {
+    padding: 10px 5px;
+    //background-color: red;
+}
+.dest-card-vertical-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    font-size: 21px;
+    line-height: 1;
+}
+.dest-card-vertical-sub-heading {
+    font-size: 14px;
+}
+.dest-card-vertical-location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-top: 15px;
 }
 
 .dest-card-horizontal-img {
@@ -49,8 +71,20 @@
 }
 .dest-card-vertical-img > img {
     width: 100%;
-    height: 150px;
+    height: 125px;
     object-fit: cover;
     object-position: center;
-    border-radius: calc($borderRadiusChild - 14px);
+    border-radius: calc($borderRadiusChild - 10px) calc($borderRadiusChild - 10px) 15px 15px;
+}
+
+@media screen and (max-width: 1280px) {
+    .dest-card-vertical-container {
+        padding: 5px;
+    }
+    .dest-card-vertical-heading {
+        font-size: 18px;
+    }
+    .dest-card-vertical-img > img {
+        border-radius: calc($borderRadiusChild - 6px) calc($borderRadiusChild - 6px) 15px 15px;
+    }
 }

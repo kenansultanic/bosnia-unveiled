@@ -1,0 +1,92 @@
+@import "../../scss/variables";
+
+.home-search-container form {
+    display: flex;
+    gap: 10px;
+    height: 100%;
+}
+
+.search-form-inputs {
+    display: flex;
+    flex-basis: 85%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 50px;
+    border-radius: calc($borderRadiusChild - 8px);
+    background-color: #fff;
+}
+.search-form-inputs > input {
+    flex: 1;
+    width: 0;
+    min-width: 10px;
+    height: 75px;
+    border-radius: 10px;
+}
+.search-form-inputs > input:not(input[type="range"]) {
+    flex-shrink: 1;
+}
+
+.search-form-submit-button {
+    flex-basis: 15%;
+    border-radius: calc($borderRadiusChild - 10px) !important;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 20px;
+    border: 5px solid $primaryColor;
+    border-radius: 30px;
+    background-color: $secondaryColor;
+}
+
+input[type="range"]::-moz-range-track {
+    height: 10px;
+    border-radius: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    margin-top: -10px;
+    border: 10px solid $textColor;
+    border-radius: 50%;
+    background-color: $secondaryColor;
+}
+
+input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -12px;
+    background-color: #5cd5eb;
+    height: 2rem;
+    width: 1rem;
+}
+
+@media screen and (max-width: 1280px) {
+    .search-form-inputs {
+        flex-basis: 90%;
+        padding: 0 25px;
+    }
+    .search-form-submit-button {
+        flex-basis: 10%;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .search-form-inputs {
+        border-radius: calc($borderRadiusChild - 12px);
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .search-form-inputs {
+        border-radius: calc($borderRadiusChild - 22px);
+    }
+}

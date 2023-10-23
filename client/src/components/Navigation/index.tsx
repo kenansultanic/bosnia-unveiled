@@ -5,7 +5,7 @@ const Navigation = () => {
     return (
         <header className="navigation-container">
             {/* <nav></nav> */}
-            <div>[ NAVIGATION ]<button>hehe</button></div>
+            <div>[ NAVIGATION ]</div>
             <div className="navigation-logo">
                 <img src={logo} />
             </div>

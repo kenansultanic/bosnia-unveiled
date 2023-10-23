@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import "./search-bar.scss";
+import { useState, useEffect, FormEvent } from "react";
 import useScrollPos from "hooks/useScrollPos";
 import Button from "components/Button";
-import { useGetClosestDestinationsQuery} from "../../store/destinationsApi";
 
 const SearchBar = () => {
     const [animatePositionUp, setAnimatePositionUp] = useState(true);
@@ -9,11 +9,8 @@ const SearchBar = () => {
     const scrollPos = useScrollPos(50);
 
     const [location, setLocation] = useState('');
-    const [selectedCategories, setSelectedCategories] = useState([''])
-    const [distance, setDistance] = useState(10)
-
-    const res = useGetClosestDestinationsQuery({locationID: 1, distance: 10, categories: ['grad', 'selo']})
-    console.info(res)
+    const [distance, setDistance] = useState(100);
+    const [selectedCategories, setSelectedCategories] = useState(["nature", "park"]);
 
     useEffect(() => {
         if (scrollPos > 700) {
@@ -39,18 +36,36 @@ const SearchBar = () => {
         applyBorderFixes = true;
     }
 
+    const onFormSubmit = (e: FormEvent) => {
+        e.preventDefault();
+
+        console.log(e)
+    };
+
     return (
         <section
             style={positionStyle}
             className={`home-search-section ${applyBorderFixes && "home-search-section-border-fix"}`}>
             <div
-                style={!animatePositionUp ? { border: "none", height: "180px" } : {}}
+                style={!animatePositionUp ? { border: "none", height: "150px" } : {}}
                 className={`home-search-container ${applyBorderFixes ? "home-search-container-border-fix" : ""}`}>
-                <form>
+                <form onSubmit={onFormSubmit}>
                     <div className="search-form-inputs">
-                        <input onChange={e => setLocation(e.target.value)}/>
-                        <input onChange={e => setSelectedCategories([...selectedCategories, e.target.value])}/>
-                        <input type="range" onChange={e => setDistance(Number(e.target.value))} />
+                        <input
+                            type="text"
+                            value={location}
+                            onChange={e => setLocation(e.target.value)}/>
+                        <input
+                            type="text"
+                            value={""}
+                            onChange={e => setSelectedCategories([...selectedCategories, e.target.value])}/>
+                        <input
+                            type="range"
+                            step={50}
+                            min={50}
+                            max={300}
+                            value={distance}
+                            onChange={e => setDistance(parseInt(e.target.value))} />
                     </div>
                     <Button
                         onClick={() => {

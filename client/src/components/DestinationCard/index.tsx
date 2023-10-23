@@ -34,7 +34,21 @@ const DestinationCard = ({ className, orientation, image }: Props) => {
                     <div className="dest-card-vertical-img">
                         <img src={image} />
                     </div>
-                    <div className="dest-card-vertical-description">vertical</div>
+                    <div className="dest-card-vertical-description">
+                        <div className="dest-card-vertical-heading">
+                            <h3>Vodopadi Kravice</h3>
+                            <span className="material-symbols-outlined" aria-hidden="true">
+                                partly_cloudy_day
+                            </span>
+                        </div>
+                        <p className="dest-card-vertical-sub-heading">Picturesque waterfalls near city of Ljubuški</p>
+                        <div className="dest-card-vertical-location">
+                            <span className="material-symbols-outlined" aria-hidden="true">
+                                location_on
+                            </span>
+                            <div>Ljubuski</div>
+                        </div>
+                    </div>
                 </div>
             </Tilt>
         );

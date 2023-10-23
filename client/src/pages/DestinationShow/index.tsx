@@ -1,7 +1,7 @@
 import "./destination-show.scss";
-import { useState } from "react";
-import { useGetDestinationQuery } from "store/destinationsApi";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector, getDestinationById } from "store";
 import mainImage from "../../assets/main-section-image.jpg";
 import destImg1 from "../../assets/background2.jpg";
 import destImg2 from "../../assets/background4.jpg";
@@ -17,6 +17,11 @@ const DestinationShow = () => {
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
     //const { data, error, isLoading } = useGetDestinationQuery(2);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(getDestinationById(1));
+    }, []);
 
     return (
         <main className="dest-show">
