@@ -33,10 +33,9 @@ h3 {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: $bgColor;
-    border-radius: $borderRadiusParent;
+    background: $primaryColor;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: $bgColor;
+    background: rgb(192, 192, 66);
 }

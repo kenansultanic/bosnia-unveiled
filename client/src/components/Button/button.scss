@@ -74,7 +74,7 @@
     border: none;
     border-radius: 50%;
     color: $elementTextColor;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 1);
     transition: color 150ms, background-color 150ms;
 }
 .button-dest-gallery-open:hover {
@@ -94,24 +94,24 @@
     // inverted border radius
     content: "";
     position: absolute;
-    bottom: -1px;
-    left: -56px;
+    bottom: 0px;
+    left: -58px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     box-shadow: 25px 20px $primaryColor;
+    //background-color: red;
 }
 .button-dest-gallery-open::after {
     // inverted border radius
     content: "";
     position: absolute;
-    top: -57px;
+    top: -58px;
     right: 0;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     box-shadow: 20px 25px $primaryColor;
-    //background-color: red;
 }
 
 // Media queries
@@ -153,5 +153,28 @@
     }
     .button-dest-gallery-open > span {
         font-size: 25px;
+    }
+
+    .button-dest-gallery-open::before {
+        // inverted border radius
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        left: -63px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: 25px 21px $primaryColor;
+    }
+    .button-dest-gallery-open::after {
+        // inverted border radius
+        content: "";
+        position: absolute;
+        top: -63px;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: 20px 25px $primaryColor;
     }
 }

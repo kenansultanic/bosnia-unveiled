@@ -1,20 +1,16 @@
 @import "../../scss/variables";
 
-.dest-card-horizontal, .dest-card-vertical {
+.dest-card {
     display: flex;
+    flex-direction: column;
     border: 1px solid rgba(255, 255, 255, .25);
     border-radius: $borderRadiusChild;
     background-color: $elementBgColorTransparent;
 }
-.dest-card-horizontal {
-    padding: 15px;
-}
-.dest-card-vertical {
-    flex-direction: column;
-}
-.dest-card-vertical-container {
+
+.dest-card-container {
     height: 100%;
-    padding: 10px;
+    padding: 5px;
 }
 .dest-suggested-card {
     height: 300px;
@@ -37,54 +33,73 @@
     border-color: rgba(100, 100, 100, .95);
 }
 
-.dest-card-vertical-description {
-    padding: 10px 5px;
-    //background-color: red;
+.dest-card-description {
+    padding: 10px 15px;
 }
-.dest-card-vertical-heading {
+.dest-card-heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     font-size: 21px;
     line-height: 1;
 }
-.dest-card-vertical-sub-heading {
-    font-size: 14px;
-}
-.dest-card-vertical-location {
+
+.dest-card-location {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding-top: 15px;
+    gap: 10px;
+    font-size: 14px;
+}
+.dest-card-sub-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+}
+.dest-card-location > span, .dest-card-sub-heading > span {
+    font-size: 20px;
 }
 
-.dest-card-horizontal-img {
-    flex-basis: 45%;
-}
-.dest-card-horizontal-img > img {
+.dest-card-img > img {
     width: 100%;
-    height: 100%;
+    height: 140px;
     object-fit: cover;
     object-position: center;
-    border-radius: calc($borderRadiusChild - 12px);
-}
-.dest-card-vertical-img > img {
-    width: 100%;
-    height: 125px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: calc($borderRadiusChild - 10px) calc($borderRadiusChild - 10px) 15px 15px;
+    border-radius: calc($borderRadiusChild - 5px) calc($borderRadiusChild - 5px) 15px 15px;
 }
 
 @media screen and (max-width: 1280px) {
-    .dest-card-vertical-container {
+    .dest-card-container {
         padding: 5px;
     }
-    .dest-card-vertical-heading {
-        font-size: 18px;
+    .dest-card-description {
+        padding: 10px 5px;
     }
-    .dest-card-vertical-img > img {
+    .dest-card-heading {
+        font-size: 16px;
+    }
+    .dest-card-img > img {
         border-radius: calc($borderRadiusChild - 6px) calc($borderRadiusChild - 6px) 15px 15px;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .pick-card {
+        height: auto;
+        padding-bottom: 30px;
+        border-radius: calc($borderRadiusChild - 10px);
+    }
+    .dest-card-img > img {
+        border-radius: calc($borderRadiusChild - 16px) calc($borderRadiusChild - 16px) 15px 15px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .pick-card {
+        width: 100%;
+    }
+    .dest-card-description {
+        padding: 10px 15px;
     }
 }

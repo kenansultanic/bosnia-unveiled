@@ -111,15 +111,12 @@ const DestinationShow = () => {
                             <section className="dest-suggested-cards">
                                 <DestinationCard
                                     className="dest-suggested-card"
-                                    orientation="horizontal"
                                     image={destImg1} />
                                 <DestinationCard
                                     className="dest-suggested-card"
-                                    orientation="horizontal"
                                     image={destImg2} />
                                 <DestinationCard
                                     className="dest-suggested-card"
-                                    orientation="horizontal"
                                     image={destImg3} />
                             </section>
                         </section>

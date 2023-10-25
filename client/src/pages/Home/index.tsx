@@ -29,15 +29,12 @@ const Home = () => {
                     <div className="home-top-picks">
                         <DestinationCard
                             className="pick-card"
-                            orientation="vertical"
                             image={pickImg1} />
                         <DestinationCard
                             className="pick-card"
-                            orientation="vertical"
                             image={pickImg2} />
                         <DestinationCard
                             className="pick-card"
-                            orientation="vertical"
                             image={pickImg3} />
                     </div>
                 </section>

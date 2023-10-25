@@ -6,10 +6,10 @@ import Button from "components/Button";
 const SearchBar = () => {
     const [animatePositionUp, setAnimatePositionUp] = useState(true);
     const [positionStyle, setPositionStyle] = useState({});
-    const scrollPos = useScrollPos(50);
+    const { scrollPos } = useScrollPos();
 
     const [location, setLocation] = useState('');
-    const [distance, setDistance] = useState(100);
+    const [distance, setDistance] = useState(20);
     const [selectedCategories, setSelectedCategories] = useState(["nature", "park"]);
 
     useEffect(() => {
@@ -54,18 +54,42 @@ const SearchBar = () => {
                         <input
                             type="text"
                             value={location}
-                            onChange={e => setLocation(e.target.value)}/>
+                            onChange={e => setLocation(e.target.value)} />
                         <input
                             type="text"
                             value={""}
-                            onChange={e => setSelectedCategories([...selectedCategories, e.target.value])}/>
-                        <input
-                            type="range"
-                            step={50}
-                            min={50}
-                            max={300}
-                            value={distance}
-                            onChange={e => setDistance(parseInt(e.target.value))} />
+                            onChange={e => setSelectedCategories([...selectedCategories, e.target.value])} />
+                        <div className="search-slider" data-slider-value={distance}>
+                            <input
+                                type="range"
+                                step={20}
+                                min={20}
+                                max={100}
+                                value={distance}
+                                onChange={e => setDistance(parseInt(e.target.value))} />
+                            <div className="search-slider-indicator">
+                                <div className="search-slider-indicator-element">
+                                    <span></span>
+                                    <span className={distance === 20 ? "indicator-selected-value" : ""}>20</span>
+                                </div>
+                                <div className="search-slider-indicator-element">
+                                    <span></span>
+                                    <span className={distance === 40 ? "indicator-selected-value" : ""}>40</span>
+                                </div>
+                                <div className="search-slider-indicator-element">
+                                    <span></span>
+                                    <span className={distance === 60 ? "indicator-selected-value" : ""}>60</span>
+                                </div>
+                                <div className="search-slider-indicator-element">
+                                    <span></span>
+                                    <span className={distance === 80 ? "indicator-selected-value" : ""}>80</span>
+                                </div>
+                                <div className="search-slider-indicator-element">
+                                    <span></span>
+                                    <span className={distance === 100 ? "indicator-selected-value" : ""}>100</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <Button
                         onClick={() => {
