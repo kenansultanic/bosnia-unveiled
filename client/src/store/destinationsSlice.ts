@@ -1,10 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getDestinations, getDestinationById, getClosestDestinations } from "./getDestinations";
 
-interface Destination {
-
+interface DestinationsInitialState {
+    allDestinations: any[],
+    searchedDestinations: any[],
+    isSearched: boolean
 }
-const initialState: Destination[] = [];
+
+const initialState: DestinationsInitialState = {
+    allDestinations: [],
+    searchedDestinations: [],
+    isSearched: false
+};
 
 export const destinationsSlice = createSlice({
     name: "destinations",
@@ -12,13 +19,15 @@ export const destinationsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getDestinations.fulfilled, (state, action) => {
-            state.push(...action.payload);
+            state.allDestinations.push(...action.payload.results);
         });
         builder.addCase(getDestinationById.fulfilled, (state, action) => {
-            state.push(action.payload);
+            state.allDestinations.push(action.payload);
         });
         builder.addCase(getClosestDestinations.fulfilled, (state, action) => {
-            state.push();
+            state.allDestinations.push(...action.payload.closest_destinations);
+            state.searchedDestinations.push(...action.payload.closest_destinations);
+            state.isSearched = true;
         });
     }
 });

@@ -51,7 +51,7 @@ const CustomPopup = ({ latitude, longitude }: CustomPopupProps) => {
 
 const Map = () => {
     return (
-        <div>
+        <div className="map">
             <ReactMapGL
                 mapLib={import('mapbox-gl')}
                 mapboxAccessToken={API_KEY}
@@ -61,7 +61,7 @@ const Map = () => {
                     longitude: -75.6903,
                     zoom: 10
                 }}
-                style={{ width: '100%', height: '450px' }}
+                style={{ width: '100%', height: '100%' }}
                 mapStyle="mapbox://styles/mapbox/streets-v9"
             >
                 <CustomMarker latitude={45.42006386841473} longitude={-75.67117355462116} />
