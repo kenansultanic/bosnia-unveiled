@@ -227,8 +227,16 @@ get_locations_categories_schema = openapi.Schema(
 
 # all destinations schema
 get_all_destinations_schema = openapi.Schema(
-    type=openapi.TYPE_ARRAY,
-    items=destination_schema
+    type=openapi.TYPE_OBJECT,
+    properties={
+        'count': openapi.Schema(type=openapi.TYPE_INTEGER),
+        'next': openapi.Schema(type=openapi.TYPE_STRING),
+        'previous': openapi.Schema(type=openapi.TYPE_STRING),
+        'results': openapi.Schema(
+            type=openapi.TYPE_ARRAY,
+            items=destination_schema
+        )
+    }
 )
 
 

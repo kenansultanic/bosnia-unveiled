@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 
-const useScrollPos = (scrollStep: number) => {
+const useScrollPos = () => {
     const [scrollPos, setScrollPos] = useState(0);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const SCROLL_STEP: number = 50;
 
     const handleScroll = (e: Event) => {
-        if (Math.abs(window.scrollY - scrollPos) > scrollStep) {
+        if (Math.abs(window.scrollY - scrollPos) > SCROLL_STEP) {
+            setPrevScrollPos(scrollPos);
             setScrollPos(window.scrollY);
         }
     };
@@ -17,7 +20,7 @@ const useScrollPos = (scrollStep: number) => {
         };
     }, [scrollPos]);
 
-    return scrollPos;
+    return { prevScrollPos, scrollPos };
 };
 
 export default useScrollPos;

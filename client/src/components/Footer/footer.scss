@@ -21,8 +21,8 @@ div.hr {
 }
 .footer-section {
     display: flex;
-    justify-content: space-evenly;
-    //background-color: red;
+    justify-content: center;
+    gap: 175px;
 }
 .footer-section > div {
     display: flex;
@@ -56,6 +56,7 @@ div.hr {
 @media screen and (max-width: 960px) {
     .footer-section {
         flex-direction: column;
+        gap: 30px;
         padding: 0 50px;
     }
     .footer-section > div {
