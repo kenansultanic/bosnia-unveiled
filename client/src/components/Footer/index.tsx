@@ -44,25 +44,6 @@ const Footer = ({ className }: Props) => {
                         </div>
                     </div>
                 </div>
-                <div className="footer-support">
-                    <div>
-                        <span className="material-symbols-outlined">
-                            redeem
-                        </span>
-                    </div>
-                    <h2 className="footer-heading">Support Us</h2>
-                    <div>
-                        <div className="footer-github">
-                            <div>GitHub</div>
-                            <div>github.com/kenansultanic/project</div>
-                        </div>
-                        <div className="footer-donation">
-                            <div>Donation</div>
-                            <div>donation.com/blah</div>
-                        </div>
-                    </div>
-                    <p className="footer-support-paragraph"></p>
-                </div>
             </section>
         </footer>
     );

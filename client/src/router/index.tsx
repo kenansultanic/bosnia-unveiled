@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "App";
 import Home from "../pages/Home";
 import Error from "../pages/Error";
 import DestinationShow from "../pages/DestinationShow";
@@ -7,12 +8,20 @@ import DestinationShow from "../pages/DestinationShow";
 interface Route {
     path: string,
     element: ReactElement,
-    errorElement?: ReactElement
+    errorElement?: ReactElement,
+    children?: Route[]
 }
 
 const routes: Route[] = [
-    { path: "/", element: <Home />, errorElement: <Error /> },
-    { path: "/:id", element: <DestinationShow /> }
+    {
+        path: "/",
+        element: <App />,
+        errorElement: <Error />,
+        children: [
+            { path: "", element: <Home /> },
+            { path: ":id", element: <DestinationShow /> }
+        ]
+    },
 ];
 
 const router = createBrowserRouter(routes);
