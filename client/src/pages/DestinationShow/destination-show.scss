@@ -113,15 +113,12 @@
     border-radius: $borderRadiusChild;
     transition: border-radius 250ms;
     overflow: hidden;
+    height: 500px;
 }
 .dest-map-container:hover {
-    border-radius: 10px;
+    border-radius: 0;
 }
-.dest-map {
-    width: 100%;
-    height: 500px;
-    border: none;
-}
+
 .dest-bus-schedules {
     flex-basis: 450px;
 }

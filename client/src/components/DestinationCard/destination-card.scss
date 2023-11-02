@@ -6,8 +6,8 @@
     border: 1px solid rgba(255, 255, 255, .25);
     border-radius: $borderRadiusChild;
     background-color: $elementBgColorTransparent;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
 .dest-card-container {
     height: 100%;
     padding: 5px;

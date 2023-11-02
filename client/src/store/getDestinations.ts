@@ -22,7 +22,7 @@ const getDestinationById = createAsyncThunk(
 const getClosestDestinations = createAsyncThunk(
     "destinations/getClosest",
     async (obj: any) => {
-        const categories = obj.categories.join("_");
+        const categories = obj.categories.join(",");
         const res = await api.get("/destinations/closest", {
             params: {
                 location_id: obj.locationId,

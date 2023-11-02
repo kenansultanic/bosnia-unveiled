@@ -1,9 +1,13 @@
-import "./search-bar.scss";
+import "./search.scss";
 import { useState, useEffect, FormEvent } from "react";
 import useScrollPos from "hooks/useScrollPos";
 import Button from "components/Button";
 
-const SearchBar = () => {
+interface Props {
+    mainSectionRef: any
+}
+
+const SearchBar = ({ mainSectionRef }: Props) => {
     const [animatePositionUp, setAnimatePositionUp] = useState(true);
     const [positionStyle, setPositionStyle] = useState({});
     const { scrollPos } = useScrollPos();
@@ -16,7 +20,7 @@ const SearchBar = () => {
         if (scrollPos > 700) {
             setPositionStyle({
                 position: "fixed",
-                top: "auto",
+                top: "unset",
                 animationName: "search-slide-up"
             });
             setAnimatePositionUp(false);
@@ -38,8 +42,7 @@ const SearchBar = () => {
 
     const onFormSubmit = (e: FormEvent) => {
         e.preventDefault();
-
-        console.log(e)
+        mainSectionRef.current?.scrollIntoView({behavior: "smooth"});
     };
 
     return (
@@ -47,21 +50,35 @@ const SearchBar = () => {
             style={positionStyle}
             className={`home-search-section ${applyBorderFixes && "home-search-section-border-fix"}`}>
             <div
-                style={!animatePositionUp ? { border: "none", height: "150px" } : {}}
+                style={!animatePositionUp ? { border: "none", height: "130px" } : {}}
                 className={`home-search-container ${applyBorderFixes ? "home-search-container-border-fix" : ""}`}>
                 <form onSubmit={onFormSubmit}>
                     <div className="search-form-inputs">
-                        <input
-                            type="text"
-                            value={location}
-                            onChange={e => setLocation(e.target.value)} />
-                        <input
-                            type="text"
-                            value={""}
-                            onChange={e => setSelectedCategories([...selectedCategories, e.target.value])} />
-                        <div className="search-slider" data-slider-value={distance}>
+                        <div className="search-form-input-container">
+                            <label htmlFor="location">Your Location</label>
+                            <input
+                                type="text"
+                                name="location"
+                                placeholder="Sarajevo"
+                                value={location}
+                                className="search-form-input"
+                                onChange={e => setLocation(e.target.value)} />
+                        </div>
+                        <div className="search-form-input-container">
+                            <label htmlFor="categories">Categories</label>
+                            <input
+                                type="text"
+                                name="categories"
+                                placeholder="Old town"
+                                value={""}
+                                className="search-form-input"
+                                onChange={e => setSelectedCategories([...selectedCategories, e.target.value])} />
+                        </div>
+                        <div className="search-slider">
+                            <label htmlFor="distance">Distance (km)</label>
                             <input
                                 type="range"
+                                name="distance"
                                 step={20}
                                 min={20}
                                 max={100}
@@ -92,8 +109,6 @@ const SearchBar = () => {
                         </div>
                     </div>
                     <Button
-                        onClick={() => {
-                        }}
                         className="primary search-form-submit-button"
                         icon="search"
                         iconAriaLabel="Search">
