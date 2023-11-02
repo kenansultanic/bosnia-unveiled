@@ -9,6 +9,7 @@ import os
 import requests
 from django.db.models import Q
 from geopy.distance import geodesic
+from panel.pagination import DestinationsPagination
 
 from .schemas import get_destination_schema, search_for_destinations_schema, get_all_destinations_schema, \
     closest_destinations_schema, get_locations_categories_schema
@@ -33,19 +34,26 @@ def get_all_categories_and_locations(request):
     return Response({'locations': parsed_locations, 'categories': parsed_categories})
 
 
-@swagger_auto_schema(method='get', responses={200: get_all_destinations_schema})
+page_param = Parameter('page', IN_QUERY, description='Page number', type=TYPE_INTEGER)
+per_page_param = Parameter('per_page', IN_QUERY, description='Number of destinations per page', type=TYPE_INTEGER)
+
+
+@swagger_auto_schema(
+    method='get',
+    manual_parameters=[page_param, per_page_param],
+    responses={200: get_all_destinations_schema}
+)
 @api_view(['GET'])
 def get_all_destinations(request):
     """
-        Returns all destinations from the database
+        Returns all destinations from the database. Implemented with pagination
     """
     destinations = Destination.objects.all()
-    serialized_destinations = []
+    paginator = DestinationsPagination()
+    result_page = paginator.paginate_queryset(destinations, request)
+    serialized_destinations = [destination.to_dict(request) for destination in result_page]
 
-    for destination in destinations:
-        serialized_destinations.append(destination.to_dict(request))
-
-    return Response(serialized_destinations)
+    return paginator.get_paginated_response(serialized_destinations)
 
 
 @swagger_auto_schema(
