@@ -2,14 +2,14 @@
 
 <h3 align="center">Unveiled Bosnia</h3>
 <p align="center">
-    nxsxsxc
+    Tourist app
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Server docs</a>
+    <a href="https://project-production-149b.up.railway.app/swagger/">View Server docs</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Demo</a>
+    <a href="https://project-production-149b.up.railway.app/front/">Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Admin login</a>
+    <a href="https://project-production-149b.up.railway.app/admin/login/?next=/admin/">Admin login</a>
   </p>
 </div>
 
@@ -44,7 +44,7 @@ A website
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+This section contains all major frameworks and libraries that we used to develop your project. 
 
 * [![React][React.js]][React-url]
 * [![Typescript][TypeScript]][TypeScript-url]
@@ -58,12 +58,11 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+In this section we provided the prerequisites that are necessary to run the project.
 
 ### Prerequisites
 
-The React app uses NPM as the package manager
+The React app uses NPM as the package manager.
 * npm
   ```sh
   npm install npm@latest -g
@@ -78,7 +77,8 @@ The Django server uses PIP as a package-managment system.
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+This guide will walk you through the steps to install and setup
+Unveiled Bosnia on your local machine.
 
 1. Get a free API Key at [https://openweathermap.org](https://openweathermap.org/current)
 2. Clone the repo
@@ -104,32 +104,16 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- CONTACT -->
 ## Contact
 
-* Kenan Sultanić - [@your_twitter](https://twitter.com/your_username) - kenansultanic0805@gmail.com
-* Demir Pašalić - [@your_twitter](https://twitter.com/your_username) - de.pasalicc@gmail.com
-* Admira Bakal - [@your_twitter](https://twitter.com/your_username) - admira.bakal@gmail.com
+* Kenan Sultanić - [@Kenan's LinkedIn](https://linkedin.com/in/kenansultanic) - kenansultanic0805@gmail.com
+* Demir Pašalić - [@Demir's LinkedIn](https://www.linkedin.com/in/dpasalic/) - de.pasalicc@gmail.com
+* Admira Bakal - [@Admira's LinkedIn](https://www.linkedin.com/in/admira-bakal-591176238/) -
+admira.bakal@gmail.com
 
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/kenansultanic/project.git](https://github.com/kenansultanic/project.git)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-
-
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
 
 [React.js]: https://img.shields.io/badge/react-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
