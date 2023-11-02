@@ -46,7 +46,7 @@ A website
 
 This section contains all major frameworks and libraries that we used to develop your project. 
 
-* [![React][React.js]][React-url]
+* [<a href="https://reactjs.org/" target="_blank">![React][React.js]][React-url]
 * [![Typescript][TypeScript]][TypeScript-url]
 * [![SassCSS][SassCSS]][SassCSS-url]
 * [![Django][Django]][Django-url]
@@ -80,7 +80,7 @@ The Django server uses PIP as a package-managment system.
 This guide will walk you through the steps to install and setup
 Unveiled Bosnia on your local machine.
 
-1. Get a free API Key at [https://openweathermap.org](https://openweathermap.org/current)
+1. Get a free API Key at <a href="https://openweathermap.org" target="_blank">https://openweathermap.org </a>
 2. Clone the repo
    ```sh
    git clone https://github.com/kenansultanic/project.git
@@ -104,13 +104,11 @@ Unveiled Bosnia on your local machine.
 <!-- CONTACT -->
 ## Contact
 
-* Kenan Sultanić - [@Kenan's LinkedIn](https://linkedin.com/in/kenansultanic) - kenansultanic0805@gmail.com
-* Demir Pašalić - [@Demir's LinkedIn](https://www.linkedin.com/in/dpasalic/) - de.pasalicc@gmail.com
-* Admira Bakal - [@Admira's LinkedIn](https://www.linkedin.com/in/admira-bakal-591176238/) -
-admira.bakal@gmail.com
+* Kenan Sultanić - <a href="https://linkedin.com/in/kenansultanic/" target="_blank">@Kenan's LinkedIn</a> - kenansultanic0805@gmail.com
+* Demir Pašalić - <a href="https://www.linkedin.com/in/dpasalic/" target="_blank">@Demir's LinkedIn</a> - de.pasalicc@gmail.com
+* Admira Bakal - <a href="https://www.linkedin.com/in/admira-bakal-591176238/" target="_blank">@Admira's LinkedIn</a> admira.bakal@gmail.com
 
-
-Project Link: [https://github.com/kenansultanic/project.git](https://github.com/kenansultanic/project.git)
+Project Link: <a href="https://github.com/kenansultanic/project.git" target="_blank">https://github.com/kenansultanic/project.git </a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
