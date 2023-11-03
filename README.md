@@ -37,7 +37,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Name Screen Shot][product-screenshot]](https://example.com)
+[![Screen Shot][product-screenshot]](https://example.com)
 
 A website 
 
