@@ -9,7 +9,9 @@ const Footer = ({ className }: Props) => {
     return (
         <footer className={`footer ${className}`}>
             <div className="footer-logo">
-                <img src={miniLogo} />
+                <span className="material-symbols-outlined">
+                    crowdsource
+                </span>
             </div>
             <div className="hr"></div>
             <section className="footer-section">
