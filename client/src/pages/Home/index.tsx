@@ -18,8 +18,11 @@ const Home = () => {
     const [getClosestDests, isClosestDestsLoading, closestDestsError] = useThunk(getClosestDestinations);
 
     useEffect(() => {
-        getClosestDests({ locationId: 1, distance: 1000, categories: ["grad"] });
     }, []);
+
+    const handleSearchSubmit = () => {
+        getClosestDests({ locationId: 1, distance: 1000, categories: [] });
+    };
 
     return (
         <main className="home">
@@ -28,7 +31,7 @@ const Home = () => {
                     <h1 className="home-main-heading">Bosnia Unveiled</h1>
                     <p className="home-sub-heading">Explore hidden destinations of Bosnia & Herzegovina</p>
                 </header>
-                <SearchBar mainSectionRef={mainSectionRef} />
+                <SearchBar mainSectionRef={mainSectionRef} handleSearchSubmit={handleSearchSubmit} />
                 <section className="home-top-picks-section">
                     <h2>Our top <span>picks</span></h2>
                     <div className="home-top-picks">
@@ -51,9 +54,8 @@ const Home = () => {
                             <SearchCardsSkeleton />
                         : destinations.searchedDestinations.length === 0 ?
                             <SearchMotive />
-                        : null
+                        : <Map />
                     }
-                    <Map />
                 </section>
 
                 <Footer className="home-footer" />

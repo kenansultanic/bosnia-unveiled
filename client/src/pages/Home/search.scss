@@ -2,229 +2,110 @@
 
 .home-search-container form {
     display: flex;
-    gap: 10px;
+    justify-content: center;
     height: 100%;
 }
-
 .search-form-inputs {
-    flex-basis: 85%;
+    flex: 1;
     display: flex;
-    flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
     gap: 10px;
-    padding: 15px 40px;
-    border-radius: 100px;
+    padding: 24px 40px;
+    border-radius: 32px;
     background-color: #fff;
 }
-
-.search-form-input-container,
-.search-slider {
-    flex: 1 1 auto;
+.search-form-input-container {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    max-width: 220px;
+    justify-content: center;
+    gap: 5px;
 }
-
-.search-form-input-container>label,
-.search-slider>label {
-    display: inline-block;
-    padding: 5px;
-    font-size: 14px;
-}
-.search-slider>label {
-    padding-bottom: 15px;
-}
-
-.search-form-input {
-    width: 100%;
-    height: 40px;
-    padding-left: 10px;
-    border: 1px solid #ccc;
-    border-radius: 40px;
-    transition: border 100ms, outline 250ms;
-}
-
-.search-form-input:focus {
-    border-color: $primaryColor;
-    outline: 5px solid rgba(255, 255, 0, .45);
-}
-
-.search-form-submit-button {
-    flex-basis: 15%;
-    border-radius: calc($borderRadiusChild - 10px) !important;
-}
-
-input[type="range"] {
-    flex-shrink: 0;
-    width: 200px;
-    -webkit-appearance: none;
-    cursor: pointer;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-    height: 10px;
-    border-radius: 30px;
-    background-color: $primaryColor;
-}
-
-input[type="range"]::-moz-range-track {
-    height: 10px;
-    border-radius: 30px;
-    background-color: $primaryColor;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 30px;
-    height: 30px;
-    margin-top: -10px;
-    border: 10px solid $textColor;
-    border-radius: 50%;
-    background-color: $secondaryColor;
-}
-
-input[type="range"]::-moz-range-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 10px;
-    height: 10px;
-    margin-top: -10px;
-    border: 10px solid $textColor;
-    border-radius: 50%;
-    background-color: $secondaryColor;
-}
-
 .search-slider {
     position: relative;
-    width: min-content;
+    //background-color: red;
 }
-
-.search-slider-indicator {
+.search-slider::before {
+    content: "";
     position: absolute;
-    bottom: -30px;
-    left: 5px;
-    display: flex;
-    justify-content: space-between;
-    width: 190px;
-}
-
-.search-slider-indicator-element {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    width: 20px;
-}
-
-.search-slider-indicator-element>span:first-child {
-    width: 2px;
-    height: 4px;
-    background-color: $textColor;
-}
-
-.search-slider-indicator-element>span:nth-child(2) {
-    font-size: 12px;
-    transition: transform 75ms;
-}
-
-.indicator-selected-value {
-    font-weight: 900;
-    transform: scale(2);
-}
-
-.search-cards-placeholder,
-.search-cards-skeleton {
-    width: 100%;
-    display: flex;
-    gap: 15px;
-    padding: 20px;
-}
-.search-cards-placeholder > div,
-.search-cards-skeleton > div {
-    flex: 1 1 auto;
-    height: 350px;
-    border-radius: $borderRadiusChild;
-    background-color: #fff !important;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    transition: background-position 250ms linear;
-}
-.search-cards-skeleton {
-    position: absolute;
-    top: 0;
     left: 0;
-    z-index: 1;
+    top: 39px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #ccc;
 }
-.search-cards-skeleton > div {
-    background: linear-gradient(110deg, rgba(0, 0, 0, 0) 30%, rgba(150, 150, 150, .3), rgba(0, 0, 0, 0) 60%);
-    background-size: 250% 250%;
-    animation: search-card-skeleton 1000ms linear infinite;
+.search-slider::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 39px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+.distance {
+    font-weight: 900;
 }
 
-@media screen and (max-width: 1280px) {
-    .search-form-inputs {
-        padding: 15px 30px;
-        flex-basis: 90%;
-    }
-
-    .search-form-input-container>label,
-    .search-slider>label {
-        font-size: 12px;
-    }
-
-    .search-form-submit-button {
-        flex-basis: 10%;
-    }
+.search-animate-up {
+    
+}
+.search-animate-down {
+    position: fixed;
+    top: unset;
+    height: 130px;
+    animation: search-animate-down 500ms forwards;
+}
+.search-animate-down .home-search-container {
+    padding: 5px;
+    border-radius: 40px;
+}
+.search-animate-down .search-form-inputs {
+    padding: 20px 40px;
+    border-radius: 26px;
 }
 
 @media screen and (max-width: 960px) {
     .search-form-inputs {
-        border-radius: calc($borderRadiusChild - 12px);
+        border-radius: 44px;
+    }
+    .search-animate-down .home-search-container {
+        border-radius: 62px;
+    }
+    .search-animate-down .search-form-inputs {
+        border-radius: 58px;
     }
 }
-
 @media screen and (max-width: 560px) {
     .search-form-inputs {
         flex-direction: column;
-        padding: 10px 10px;
-        border-radius: calc($borderRadiusChild - 22px);
-    }
-    .search-form-input {
-        height: 50px;
-    }
-    .search-form-input-container,
-    .search-slider {
-        flex-basis: 100%;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        max-width: unset;
-        width: 100%;
-    }
-    .search-form-input-container > label,
-    .search-slider > label {
-        min-width: 75px;
-        padding: 0;
-    }
-    input[type="range"] {
-        flex-grow: 1;
-        flex-shrink: 1;
-        width: unset;
-    }
-    .search-slider-indicator {
-        bottom: -10px;
-        left: 82px;
-        gap: 0;
-        width: 45vw;
+        align-items: stretch;
+        border-radius: 40px;
+        padding: 20px 30px;
     }
 }
+
 @keyframes search-card-skeleton {
     0% {
         background-position: 140% 0%;
     }
+
     100% {
-        background-position: 0% 0%;
+        background-position: -10% 0%;
+    }
+}
+
+// Search bar animation
+@keyframes search-animate-down {
+    0% {
+        bottom: -200px;
+    }
+    50% {
+        bottom: 50px;
+    }
+    100% {
+        bottom: 10px;
     }
 }

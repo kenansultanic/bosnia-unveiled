@@ -98,14 +98,12 @@
     max-width: 1000px;
     height: 150px;
     z-index: 9999;
-    animation-duration: 500ms;
-    animation-fill-mode: forwards;
 }
 
 .home-search-container {
     width: 100%;
     height: 100%;
-    padding: 15px;
+    padding: 10px;
     border: 10px solid $bgColor;
     border-radius: 50px;
     background-color: $primaryColor;
@@ -222,7 +220,7 @@
     .home-search-container,
     .home-center-image-section,
     .home-main-section {
-        border-radius: calc($borderRadiusParent - 10px);
+        border-radius: calc($borderRadiusParent - 20px);
     }
 
     .home-search-section {
@@ -233,6 +231,10 @@
         width: calc(100% - 20px);
         height: 130px;
         transform: none;
+    }
+    .home-search-section.search-animate-down {
+        height: 130px;
+        padding-bottom: 20px;
     }
 
     .home-search-container {
@@ -318,6 +320,9 @@
         top: 325px;
         height: 250px;
     }
+    .home-search-section.search-animate-down {
+        display: none;
+    }
 }
 
 @media screen and (min-width: 961px) {
@@ -400,20 +405,5 @@
     .home-top-picks-section:hover>.home-top-picks {
         transform: translateX(-50%);
         background-color: #ddd;
-    }
-}
-
-// Search bar animation
-@keyframes search-slide-up {
-    0% {
-        bottom: -200px;
-    }
-
-    50% {
-        bottom: 70px;
-    }
-
-    100% {
-        bottom: 10px;
     }
 }

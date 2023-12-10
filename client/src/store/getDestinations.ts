@@ -23,6 +23,7 @@ const getClosestDestinations = createAsyncThunk(
     "destinations/getClosest",
     async (obj: any) => {
         const categories = obj.categories.join(",");
+
         const res = await api.get("/destinations/closest", {
             params: {
                 location_id: obj.locationId,
@@ -34,5 +35,14 @@ const getClosestDestinations = createAsyncThunk(
         return res.data;
     }
 );
+
+// DEV ONLY
+const pause = (time: number) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(null);
+        }, time)
+    });
+};
 
 export { getDestinations, getDestinationById, getClosestDestinations };
