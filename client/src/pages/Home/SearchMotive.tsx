@@ -14,11 +14,19 @@ const SearchMotive = () => {
                 <div></div>
             </div>
             <img src={searchMotiveImg} alt="" />
+            <h2>
+                {
+                    isSearched ?
+                        "Empty Search!"
+                        :
+                        "Search below!"
+                }
+            </h2>
             <p>
                 {
                     isSearched ?
                         "We haven't found any destinations based on your parameters, you can always search again"
-                    :
+                        :
                         "Looks like you haven't searched for any destinations, feel free to explore"
                 }
                 <span className="material-symbols-outlined">

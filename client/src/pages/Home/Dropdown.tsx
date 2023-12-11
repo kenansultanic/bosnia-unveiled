@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Select from "react-select";
 
 const options = [
@@ -8,19 +7,18 @@ const options = [
 ];
 
 interface Props {
+    handleChange: any,
     isMulti: boolean,
     scrollPos: number
 }
 
-const Dropdown = ({ isMulti, scrollPos }: Props) => {
-    const [selectedOption, setSelectedOption] = useState<any>(null);
-console.log(selectedOption)
+const Dropdown = ({ handleChange, isMulti, scrollPos }: Props) => {
     return (
         <Select
             isMulti={isMulti}
             options={options}
             menuPlacement={scrollPos < 700 ? "bottom" : "top"}
-            onChange={o => setSelectedOption(o)}
+            onChange={val => handleChange(val)}
             styles={{
                 control: (baseStyles, state) => ({
                     ...baseStyles,

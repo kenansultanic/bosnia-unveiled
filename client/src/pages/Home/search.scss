@@ -15,6 +15,7 @@
     background-color: #fff;
 }
 .search-form-input-container {
+    position: relative;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -60,11 +61,51 @@
 }
 .search-animate-down .home-search-container {
     padding: 5px;
-    border-radius: 40px;
+    border-radius: 50px;
 }
 .search-animate-down .search-form-inputs {
-    padding: 20px 40px;
-    border-radius: 26px;
+    padding: 25px 40px;
+    border-radius: 46px;
+}
+
+.search-cards-skeleton {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: rgba($bgColor, .7);
+    z-index: 1;
+}
+.search-cards-skeleton > div {
+    flex: 1;
+    max-width: 300px;
+    height: 200px;
+    border-radius: 50px;
+    background-color: #fff;
+    background-image: linear-gradient(115deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0) 70%);
+    background-size: 200%;
+    animation: search-card-skeleton 1000ms linear infinite;
+}
+
+.input-error {
+    position: absolute;
+    top: -5px;
+    width: 100%;
+    padding: 5px;
+    padding-bottom: 15px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 10px 10px 0 0;
+    background-color: red;
+    z-index: 1;
+}
+.search-form-input-container > :nth-child(2) {
+    z-index: 2;
 }
 
 @media screen and (max-width: 960px) {
@@ -82,18 +123,18 @@
     .search-form-inputs {
         flex-direction: column;
         align-items: stretch;
-        border-radius: 40px;
-        padding: 20px 30px;
+        border-radius: 44px;
+        padding: 15px 20px;
     }
 }
 
 @keyframes search-card-skeleton {
     0% {
-        background-position: 140% 0%;
+        background-position: 200% 0%;
     }
 
     100% {
-        background-position: -10% 0%;
+        background-position: 0% 0%;
     }
 }
 

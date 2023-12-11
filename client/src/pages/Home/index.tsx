@@ -20,7 +20,7 @@ const Home = () => {
     useEffect(() => {
     }, []);
 
-    const handleSearchSubmit = () => {
+    const handleSearchSubmit = (location: string, categories: string[], distance: number) => {
         getClosestDests({ locationId: 1, distance: 1000, categories: [] });
     };
 
@@ -54,8 +54,9 @@ const Home = () => {
                             <SearchCardsSkeleton />
                         : destinations.searchedDestinations.length === 0 ?
                             <SearchMotive />
-                        : <Map />
+                        : null
                     }
+                    <Map />
                 </section>
 
                 <Footer className="home-footer" />
