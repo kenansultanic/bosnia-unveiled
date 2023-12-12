@@ -13,7 +13,7 @@ from geopy.distance import geodesic
 from panel.pagination import DestinationsPagination
 
 from .schemas import get_destination_schema, search_for_destinations_schema, get_all_destinations_schema, \
-    closest_destinations_schema, get_locations_categories_schema
+    closest_destinations_schema, get_locations_categories_schema, random_destinations_schema
 
 load_dotenv()
 
@@ -148,7 +148,8 @@ def search_destinations(request):
 
 
 location_id = Parameter('location_id', IN_QUERY, description='Selected location ID', type=TYPE_INTEGER, required=True)
-max_distance = Parameter('distance', IN_QUERY, description='Maximum distance from location', type=TYPE_NUMBER, required=True)
+max_distance = Parameter('distance', IN_QUERY, description='Maximum distance from location', type=TYPE_NUMBER,
+                         required=True)
 search_categories = Parameter(
     'categories',
     IN_QUERY,
@@ -178,8 +179,12 @@ def find_closest_destinations(request):
 
     try:
         selected_location = Location.objects.get(pk=selected_location_id)
+        destinations = []
 
-        destinations = Destination.objects.filter(Q(categories__name__in=categories))
+        if len(categories) > 1 or categories[0]:
+            destinations = Destination.objects.filter(Q(categories__name__in=categories))
+        else:
+            destinations = Destination.objects.all()
 
         closest_destinations = filter(lambda dest: geodesic(
             (selected_location.latitude, selected_location.longitude),
@@ -201,3 +206,16 @@ def find_closest_destinations(request):
 
     except Exception as e:
         return Response({'error': str(e)}, status=500)
+
+
+@swagger_auto_schema(method='get', responses={200: random_destinations_schema})
+@api_view(['GET'])
+def random_destinations(request, number_of_destinations):
+    """
+        Returns a specified number of destinations randomly
+    """
+    destinations = Destination.objects.order_by('?')[:number_of_destinations]
+
+    serialized_destinations = [destination.to_dict(request) for destination in destinations]
+
+    return Response(serialized_destinations)

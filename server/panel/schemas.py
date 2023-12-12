@@ -72,7 +72,6 @@ location_schema = openapi.Schema(
     required=['name', 'latitude', 'longitude']
 )
 
-
 destination_schema = openapi.Schema(
     type=openapi.TYPE_OBJECT,
     properties={
@@ -239,7 +238,6 @@ get_all_destinations_schema = openapi.Schema(
     }
 )
 
-
 # search by name or category schema
 search_for_destinations_schema = openapi.Schema(
     type=openapi.TYPE_ARRAY,
@@ -253,7 +251,6 @@ search_for_destinations_schema = openapi.Schema(
     )
 )
 
-
 # closest destinations search schema
 closest_destinations_schema = openapi.Schema(
     type=openapi.TYPE_ARRAY,
@@ -261,8 +258,8 @@ closest_destinations_schema = openapi.Schema(
     max_items=3
 )
 
-# all images schema
-# get_all_images_schema = openapi.Schema(
-#     type=openapi.TYPE_ARRAY,
-#     items=image_schema
-# )
+# random destinations schema
+random_destinations_schema = openapi.Schema(
+    type=openapi.TYPE_ARRAY,
+    items=destination_schema
+)
