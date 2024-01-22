@@ -25,7 +25,14 @@ export const destinationsSlice = createSlice({
             state.allDestinations.push(action.payload);
         });
         builder.addCase(getClosestDestinations.fulfilled, (state, action) => {
-            state.allDestinations.push(...action.payload.closest_destinations);
+            const newDestinations = action.payload.closest_destinations;
+
+            // Check if each destination is not already in allDestinations
+            const uniqueDestinations = newDestinations.filter(
+              (destination: any) => !state.allDestinations.includes(destination)
+            );
+
+            state.allDestinations.push(...newDestinations);
             state.searchedDestinations.push(...action.payload.closest_destinations);
             state.isSearched = true;
         });

@@ -2,16 +2,22 @@ import { ReactNode, ButtonHTMLAttributes } from "react";
 import "./button.scss";
 
 interface Props {
-    className: string,
+    variant: string,
+    className?: string,
     children?: ReactNode,
     icon?: string,
     iconAriaHidden?: boolean,
-    iconAriaLabel?: string
+    iconAriaLabel?: string,
+    onClick?: any,
+    ref?: any
 }
 
-const Button = ({ children, className, icon, iconAriaHidden, iconAriaLabel, ...rest }: Props & ButtonHTMLAttributes<HTMLButtonElement>) => {
-    const buttonContent = (
-        <span className="button-content">
+const Button = ({ variant, children, className, icon, iconAriaHidden, iconAriaLabel, onClick, ...rest }: Props & ButtonHTMLAttributes<HTMLButtonElement>) => {
+    return (
+        <button
+            onClick={onClick}
+            className={`${variant} ${className}`}
+            {...rest}>
             {
                 icon &&
                 <span
@@ -22,18 +28,7 @@ const Button = ({ children, className, icon, iconAriaHidden, iconAriaLabel, ...r
                 </span>
             }
             <span>{children}</span>
-        </span>
-    );
-
-    return (
-        <button
-            onClick={() => console.log("hehe")}
-            className={`button button-${className}`}
-            {...rest}>
-            <span className="button-hover-overlay"></span>
-            {buttonContent}
-            {buttonContent}
-        </button>
+        </button >
     );
 };
 

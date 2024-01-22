@@ -146,7 +146,7 @@ const SearchBar = ({ mainSectionRef, handleSearchSubmit }: Props) => {
                         </div>
                     </div>
                     <Button
-                        className="primary search-form-submit-button"
+                        variant="primary search-form-submit-button"
                         icon="search"
                         iconAriaLabel="Search">
                     </Button>

@@ -13,7 +13,7 @@ const getDestinations = createAsyncThunk(
 const getDestinationById = createAsyncThunk(
     "destinations/getById",
     async (id: number) => {
-        const res = await api.get(`/destination/${id}`);
+        const res = await api.get(`/destination/${id}/`);
 
         return res.data;
     }

@@ -1,41 +1,44 @@
 import "./destination-card.scss";
+import { Link } from "react-router-dom";
 import Tilt from "react-parallax-tilt";
 
 interface Props {
     className?: string,
-    image: string
+    id: number,
+    image: string,
+    title: string,
+    subTitle: string,
+    categories: string[]
 }
 
-const DestinationCard = ({ className, image }: Props) => {
+const DestinationCard = ({ className, id, image, title, subTitle, categories }: Props) => {
+    const renderedCategories = categories.map((c: string) => (
+        <div key={c} className="content-card-category">
+            <span>{c}</span>
+        </div>
+    ));
     return (
-        <Tilt
-            tiltMaxAngleX={7}
-            tiltMaxAngleY={7}
-            perspective={450}
-            className={`dest-card ${className}`}>
-            <div
-                tabIndex={0}
-                className="dest-card-container">
-                <div className="dest-card-img">
-                    <img src={image} />
-                </div>
-                <div className="dest-card-description">
-                    <div className="dest-card-heading">
-                        <h3>Vodopadi Kravice I Tako To</h3>
-                        <span className="material-symbols-outlined" aria-hidden="true">
-                            partly_cloudy_day
-                        </span>
+        <Link to={`/${id}`} className="card-link">
+            <Tilt
+                tiltMaxAngleX={7}
+                tiltMaxAngleY={7}
+                perspective={750}
+                className={`dest-card ${className}`}>
+                <div
+                    tabIndex={0}
+                    className="dest-card-container">
+                    <div className="dest-card-img">
+                        <img src={image} />
                     </div>
-                    {/* <div className="dest-card-location">
-                        <span className="material-symbols-outlined" aria-hidden="true">
-                            location_on
-                        </span>
-                        <div>Ljubuski</div>
-                    </div> */}
-                    <p className="dest-card-sub-heading">Picturesque waterfalls near city of Ljubuški</p>
+                    <div className="dest-card-description">
+                        <div className="dest-card-heading">
+                            <h3>{title}</h3>
+                        </div>
+                        <p className="dest-card-sub-heading">{subTitle}</p>
+                        <div className="dest-card-categories">{renderedCategories}</div>
+                    </div>
                 </div>
-            </div>
-        </Tilt>
+            </Tilt></Link>
     );
 };
 
