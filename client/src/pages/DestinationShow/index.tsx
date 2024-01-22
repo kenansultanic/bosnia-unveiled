@@ -13,6 +13,7 @@ import DestinationCard from "components/DestinationCard";
 import Map from "components/Map";
 import Footer from "components/Footer";
 import Gallery from "components/Gallery";
+import LoadingScreen from "components/LoadingScreen";
 
 const DestinationShow = () => {
     const { id } = useParams();
@@ -27,7 +28,7 @@ const DestinationShow = () => {
     }, [id]);
 
     if (isDestLoading || !destination) {
-        return <div>Loading...</div>;
+        return <LoadingScreen />;
     }
     console.log(destination)
 
