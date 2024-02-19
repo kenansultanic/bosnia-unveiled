@@ -18,9 +18,9 @@ nav {
 
 .nav-hidden {
     opacity: 0;
+    height: 0;
 }
 .nav-minimized {
-    //background-image: $noise;
     height: 75px;
     background-color: #fff;
     

@@ -16,10 +16,15 @@ const Home = () => {
     const mainSectionRef = useRef(null);
     const { destinations } = useAppSelector(state => state);
     const [getClosestDests, isClosestDestsLoading, closestDestsError] = useThunk(getClosestDestinations);
-
+    const [getDests, s, a] = useThunk(getDestinations);
+console.log(destinations)
     useEffect(() => {
-        getClosestDests({ locationId: 1, distance: 1000, categories: ["grad"] });
+        // getClosestDests();
     }, []);
+
+    const handleSearchSubmit = (location: string, categories: string[], distance: number) => {
+        getClosestDests({ locationId: 1, distance: 40, categories: [] });
+    };
 
     return (
         <main className="home">
@@ -28,11 +33,11 @@ const Home = () => {
                     <h1 className="home-main-heading">Bosnia Unveiled</h1>
                     <p className="home-sub-heading">Explore hidden destinations of Bosnia & Herzegovina</p>
                 </header>
-                <SearchBar mainSectionRef={mainSectionRef} />
+                <SearchBar mainSectionRef={mainSectionRef} handleSearchSubmit={handleSearchSubmit} />
                 <section className="home-top-picks-section">
                     <h2>Our top <span>picks</span></h2>
                     <div className="home-top-picks">
-                        <DestinationCard
+                        {/* <DestinationCard
                             className="pick-card"
                             image={pickImg1} />
                         <DestinationCard
@@ -40,7 +45,7 @@ const Home = () => {
                             image={pickImg2} />
                         <DestinationCard
                             className="pick-card"
-                            image={pickImg3} />
+                            image={pickImg3} /> */}
                     </div>
                 </section>
                 <section className="home-center-image-section"></section>

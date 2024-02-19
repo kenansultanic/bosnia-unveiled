@@ -14,6 +14,10 @@ interface CustomPopupProps {
     latitude: number,
     longitude: number
 }
+interface MapProps {
+    latitude?: number,
+    longitude?: number
+}
 
 const CustomMarker = ({ latitude, longitude }: CustomMarkerProps) => {
     return (
@@ -49,7 +53,7 @@ const CustomPopup = ({ latitude, longitude }: CustomPopupProps) => {
     }
 };
 
-const Map = () => {
+const Map = ({ latitude, longitude }: MapProps) => {
     return (
         <div className="map">
             <ReactMapGL
@@ -57,14 +61,15 @@ const Map = () => {
                 mapboxAccessToken={API_KEY}
                 onClick={e => { console.log(e) }}
                 initialViewState={{
-                    latitude: 45.4211,
-                    longitude: -75.6903,
-                    zoom: 10
+                    latitude,
+                    longitude,
+                    zoom: 8
                 }}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle="mapbox://styles/mapbox/streets-v9"
             >
-                <CustomMarker latitude={45.42006386841473} longitude={-75.67117355462116} />
+                {latitude && longitude ?
+                    <CustomMarker latitude={latitude} longitude={longitude} /> : null}
 
             </ReactMapGL>
         </div>

@@ -1,7 +1,8 @@
 import "./destination-show.scss";
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState, useEffect, useRef, Fragment } from "react";
+import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector, getDestinationById } from "store";
+import { useThunk } from "hooks/useThunk";
 import mainImage from "../../assets/main-section-image.jpg";
 import destImg1 from "../../assets/background2.jpg";
 import destImg2 from "../../assets/background4.jpg";
@@ -12,33 +13,75 @@ import DestinationCard from "components/DestinationCard";
 import Map from "components/Map";
 import Footer from "components/Footer";
 import Gallery from "components/Gallery";
+import LoadingScreen from "components/LoadingScreen";
 
 const DestinationShow = () => {
+    const { id } = useParams();
+    const mapRef = useRef<HTMLDivElement>(null);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-    const [searchParams, setSearchParams] = useSearchParams();
+    const destination = useAppSelector(state => state.destinations.allDestinations.find(d => d.destination.id == id));
     //const { data, error, isLoading } = useGetDestinationQuery(2);
-    const dispatch = useAppDispatch();
+    const [getDestById, isDestLoading, destError] = useThunk(getDestinationById);
 
     useEffect(() => {
-        dispatch(getDestinationById(1));
-    }, []);
+        getDestById(id);
+    }, [id]);
+
+    if (isDestLoading || !destination) {
+        return <LoadingScreen />;
+    }
+    console.log(destination)
+
+    const scrollToMap = () => {
+        if (mapRef.current) {
+            mapRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+            });
+        }
+    };
+
+    const { title, sub_title, description, categories, location, image } = destination.destination;
+    const { weather } = destination;
+    const temperature = (weather.main.temp - 273.15).toFixed(1);
+    const windSpeed = (weather.wind.speed * 1.60934).toFixed(1);
+
+    const renderedCategories = categories.map((c: string) => (
+        <div key={c} className="content-card-category">
+            <span>{c}</span>
+        </div>
+    ));
+
+    const renderedSuggestedDests = destination.similar_destinations.map((dest: any) =>
+        <Fragment key={dest.id}>
+            <DestinationCard
+                className="dest-suggested-card"
+                id={dest.id}
+                image={destImg3}
+                title={dest.title}
+                subTitle={dest.sub_title}
+                categories={dest.categories} />
+        </Fragment>
+    );
 
     return (
         <main className="dest-show">
-            {isGalleryOpen && <Gallery isGalleryOpen={isGalleryOpen} setIsGalleryOpen={setIsGalleryOpen} />}
+            {isGalleryOpen && <Gallery isGalleryOpen={true} setIsGalleryOpen={setIsGalleryOpen} />}
             <div className="dest-show-container">
                 <header className="dest-heading">
-                    <p className="dest-sub-heading">Picturesque waterfalls near city of Ljubuški</p>
-                    <h1 className="dest-main-heading">Vodopadi Kravice</h1>
+                    <p className="dest-sub-heading">{sub_title}</p>
+                    <h1 className="dest-main-heading">{title}</h1>
 
-                    <Button className="primary dest-main-cta" icon="route" iconAriaHidden={true}>Take me there</Button>
+                    <Button
+                        variant="primary" icon="route" iconAriaHidden={true}
+                        onClick={scrollToMap}>Take me there</Button>
                 </header>
                 <section className="dest-image-section">
                     <div className="dest-main-image">
-                        <img src={mainImage} alt="Alt provided by API" />
+                        <img src={mainImage} alt="Image showing destination" />
                         <Button
                             onClick={() => setIsGalleryOpen(true)}
-                            className="dest-gallery-open" icon="photo_library" iconAriaLabel="Open gallery"></Button>
+                            variant="gallery-button" icon="photo_library" iconAriaLabel="Open gallery"></Button>
                     </div>
                 </section>
                 <section className="dest-main-section">
@@ -47,60 +90,45 @@ const DestinationShow = () => {
                             <div className="dest-quick-info">
                                 <ContentCard
                                     icon="location_on"
-                                    iconAriaLabel="Location"
-                                    heading="Ljubuški, Federation of Bosnia and Herzegovina">
-                                    3 km from Vitaljina, Studenci
+                                    iconAriaHidden
+                                    heading="Location Coordinates">
+                                    {location.latitude},
+                                    <br />
+                                    {location.longitude}
                                 </ContentCard>
                                 <ContentCard
                                     icon="category"
-                                    iconAriaLabel="Categories"
+                                    iconAriaHidden
                                     heading="Categories">
-                                    <div className="content-card-category">
-                                        <span className="material-symbols-outlined" aria-hidden="true">
-                                            nature
-                                        </span>
-                                        <span>Nature</span>
-                                    </div>
-                                    <div className="content-card-category">
-                                        <span className="material-symbols-outlined" aria-hidden="true">
-                                            park
-                                        </span>
-                                        <span>Park</span>
-                                    </div>
-                                    <div className="content-card-category">
-                                        <span className="material-symbols-outlined" aria-hidden="true">
-                                            tour
-                                        </span>
-                                        <span>Touristic place</span>
-                                    </div>
+                                    {renderedCategories}
                                 </ContentCard>
-                                <ContentCard icon="partly_cloudy_day" iconAriaLabel="Weather today" heading="Partly Cloudy">
-                                    Expect a partly cloudy day with a temperature of 28°C and a gentle breeze. There is a 20% chance of isolated showers in the late afternoon
-                                </ContentCard>
-                                <ContentCard icon="schedule" iconAriaLabel="Working hours" heading="Open until 11 PM">
-                                    Available for visit every day until 10 PM, on weekends until 11 PM
+                                <ContentCard icon="thermostat" iconAriaHidden
+                                    heading="Weather Today" className="dest-weather">
+                                    <div>
+                                        <h4>Temperature</h4>
+                                        <p>{temperature}<span>°C</span></p>
+                                    </div>
+                                    <div>
+                                        <h4>Wind</h4>
+                                        <p>{windSpeed}<span>km/h</span></p>
+                                    </div>
+                                    <div>
+                                        <h4>Humidity</h4>
+                                        <p>{weather.main.humidity}<span>%</span></p>
+                                    </div>
                                 </ContentCard>
                             </div>
-                            <ContentCard className="dest-bus-schedules" icon="directions_bus" iconAriaLabel="" heading="Bus schedules for today">
-
+                            <ContentCard className="dest-bus-schedules" icon="directions_bus" iconAriaHidden heading="Bus schedules for today">
+                                /
                             </ContentCard>
                         </section>
 
                         <section className="dest-main-section-left-side">
-                            <ContentCard className="dest-description" icon="menu_book" iconAriaLabel="About destination" heading="Kravice Waterfalls: The Natural Marvel of Herzegovina">
-                                <p>Kravice Waterfalls, situated on the Trebižat River in the stunning Herzegovinian landscape, represent one of the most impressive natural wonders of Bosnia and Herzegovina. These beautiful waterfalls, often referred to as the "Herzegovinian Niagara," are an irresistible attraction for locals and visitors from around the world.</p>
-
-                                <p>Kravice Waterfalls encompass a series of cascades and rapids, creating a picturesque scene that takes your breath away. Water tumbles down from a height of about 25 meters (82 feet) over the cliffs, generating a roar and mist that further enhance the sense of natural beauty and energy. During spring, when the water level of the Trebižat River is typically higher due to abundant rainfall, the waterfalls become even more impressive, creating spectacular views that are unforgettable for every visitor.</p>
-
-                                <p>The surrounding nature further complements the experience of Kravice Waterfalls. Dense forests and greenery encircle the falls, creating a feeling of isolation and tranquility. Visitors often take the opportunity to explore the surroundings by hiking or taking boat rides on the river. There's also the option to swim in the natural pools formed beneath the waterfalls, which is particularly appealing during the warmer months.</p>
-
-                                <p>These waterfalls are not only a natural treasure but also hold cultural significance. They are steeped in rich history and folklore, often passed down through generations. Kravice Waterfalls are also a popular destination for various events and festivals, where local culture is celebrated through song, dance, and traditional food.</p>
-
-                                <p>For nature enthusiasts, photographers, and anyone seeking moments of escape from the hustle and bustle of daily life, Kravice Waterfalls provide a true sanctuary. Here, nature opens up in its full splendor, inviting us to connect with its beauty and power.</p>
-
+                            <ContentCard className="dest-description" icon="menu_book" iconAriaHidden heading="Description">
+                                {description}
                             </ContentCard>
-                            <div className="dest-map-container">
-                                <Map />
+                            <div ref={mapRef} className="dest-map-container">
+                                <Map latitude={location.latitude} longitude={location.longitude} />
                                 {/* <a href="#" target="_blank">Link to Google Maps</a> */}
                                 {/* Link above is for users who cannot interact with map */}
                             </div>
@@ -109,15 +137,7 @@ const DestinationShow = () => {
                         <section className="dest-main-section-suggested">
                             <h2 className="dest-suggested-heading">Similar places</h2>
                             <section className="dest-suggested-cards">
-                                <DestinationCard
-                                    className="dest-suggested-card"
-                                    image={destImg1} />
-                                <DestinationCard
-                                    className="dest-suggested-card"
-                                    image={destImg2} />
-                                <DestinationCard
-                                    className="dest-suggested-card"
-                                    image={destImg3} />
+                                {renderedSuggestedDests}
                             </section>
                         </section>
                     </div>
