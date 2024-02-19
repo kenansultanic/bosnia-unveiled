@@ -55,6 +55,21 @@ class Location(models.Model):
         }
 
 
+class Image(models.Model):
+    image = models.ImageField(upload_to='images/')
+
+    def to_dict(self, request):
+        serialized_image = {
+            'image': self.get_image_url(request),
+        }
+        return serialized_image
+
+    def get_image_url(self, request):
+        if self.image:
+            return request.build_absolute_uri(self.image.url)
+        return None
+
+
 class Destination(models.Model):
     title = models.CharField(max_length=200, blank=False, unique=True)  # unique=true
     sub_title = models.CharField(max_length=200, unique=True)  # unique=true
@@ -63,6 +78,7 @@ class Destination(models.Model):
     location = models.OneToOneField(Location, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category, blank=False)
     open_time = models.ForeignKey(OpenTime, on_delete=models.CASCADE)
+    images = models.ManyToManyField(Image)
 
     def __str__(self) -> str:
         return self.title
@@ -88,7 +104,6 @@ class Destination(models.Model):
 
 
 class PublicTransportLine(models.Model):
-
     class TransportationType(models.TextChoices):
         BUS = 'BU', 'Bus'
         TRAIN = 'TR', 'Train'
