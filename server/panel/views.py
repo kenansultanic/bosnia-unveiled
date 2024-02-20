@@ -12,7 +12,7 @@ from geopy.distance import geodesic
 from panel.pagination import DestinationsPagination
 
 from .schemas import get_destination_schema, search_for_destinations_schema, get_all_destinations_schema, \
-    closest_destinations_schema, get_locations_categories_schema
+    closest_destinations_schema, get_locations_categories_schema, get_all_images_schema
 
 load_dotenv()
 
@@ -74,6 +74,7 @@ def get_destination(request, destination_id):
         destination = Destination.objects.get(pk=destination_id)
         all_destinations = Destination.objects.exclude(id=destination_id)
         public_transport_schedule = destination.departures.all()
+        images = destination.images.all()
 
         latitude = destination.location.latitude
         longitude = destination.location.longitude
@@ -102,12 +103,17 @@ def get_destination(request, destination_id):
             }
             for schedule in public_transport_schedule
         ]
+        serialized_images = []
+
+        for image in images:
+            serialized_images.append(image.to_dict(request))
 
         response = {
             'destination': serialized_destination,
             'weather': api_response.json() if api_response.status_code == 200 else None,
             'public_transport_schedule': serialized_transport_schedule,
-            'similar_destinations': serialized_similar_destinations
+            'similar_destinations': serialized_similar_destinations,
+            'images': serialized_images
         }
 
         return Response(response)
@@ -140,7 +146,8 @@ def search_destinations(request):
 
 
 location_id = Parameter('location_id', IN_QUERY, description='Selected location ID', type=TYPE_INTEGER, required=True)
-max_distance = Parameter('distance', IN_QUERY, description='Maximum distance from location', type=TYPE_NUMBER, required=True)
+max_distance = Parameter('distance', IN_QUERY, description='Maximum distance from location', type=TYPE_NUMBER,
+                         required=True)
 search_categories = Parameter(
     'categories',
     IN_QUERY,
@@ -193,3 +200,23 @@ def find_closest_destinations(request):
 
     except Exception as e:
         return Response({'error': str(e)}, status=500)
+
+
+@swagger_auto_schema(
+    method='get',
+    responses={200: get_all_images_schema}
+)
+@api_view(['GET'])
+def get_all_images(request, destination_id):
+    """
+      Returns all images for specific destination
+    """
+    destination = Destination.objects.get(pk=destination_id)
+    images = destination.images.all()
+
+    serialized_images = []
+
+    for image in images:
+        serialized_images.append(image.to_dict(request))
+
+    return Response(serialized_images)

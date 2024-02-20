@@ -249,3 +249,19 @@ closest_destinations_schema = openapi.Schema(
     max_items=3
 )
 
+# Schema for the Image model
+image_schema = openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+    properties={
+        'image': openapi.Schema(
+            type=openapi.TYPE_STRING
+        ),
+    },
+    required=['image']
+)
+
+# all images schema
+get_all_images_schema = openapi.Schema(
+    type=openapi.TYPE_ARRAY,
+    items=image_schema
+)
