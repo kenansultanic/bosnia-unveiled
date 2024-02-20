@@ -104,11 +104,11 @@ MEDIA_URL = '/media/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'qzfxazjg',
-        'USER': 'qzfxazjg',
-        'PASSWORD': 'hnYr-6kyEjMI947YMVf0gXCCF7bMWUd3',
-        'HOST': 'abul.db.elephantsql.com',
-        'PORT': '5432',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'e-3*GDG21a6BgE3C2-*-CcAg3a*c11-g',
+        'HOST': 'monorail.proxy.rlwy.net',
+        'PORT': '19515',
     }
 }
 
