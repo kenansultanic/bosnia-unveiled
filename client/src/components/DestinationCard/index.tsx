@@ -18,14 +18,16 @@ const DestinationCard = ({ className, id, image, title, subTitle, categories }: 
         </div>
     ));
     return (
-        <Link to={`/${id}`} className="card-link">
+        <Link
+            to={`/${id}`}
+            className="card-link">
             <Tilt
                 tiltMaxAngleX={7}
                 tiltMaxAngleY={7}
                 perspective={750}
                 className={`dest-card ${className}`}>
                 <div
-                    tabIndex={0}
+                    // tabIndex={0}
                     className="dest-card-container">
                     <div className="dest-card-img">
                         <img src={image} />
@@ -38,7 +40,12 @@ const DestinationCard = ({ className, id, image, title, subTitle, categories }: 
                         <div className="dest-card-categories">{renderedCategories}</div>
                     </div>
                 </div>
-            </Tilt></Link>
+            </Tilt>
+            {className && className.includes("top-pick-card") ?
+                <div className="top-pick-card-overlay"><span>{title}</span><span>{title}</span></div>
+                : null
+            }
+        </Link>
     );
 };
 

@@ -3,7 +3,7 @@
 .home {
     display: flex;
     justify-content: center; // center content on resolutions wider than 1920px
-    padding: 150px 30px 20px 20px;
+    padding: 100px 30px 20px 20px;
     color: $textColor;
     background-color: $bgColor;
 }
@@ -27,18 +27,21 @@
 .home-heading {
     position: relative;
     padding: 70px 90px;
-    //background-color: #ccc;
-    background-image: $noise, radial-gradient(at -50% 0%, hsla(47, 100%, 61%, 1) 0px, transparent 50%),
-        radial-gradient(at 100% -30%, hsla(201, 85%, 38%, 0.5) 0px, transparent 50%),
-        radial-gradient(at 100% 80%, hsla(201, 85%, 38%, 0.5) 0px, transparent 35%),
-        radial-gradient(at 45% 90%, $bgColor 0px, transparent 25%);
-    //radial-gradient(at 20% 100%, hsla(201, 85%, 38%, 0.5) 0px, transparent 50%),
-    //radial-gradient(at 62% 30%, hsla(49, 86%, 80%, 1) 0px, transparent 50%);
+    // background-color: #ccc;
+    // background-image: $noise, radial-gradient(at -50% 0%, hsla(47, 100%, 61%, 1) 0px, transparent 50%),
+    //     radial-gradient(at 100% -30%, hsla(201, 85%, 38%, 0.5) 0px, transparent 50%),
+    //     radial-gradient(at 100% 80%, hsla(201, 85%, 38%, 0.5) 0px, transparent 35%),
+    //     radial-gradient(at 45% 90%, $bgColor 0px, transparent 25%);
+
+    background: #fff;
+    background-image: $noise, linear-gradient(120deg, rgba(255,213,61,1) 5%, rgb(255, 233, 151) 15%, rgba(255,255,255,1) 40%);
 }
 
 .home-main-heading {
     font-size: 66px;
     line-height: 1;
+    // text-shadow: 5px 5px 4px #aaa;
+    text-shadow: -2px -2px 2px $primaryColor;
 }
 
 .home-sub-heading {
@@ -49,7 +52,8 @@
 .home-top-picks-section {
     position: relative;
     background-image: $noise;
-    background-color: $elementBgColor;
+    background: #fff;
+    background-image: $noise, linear-gradient(60deg, rgba(255,255,255,1) 60%, rgba(189,217,243,1) 75%, $accentColor 100%);
     overflow: hidden;
 }
 
@@ -68,30 +72,19 @@
     position: absolute;
     top: 0;
     left: 50%;
+    right: 0;
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
+    // gap: 10px;
     height: 100%;
     padding: 15px;
-    border-radius: $borderRadiusParent 0 0 $borderRadiusParent;
-    background-image: $noise;
-    background-color: $elementBgColor;
+    background-color: rgba(255, 255, 255, 0);
     transition: transform 250ms, background-color 500ms;
     z-index: 9999;
 }
 
-.pick-card {
-    flex-shrink: 0;
-}
-
-.home-top-picks-section:hover .pick-card {
-    flex-shrink: 1;
-}
-
 .home-search-section {
     position: absolute;
-    top: 428px;
+    top: 378px;
     left: 50%;
     transform: translateX(-50%);
     width: 50%;
@@ -113,8 +106,8 @@
     grid-column: 1 / 3;
 
     background: {
-        image: url("../../assets/image2.jpg");
-        position: center;
+        image: url("../../assets/pexels-markus-winkler-3581824.jpg");
+        position: 100% 90%;
         repeat: no-repeat;
         //attachment: fixed;
         size: cover;
@@ -129,6 +122,7 @@
     height: 1000px;
     overflow: hidden;
 }
+
 .search-motive {
     display: flex;
     flex-direction: column;
@@ -142,17 +136,20 @@
     background-color: rgba($bgColor, .9);
     z-index: 1;
 }
-.search-motive > img {
+
+.search-motive>img {
     max-width: 20vw;
     min-width: 150px;
     padding-top: 100px;
 }
-.search-motive > h2 {
+
+.search-motive>h2 {
     padding-top: 30px;
     padding-bottom: 5px;
     font-size: 28px;
 }
-.search-motive > p {
+
+.search-motive>p {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -166,16 +163,20 @@
 }
 
 @media screen and (max-width: 1440px) {
+    .home-heading {
+        padding: 70px 70px;
+    }
     .home-main-heading {
         font-size: 56px;
     }
 
     .home-top-picks-section>h2 {
-        font-size: 43px;
+        padding: 70px 70px;
+        font-size: 38px;
     }
 
     .home-top-picks-section>h2>span {
-        font-size: 66px;
+        font-size: 59px;
     }
 
     .home-top-picks {
@@ -197,11 +198,11 @@
     }
 
     .home-top-picks-section>h2 {
-        font-size: 38px;
+        font-size: 32px;
     }
 
     .home-top-picks-section>h2>span {
-        font-size: 58px;
+        font-size: 49px;
     }
 }
 
@@ -238,6 +239,7 @@
         height: 130px;
         transform: none;
     }
+
     .home-search-section.search-animate-down {
         height: 130px;
         padding-bottom: 20px;
@@ -311,6 +313,7 @@
     .home-sub-heading {
         font-size: 16px;
     }
+
     .home-center-image-section {
         display: none;
     }
@@ -330,6 +333,7 @@
         top: 325px;
         height: 250px;
     }
+
     .home-search-section.search-animate-down {
         display: none;
     }
@@ -337,22 +341,13 @@
     .home-main-section {
         grid-row: 3 / 4;
     }
-    
+
     .home-footer {
         grid-row: 5 / 6;
     }
 }
 
-@media screen and (min-width: 561px) {
-    .search-animate-up .home-search-container {
-        border: 10px solid $bgColor;
-    }
-}
 @media screen and (min-width: 961px) {
-    .home-top-picks-section:hover>.home-top-picks {
-        transform: translateX(-60%);
-        background-color: #ddd;
-    }
     .home-heading::after {
         // border radius fix
         content: "";
@@ -386,6 +381,7 @@
         border-radius: 50%;
         background-color: $bgColor;
         background-image: $noise;
+        background-color: #fff;
     }
 
     .home-search-section-border-fix::after {
@@ -398,6 +394,7 @@
         border-radius: 50%;
         background-image: $noise;
         background-color: $elementBgColor;
+        background-color: #fff;
     }
 
     .home-search-container-border-fix::before {
@@ -423,10 +420,38 @@
         box-shadow: -35px -40px $bgColor;
         z-index: -1;
     }
+    .search-animate-up .home-search-container {
+        border: 10px solid $bgColor;
+    }
+}
+
+@media screen and (min-width: 961px) {
+    .home-top-picks {
+        left: 40%;
+        right: 10px;
+        height: 80%;
+    }
+    .top-pick-card-wrapper {
+        box-sizing: content-box;
+        position: relative;
+        width: 31.75%;
+        padding: 0 4px;
+        transition: width 100ms;
+    }
+
+    .top-pick-card-hovered {
+        width: 60%;
+    }
+
+    .top-pick-card-minimized {
+        width: 20%;
+    }
 }
 @media screen and (min-width: 1441px) {
-    .home-top-picks-section:hover>.home-top-picks {
-        transform: translateX(-50%);
-        background-color: #ddd;
+    .home-top-picks {
+        left: 50%;
+        right: 0;
+        height: 100%;
     }
+    
 }

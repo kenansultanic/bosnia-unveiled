@@ -3,6 +3,7 @@
 .home-search-container form {
     display: flex;
     justify-content: center;
+    gap: 10px;
     height: 100%;
 }
 .search-form-inputs {
@@ -56,7 +57,7 @@
 .search-animate-down {
     position: fixed;
     top: unset;
-    height: 130px;
+    height: 100px;
     animation: search-animate-down 500ms forwards;
 }
 .search-animate-down .home-search-container {
@@ -64,8 +65,15 @@
     border-radius: 50px;
 }
 .search-animate-down .search-form-inputs {
-    padding: 25px 40px;
+    padding: 15px 40px;
     border-radius: 46px;
+}
+.search-animate-down .search-button {
+    padding: 28px;
+    border-radius: 100px;
+}
+.search-animate-down .home-search-container form {
+    gap: 5px;
 }
 
 .search-cards-skeleton {
@@ -147,6 +155,6 @@
         bottom: 50px;
     }
     100% {
-        bottom: 10px;
+        bottom: 20px;
     }
 }

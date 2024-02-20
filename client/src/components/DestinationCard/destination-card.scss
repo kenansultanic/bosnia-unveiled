@@ -1,10 +1,16 @@
 @import "../../scss/variables";
 
 .card-link {
+    position: relative;
     display: block;
     width: 100%;
     text-decoration: none;
     color: $textColor;
+}
+
+.top-pick-card-wrapper .card-link {
+    border-radius: calc($borderRadiusChild - 4px);
+    overflow: hidden;
 }
 
 .dest-card {
@@ -32,20 +38,6 @@
     border-color: rgba(255, 255, 255, .95);
 }
 
-.pick-card {
-    position: relative;
-    display: inline-block;
-    width: calc(33% - 5px);
-    height: 100%;
-    border: 1px solid;
-    border-color: rgba(255, 255, 255, 1);
-    background-color: rgba(255, 255, 255, .75);
-}
-
-.pick-card:hover {
-    background-color: #fff;
-    border-color: rgba(100, 100, 100, .95);
-}
 
 .dest-card-description {
     width: 100%;
@@ -116,11 +108,6 @@
 }
 
 @media screen and (max-width: 960px) {
-    .pick-card {
-        height: auto;
-        padding-bottom: 30px;
-        border-radius: calc($borderRadiusChild - 10px);
-    }
 
     // .dest-card-img > img {
     //     border-radius: calc($borderRadiusChild - 16px) calc($borderRadiusChild - 16px) 15px 15px;
@@ -128,9 +115,6 @@
 }
 
 @media screen and (max-width: 560px) {
-    .pick-card {
-        width: 100%;
-    }
 
     .dest-card-img {
         height: 150px;
@@ -138,5 +122,83 @@
 
     .dest-card-description {
         padding: 15px 35px;
+    }
+}
+
+@media screen and (min-width: 961px) {
+    .top-pick-card {
+        width: 100%;
+        height: 250px;
+        border-color: #fff;
+        border-radius: calc($borderRadiusChild - 4px);
+    }
+    .top-pick-card .dest-card-description {
+        padding: 10px 15px;
+    }
+    .top-pick-card .dest-card-img {
+        height: 110px;
+    }
+
+    .top-pick-card-overlay {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(29, 124, 212, .4);
+        border-radius: calc($borderRadiusChild - 4px);
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: 900;
+        font-family: "Merriweather", serif;
+        background-color: #fff;
+        transition: opacity 150ms 50ms;
+        overflow: hidden;
+    }
+    .top-pick-card-overlay:hover {
+        opacity: 0;
+    }
+    .top-pick-card-overlay > span:nth-child(2) {
+        display: block;
+        position: absolute;
+        color: $primaryColor;
+        opacity: .3;
+    }
+    .top-pick-card-1 + .top-pick-card-overlay > span:nth-child(2) {
+        left: -15px;
+        font-size: 84px;
+    }
+    .top-pick-card-2 + .top-pick-card-overlay > span:nth-child(2) {
+        font-size: 36px;
+        text-wrap: nowrap;
+    }
+    .top-pick-card-3 + .top-pick-card-overlay > span:nth-child(2) {
+        font-size: 68px;
+    }
+}
+@media screen and (min-width: 1441px) {
+    .top-pick-card {
+        height: 320px;
+    }
+    .top-pick-card .dest-card-description {
+        padding: 10px 15px;
+    }
+    .top-pick-card .dest-card-img {
+        height: 155px;
+    }
+    .top-pick-card-overlay {
+        font-size: 24px;
+    }
+    .top-pick-card-1 + .top-pick-card-overlay > span:nth-child(2) {
+        left: -20px;
+        font-size: 96px;
+    }
+    .top-pick-card-2 + .top-pick-card-overlay > span:nth-child(2) {
+        font-size: 36px;
+        text-wrap: nowrap;
+    }
+    .top-pick-card-3 + .top-pick-card-overlay > span:nth-child(2) {
+        font-size: 68px;
     }
 }

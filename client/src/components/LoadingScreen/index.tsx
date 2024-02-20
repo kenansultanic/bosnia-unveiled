@@ -13,7 +13,7 @@ function LoadingScreen() {
             <div className="loading-wrapper">
                 <div className="loading-text">Bosnia Unvelied</div>
                 <PropagateLoader
-                    color={"#FFD53D"}
+                    color={"#262626"}
                     cssOverride={override}
                     size={15}
                     aria-label="Loading Spinner"

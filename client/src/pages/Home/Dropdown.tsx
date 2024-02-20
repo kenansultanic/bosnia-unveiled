@@ -19,6 +19,7 @@ const Dropdown = ({ handleChange, isMulti, scrollPos }: Props) => {
             options={options}
             menuPlacement={scrollPos < 700 ? "bottom" : "top"}
             onChange={val => handleChange(val)}
+            menuPortalTarget={document.body}
             styles={{
                 control: (baseStyles, state) => ({
                     ...baseStyles,
@@ -28,6 +29,7 @@ const Dropdown = ({ handleChange, isMulti, scrollPos }: Props) => {
                     boxShadow: 'none',
                     outline: state.isFocused ? "5px solid rgba(255, 255, 0, .75)" : "none",
                 }),
+                menuPortal: styles => ({ ...styles, fontFamily: "Roboto", zIndex: "99999" })
             }} />
     );
 };
