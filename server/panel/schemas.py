@@ -1,17 +1,6 @@
 from drf_yasg import openapi
 
 
-class CategorySchema(openapi.Schema):
-    type = openapi.TYPE_OBJECT
-    properties = {
-        'name': openapi.Schema(
-            type=openapi.TYPE_STRING,
-            max_length=200,
-        ),
-    }
-    required = ['name']
-
-
 # Schema for the Category model
 category_schema = openapi.Schema(
     type=openapi.TYPE_OBJECT,
