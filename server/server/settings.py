@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'corsheaders',
     'rest_framework',
     'coreapi',
@@ -112,6 +114,12 @@ DATABASES = {
     }
 }
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dwhynx6j5',
+    'API_KEY': '184424425752741',
+    'API_SECRET': 'Xvc4KmUQpuJQXJEg5UlRUZWu2CE',
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -149,6 +157,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'staticfiles'),)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'staticfiles')
 MEDIA_URLS = '/media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Additional directories where static files are located
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
