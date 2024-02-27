@@ -9,8 +9,8 @@
 }
 
 .top-pick-card-wrapper .card-link {
-    border-radius: calc($borderRadiusChild - 4px);
-    overflow: hidden;
+    // border-radius: calc($borderRadiusChild - 4px);
+    // overflow: hidden;
 }
 
 .dest-card {
@@ -93,6 +93,22 @@
     font: 14px;
 }
 
+.searched-destinations > .card-link {
+    width: calc(50% - 5px);
+}
+.searched-destinations .dest-card {
+    height: 100%;
+    border-width: 5px;
+    border-style: solid;
+    background-color: rgba(255, 255, 255, .75);
+}
+.searched-destinations .dest-card-img {
+    height: 100px;
+}
+.searched-destinations .dest-card-description {
+    padding: 10px 15px 25px 15px;
+}
+
 @media screen and (max-width: 1280px) {
 
     // .dest-card-description {
@@ -108,16 +124,20 @@
 }
 
 @media screen and (max-width: 960px) {
-
+    .top-pick-card-wrapper {
+        width: 100%;
+    }
     // .dest-card-img > img {
     //     border-radius: calc($borderRadiusChild - 16px) calc($borderRadiusChild - 16px) 15px 15px;
     // }
 }
 
 @media screen and (max-width: 560px) {
-
+    .top-pick-card {
+        border-radius: 44px;
+    }
     .dest-card-img {
-        height: 150px;
+        height: 120px;
     }
 
     .dest-card-description {
@@ -125,6 +145,22 @@
     }
 }
 
+@media screen and (min-width: 561px) {
+    .card-link {
+        // border-radius: 44px !important;
+    }
+    .top-pick-card {
+        height: 320px;
+        border-color: #fff;
+        border-radius: 44px;
+    }
+    .top-pick-card .dest-card-description {
+        padding: 20px 25px;
+    }
+    .top-pick-card .dest-card-img {
+        height: 150px;
+    }
+}
 @media screen and (min-width: 961px) {
     .top-pick-card {
         width: 100%;

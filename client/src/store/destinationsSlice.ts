@@ -33,7 +33,7 @@ export const destinationsSlice = createSlice({
             );
 
             state.allDestinations.push(...newDestinations);
-            state.searchedDestinations.push(...action.payload.closest_destinations);
+            state.searchedDestinations = action.payload.closest_destinations;
             state.isSearched = true;
         });
     }

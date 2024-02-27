@@ -29,9 +29,6 @@ const SearchMotive = () => {
                         :
                         "Looks like you haven't searched for any destinations, feel free to explore"
                 }
-                <span className="material-symbols-outlined">
-                    arrow_downward
-                </span>
             </p>
         </div>
     );

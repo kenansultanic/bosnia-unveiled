@@ -8,15 +8,22 @@ interface Props {
     image: string,
     title: string,
     subTitle: string,
-    categories: string[]
+    categories: string[],
+    borderColor?: string
 }
 
-const DestinationCard = ({ className, id, image, title, subTitle, categories }: Props) => {
+const DestinationCard = ({ className, id, image, title, subTitle, categories, borderColor }: Props) => {
     const renderedCategories = categories.map((c: string) => (
         <div key={c} className="content-card-category">
             <span>{c}</span>
         </div>
     ));
+
+    const borderStyle: any = {};
+    if (borderColor) {
+        borderStyle.border = `5px solid ${borderColor}`;
+    }
+
     return (
         <Link
             to={`/${id}`}
@@ -25,7 +32,8 @@ const DestinationCard = ({ className, id, image, title, subTitle, categories }: 
                 tiltMaxAngleX={7}
                 tiltMaxAngleY={7}
                 perspective={750}
-                className={`dest-card ${className}`}>
+                className={`dest-card ${className}`}
+                style={borderStyle}>
                 <div
                     // tabIndex={0}
                     className="dest-card-container">

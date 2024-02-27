@@ -2,7 +2,7 @@ import "./home.scss";
 import pickImg1 from "../../assets/background2.jpg";
 import pickImg2 from "../../assets/background4.jpg";
 import pickImg3 from "../../assets/background5.jpg";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import { useThunk } from "hooks/useThunk";
 import { getDestinations, getClosestDestinations, useAppDispatch, useAppSelector } from "store";
 import SearchBar from "./SearchBar";
@@ -18,14 +18,14 @@ const Home = () => {
     const { destinations } = useAppSelector(state => state);
     const [getClosestDests, isClosestDestsLoading, closestDestsError] = useThunk(getClosestDestinations);
     const [getDests, s, a] = useThunk(getDestinations);
-    // console.log(destinations)
+    console.log(destinations)
     useEffect(() => {
         // getClosestDests();
     }, []);
 
 
     const handleSearchSubmit = (location: string, categories: string[], distance: number) => {
-        getClosestDests({ locationId: 1, distance: 40, categories: [] });
+        getClosestDests({ locationId: 4, distance: 1000, categories: [] });
     };
 
     const getOverlayClassname = (key: string) => {
@@ -37,6 +37,26 @@ const Home = () => {
             return "";
         }
     };
+
+    const markerColors: string[] = ["#FFD53D", "#1d7cd4", "#30fc03", "#fc036b"];
+    const markers: any = destinations.searchedDestinations?.map((dest, i) => {
+        return ({ lat: dest.location.latitude, lon: dest.location.longitude, color: markerColors[i] });
+    });
+
+    const renderedSearchedDetinations = destinations.searchedDestinations?.map((dest, i) => {
+        return (
+            <Fragment key={dest.id}>
+                <DestinationCard
+                    className="searched-destination-card"
+                    id={dest.id}
+                    image={pickImg1}
+                    title={dest.title}
+                    subTitle={dest.sub_title}
+                    categories={dest.categories}
+                    borderColor={markerColors[i]} />
+            </Fragment>
+        );
+    });
 
     return (
         <main className="home">
@@ -92,9 +112,13 @@ const Home = () => {
                             <SearchCardsSkeleton />
                             : destinations.searchedDestinations.length === 0 ?
                                 <SearchMotive />
-                                : null
+                                : <div className="searched-destinations">{renderedSearchedDetinations}</div>
                     }
-                    <Map />
+                    <Map
+                        latitude={43.7165389}
+                        longitude={16.7721508}
+                        zoom={7}
+                        markers={markers} />
                 </section>
 
                 <Footer className="home-footer" />

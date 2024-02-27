@@ -36,6 +36,15 @@ const getClosestDestinations = createAsyncThunk(
     }
 );
 
+const getSearchedDestinations = createAsyncThunk(
+    "destinations/getSearched",
+    async (term: string) => {
+        const res = await api.get(`/destinations/search?query=${term}`);
+
+        return res.data;
+    }
+);
+
 // DEV ONLY
 const pause = (time: number) => {
     return new Promise((resolve) => {
@@ -45,4 +54,4 @@ const pause = (time: number) => {
     });
 };
 
-export { getDestinations, getDestinationById, getClosestDestinations };
+export { getDestinations, getDestinationById, getClosestDestinations, getSearchedDestinations };

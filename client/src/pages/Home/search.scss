@@ -76,28 +76,79 @@
     gap: 5px;
 }
 
-.search-cards-skeleton {
+.searched-destinations {
+    position: absolute;
+    top: 0;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
+    flex-wrap: wrap;
+    width: 440px;
+    height: auto;
+    padding: 20px 0 0 20px;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1;
+}
+.search-cards-skeleton {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 20px;
-    background-color: rgba($bgColor, .7);
+    background-color: rgba($bgColor, .5);
     z-index: 1;
 }
-.search-cards-skeleton > div {
+.search-cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 440px;
+    padding: 20px 0 0 20px;
+}
+.search-cards-container > div {
     flex: 1;
-    max-width: 300px;
+    min-width: calc(50% - 5px);
     height: 200px;
     border-radius: 50px;
     background-color: #fff;
     background-image: linear-gradient(115deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0) 70%);
     background-size: 200%;
     animation: search-card-skeleton 1000ms linear infinite;
+}
+
+.search-motive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 30px;
+    background-color: rgba($bgColor, .8);
+    z-index: 1;
+}
+
+.search-motive>img {
+    max-width: 20vw;
+    min-width: 150px;
+    padding-top: 100px;
+}
+
+.search-motive>h2 {
+    padding-top: 30px;
+    padding-bottom: 5px;
+    font-size: 28px;
+}
+
+.search-motive>p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    font-size: 16px;
 }
 
 .input-error {
@@ -128,11 +179,41 @@
     }
 }
 @media screen and (max-width: 560px) {
+    .home-search-container form {
+        flex-direction: column;
+    }
     .search-form-inputs {
         flex-direction: column;
         align-items: stretch;
         border-radius: 44px;
         padding: 15px 20px;
+    }
+    .search-motive {
+        justify-content: center;
+    }
+    
+    .search-motive>img {
+        padding-top: 0px;
+    }
+    .search-slider::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 45px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #ccc;
+    }
+    .search-slider::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 45px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #ccc;
     }
 }
 

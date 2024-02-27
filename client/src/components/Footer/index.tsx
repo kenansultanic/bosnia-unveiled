@@ -1,6 +1,5 @@
 import "./footer.scss";
-import miniLogo from "../../assets/bhwanderlust-mini.png";
-
+import Logo from "../../assets/logo.png";
 interface Props {
     className?: string
 }
@@ -9,9 +8,7 @@ const Footer = ({ className }: Props) => {
     return (
         <footer className={`footer ${className}`}>
             <div className="footer-logo">
-                <span className="material-symbols-outlined">
-                    crowdsource
-                </span>
+                <img src={Logo} alt="Word Bosnia written in old Bosnian writing" />
             </div>
             <div className="hr"></div>
             <section className="footer-section">

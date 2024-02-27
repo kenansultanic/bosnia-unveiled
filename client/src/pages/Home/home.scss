@@ -123,40 +123,6 @@
     overflow: hidden;
 }
 
-.search-motive {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0 30px;
-    background-color: rgba($bgColor, .9);
-    z-index: 1;
-}
-
-.search-motive>img {
-    max-width: 20vw;
-    min-width: 150px;
-    padding-top: 100px;
-}
-
-.search-motive>h2 {
-    padding-top: 30px;
-    padding-bottom: 5px;
-    font-size: 28px;
-}
-
-.search-motive>p {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-align: center;
-    font-size: 16px;
-}
-
 .home-footer {
     grid-column: 1 / 3;
     z-index: 9999999;
@@ -254,7 +220,7 @@
     }
 
     .home-top-picks-section>h2 {
-        padding: 70px 30px 15px 50px;
+        padding: 50px 30px 15px 50px;
         font-size: 32px;
         line-height: 1;
     }
@@ -269,6 +235,10 @@
         left: auto;
         top: auto;
         height: 350px;
+        gap: 10px;
+    }
+    .top-pick-card-overlay {
+        display: none;
     }
 
     .home-center-image-section {
@@ -299,7 +269,7 @@
 
     .home-container {
         grid-template-columns: 1fr;
-        grid-template-rows: 215px 250px auto auto auto;
+        grid-template-rows: 215px 340px auto auto auto;
     }
 
     .home-heading {
@@ -331,7 +301,7 @@
 
     .home-search-section {
         top: 325px;
-        height: 250px;
+        height: 340px;
     }
 
     .home-search-section.search-animate-down {
@@ -340,6 +310,7 @@
 
     .home-main-section {
         grid-row: 3 / 4;
+        height: 600px;
     }
 
     .home-footer {
