@@ -50,6 +50,8 @@ class Location(models.Model):
 
     def to_dict(self):
         return {
+            'id': self.pk,
+            'name': self.name,
             'latitude': self.latitude,
             'longitude': self.longitude
         }
