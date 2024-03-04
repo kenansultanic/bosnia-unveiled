@@ -4,7 +4,7 @@ import pickImg2 from "../../assets/background4.jpg";
 import pickImg3 from "../../assets/background5.jpg";
 import { useState, useEffect, useRef, Fragment } from "react";
 import { useThunk } from "hooks/useThunk";
-import { getDestinations, getClosestDestinations, useAppDispatch, useAppSelector } from "store";
+import { getDestinations, getLocationsAndCategories, getClosestDestinations, useAppDispatch, useAppSelector } from "store";
 import SearchBar from "./SearchBar";
 import Footer from "components/Footer";
 import DestinationCard from "components/DestinationCard";
@@ -17,10 +17,11 @@ const Home = () => {
     const [hoveredPickCard, setHoveredPickCard] = useState<string | null>(null);
     const { destinations } = useAppSelector(state => state);
     const [getClosestDests, isClosestDestsLoading, closestDestsError] = useThunk(getClosestDestinations);
+    const [getLocsAndCats, isL, err] = useThunk(getLocationsAndCategories);
     const [getDests, s, a] = useThunk(getDestinations);
     console.log(destinations)
     useEffect(() => {
-        // getClosestDests();
+        getLocsAndCats();
     }, []);
 
 

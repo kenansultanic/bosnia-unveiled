@@ -10,6 +10,16 @@ const getDestinations = createAsyncThunk(
     }
 );
 
+const getLocationsAndCategories = createAsyncThunk(
+    "locations/get",
+    async () => {
+        const res = await api.get("/locations-and-categories");
+
+        console.log(res.data);
+        return res.data;
+    }
+);
+
 const getDestinationById = createAsyncThunk(
     "destinations/getById",
     async (id: number) => {
@@ -54,4 +64,4 @@ const pause = (time: number) => {
     });
 };
 
-export { getDestinations, getDestinationById, getClosestDestinations, getSearchedDestinations };
+export { getDestinations, getLocationsAndCategories, getDestinationById, getClosestDestinations, getSearchedDestinations };
