@@ -142,7 +142,7 @@ def search_destinations(request):
         return Response({'error': 'Missing query parameter'}, status=400)
 
     results = Destination.objects.filter(Q(title__contains=query) | Q(categories__name__contains=query))
-    data = [{'title': item.title, 'sub_title': item.sub_title} for item in results]
+    data = [{'id': item.id, 'title': item.title, 'sub_title': item.sub_title} for item in results]
 
     return Response(data)
 
