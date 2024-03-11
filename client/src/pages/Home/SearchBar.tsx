@@ -7,15 +7,17 @@ import Dropdown from "./Dropdown";
 
 interface Props {
     mainSectionRef: any,
-    handleSearchSubmit: any
+    handleSearchSubmit: any,
+    locations: any[],
+    categories: any[]
 }
 
-const SearchBar = ({ mainSectionRef, handleSearchSubmit }: Props) => {
+const SearchBar = ({ mainSectionRef, handleSearchSubmit, locations, categories }: Props) => {
     const [searchBarAnimation, setSearchBarAnimation] = useState("search-animate-up");
     const { scrollPos } = useScrollPos();
 
-    const [location, setLocation] = useState("");
-    const [categories, setCategories] = useState([]);
+    const [locationValue, setLocationValue] = useState("");
+    const [categoriesValue, setCategoriesValue] = useState([]);
     const [distance, setDistance] = useState([40]);
     const [locationError, setLocationError] = useState("");
 
@@ -35,11 +37,15 @@ const SearchBar = ({ mainSectionRef, handleSearchSubmit }: Props) => {
     const onFormSubmit = (e: FormEvent) => {
         e.preventDefault();
 
-        if (!location) {
+        if (!locationValue) {
             setLocationError("Location required");
         } else {
             setLocationError("");
-            handleSearchSubmit(location, categories, distance[0]);
+            handleSearchSubmit(
+                locations.find(l => l.name === "tajan").id,
+                categoriesValue.map((c: any) => c.value),
+                distance[0]
+            );
             mainSectionRef.current?.scrollIntoView({ behavior: "smooth" });
         }
     };
@@ -52,29 +58,37 @@ const SearchBar = ({ mainSectionRef, handleSearchSubmit }: Props) => {
                 <form onSubmit={onFormSubmit}>
                     <div className="search-form-inputs">
                         <div className="search-form-input-container">
-                            <label htmlFor="location">Your Location</label>
+                            <label htmlFor="locationValue">Your Location</label>
                             {/* <input
                                 type="text"
-                                name="location"
+                                name="locationValue"
                                 placeholder="Sarajevo"
-                                value={location}
+                                value={locationValue}
                                 className="search-form-input"
-                                onChange={e => setLocation(e.target.value)} /> */}
-                            <Dropdown handleChange={(val: any) => setLocation(val.value)} isMulti={false} scrollPos={scrollPos} />
+                                onChange={e => setLocationValue(e.target.value)} /> */}
+                            <Dropdown
+                                handleChange={(val: any) => setLocationValue(val.value)}
+                                isMulti={false}
+                                scrollPos={scrollPos}
+                                options={locations?.map(l => ({ value: l.name, label: l.name }))} />
                             {
-                                locationError ? <div className="input-error">{locationError}</div> : null 
+                                locationError ? <div className="input-error">{locationError}</div> : null
                             }
                         </div>
                         <div className="search-form-input-container">
-                            <label htmlFor="categories">Categories</label>
+                            <label htmlFor="categoriesValue">Categories</label>
                             {/* <input
                                 type="text"
-                                name="categories"
+                                name="categoriesValue"
                                 placeholder="Old town"
                                 value={""}
                                 className="search-form-input"
                                 onChange={e => setSelectedCategories([...selectedCategories, e.target.value])} /> */}
-                            <Dropdown handleChange={(val: any) => setCategories(val)} isMulti={true} scrollPos={scrollPos} />
+                            <Dropdown
+                                handleChange={(val: any) => setCategoriesValue(val)}
+                                isMulti={true}
+                                scrollPos={scrollPos}
+                                options={categories?.map(c => ({ value: c.name, label: c.name }))} />
                         </div>
                         <div className="search-form-input-container search-slider">
                             <label htmlFor="distance">Distance (km) - <span className="distance">{distance}</span></label>

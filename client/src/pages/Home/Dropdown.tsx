@@ -1,22 +1,17 @@
 import Select from "react-select";
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-];
-
 interface Props {
     handleChange: any,
     isMulti: boolean,
-    scrollPos: number
+    scrollPos: number,
+    options?: any[]
 }
 
-const Dropdown = ({ handleChange, isMulti, scrollPos }: Props) => {
+const Dropdown = ({ handleChange, isMulti, scrollPos, options }: Props) => {  
     return (
         <Select
             isMulti={isMulti}
-            options={options}
+            options={options || [{ value: 0, label: "Loading..." }]}
             menuPlacement={scrollPos < 700 ? "bottom" : "top"}
             onChange={val => handleChange(val)}
             menuPortalTarget={document.body}

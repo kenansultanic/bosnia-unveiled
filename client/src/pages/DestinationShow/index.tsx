@@ -30,7 +30,6 @@ const DestinationShow = () => {
     if (isDestLoading || !destination) {
         return <LoadingScreen />;
     }
-    console.log(destination)
 
     const scrollToMap = () => {
         if (mapRef.current) {
@@ -45,6 +44,12 @@ const DestinationShow = () => {
     const { weather } = destination;
     const temperature = (weather.main.temp - 273.15).toFixed(1);
     const windSpeed = (weather.wind.speed * 1.60934).toFixed(1);
+
+    const marker: any = {
+        lat: destination.destination.location.latitude,
+        lon: destination.destination.location.longitude,
+        color: "#FFD53D"
+    };
 
     const renderedCategories = categories.map((c: string) => (
         <div key={c} className="content-card-category">
@@ -128,7 +133,11 @@ const DestinationShow = () => {
                                 {description}
                             </ContentCard>
                             <div ref={mapRef} className="dest-map-container">
-                                <Map latitude={location.latitude} longitude={location.longitude} />
+                                <Map
+                                    latitude={marker.lat}
+                                    longitude={marker.lon}
+                                    zoom={7}
+                                    markers={[marker]} />
                                 {/* <a href="#" target="_blank">Link to Google Maps</a> */}
                                 {/* Link above is for users who cannot interact with map */}
                             </div>

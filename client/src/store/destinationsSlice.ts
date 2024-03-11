@@ -1,16 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getDestinations, getDestinationById, getClosestDestinations } from "./getDestinations";
+import { getDestinations, getLocationsAndCategories, getDestinationById, getClosestDestinations, getSearchedDestinations } from "./getDestinations";
 
 interface DestinationsInitialState {
     allDestinations: any[],
     searchedDestinations: any[],
-    isSearched: boolean
+    searchedDestinationsByName: any[],
+    isSearched: boolean,
+    locationsAndCategories: any
 }
 
 const initialState: DestinationsInitialState = {
     allDestinations: [],
     searchedDestinations: [],
-    isSearched: false
+    searchedDestinationsByName: [],
+    isSearched: false,
+    locationsAndCategories: {}
 };
 
 export const destinationsSlice = createSlice({
@@ -19,22 +23,20 @@ export const destinationsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getDestinations.fulfilled, (state, action) => {
-            state.allDestinations.push(...action.payload.results);
+            state.allDestinations = action.payload.results;
+        });
+        builder.addCase(getLocationsAndCategories.fulfilled, (state, action) => {
+            state.locationsAndCategories = action.payload;
         });
         builder.addCase(getDestinationById.fulfilled, (state, action) => {
             state.allDestinations.push(action.payload);
         });
         builder.addCase(getClosestDestinations.fulfilled, (state, action) => {
-            const newDestinations = action.payload.closest_destinations;
-
-            // Check if each destination is not already in allDestinations
-            const uniqueDestinations = newDestinations.filter(
-              (destination: any) => !state.allDestinations.includes(destination)
-            );
-
-            state.allDestinations.push(...newDestinations);
             state.searchedDestinations = action.payload.closest_destinations;
             state.isSearched = true;
+        });
+        builder.addCase(getSearchedDestinations.fulfilled, (state, action) => {
+            state.searchedDestinationsByName = action.payload;
         });
     }
 });

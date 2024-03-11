@@ -21,7 +21,7 @@ const DestinationCard = ({ className, id, image, title, subTitle, categories, bo
 
     const borderStyle: any = {};
     if (borderColor) {
-        borderStyle.border = `5px solid ${borderColor}`;
+        borderStyle.borderColor = borderColor;
     }
 
     return (

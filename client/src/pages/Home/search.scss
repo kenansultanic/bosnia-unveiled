@@ -31,7 +31,7 @@
     content: "";
     position: absolute;
     left: 0;
-    top: 39px;
+    bottom: 15px;
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -41,7 +41,7 @@
     content: "";
     position: absolute;
     right: 0;
-    top: 39px;
+    bottom: 15px;
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -79,11 +79,11 @@
 .searched-destinations {
     position: absolute;
     top: 0;
-    display: flex;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
     flex-wrap: wrap;
-    width: 440px;
+    width: 30%;
     height: auto;
     padding: 20px 0 0 20px;
     background-color: rgba(0, 0, 0, 0);
@@ -99,11 +99,11 @@
     z-index: 1;
 }
 .search-cards-container {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
     flex-wrap: wrap;
-    width: 440px;
+    width: 30%;
     padding: 20px 0 0 20px;
 }
 .search-cards-container > div {
@@ -177,6 +177,12 @@
     .search-animate-down .search-form-inputs {
         border-radius: 58px;
     }
+    .searched-destinations {
+        grid-template-columns: 1fr;
+    }
+    .search-cards-container {
+        grid-template-columns: 1fr;
+    }
 }
 @media screen and (max-width: 560px) {
     .home-search-container form {
@@ -187,6 +193,13 @@
         align-items: stretch;
         border-radius: 44px;
         padding: 15px 20px;
+    }
+    .searched-destinations, .search-cards-container {
+        padding: 10px 0 0 10px;
+    }
+    .search-cards-container > div {
+        height: 140px;
+        border-radius: calc($borderRadiusChild - 22px);
     }
     .search-motive {
         justify-content: center;

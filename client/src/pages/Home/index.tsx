@@ -19,14 +19,15 @@ const Home = () => {
     const [getClosestDests, isClosestDestsLoading, closestDestsError] = useThunk(getClosestDestinations);
     const [getLocsAndCats, isL, err] = useThunk(getLocationsAndCategories);
     const [getDests, s, a] = useThunk(getDestinations);
-    console.log(destinations)
+
+    const { locationsAndCategories: { locations, categories } } = destinations;
+
     useEffect(() => {
         getLocsAndCats();
     }, []);
 
-
     const handleSearchSubmit = (location: string, categories: string[], distance: number) => {
-        getClosestDests({ locationId: 4, distance: 1000, categories: [] });
+        getClosestDests({ locationId: location, categories, distance });
     };
 
     const getOverlayClassname = (key: string) => {
@@ -44,7 +45,7 @@ const Home = () => {
         return ({ lat: dest.location.latitude, lon: dest.location.longitude, color: markerColors[i] });
     });
 
-    const renderedSearchedDetinations = destinations.searchedDestinations?.map((dest, i) => {
+    const renderedSearchedDetinations = destinations.searchedDestinations?.slice(0, 4).map((dest, i) => {
         return (
             <Fragment key={dest.id}>
                 <DestinationCard
@@ -66,7 +67,11 @@ const Home = () => {
                     <h1 className="home-main-heading">Bosnia Unveiled</h1>
                     <p className="home-sub-heading">Explore hidden destinations of Bosnia & Herzegovina</p>
                 </header>
-                <SearchBar mainSectionRef={mainSectionRef} handleSearchSubmit={handleSearchSubmit} />
+                <SearchBar
+                    mainSectionRef={mainSectionRef}
+                    handleSearchSubmit={handleSearchSubmit}
+                    locations={locations}
+                    categories={categories} />
                 <section className="home-top-picks-section">
                     <h2>Our top <span>picks</span></h2>
                     <div className="home-top-picks">
@@ -117,8 +122,8 @@ const Home = () => {
                     }
                     <Map
                         latitude={43.7165389}
-                        longitude={16.7721508}
-                        zoom={7}
+                        longitude={17.5521508}
+                        zoom={6}
                         markers={markers} />
                 </section>
 

@@ -119,7 +119,7 @@
 .home-main-section {
     position: relative;
     grid-column: 1 / 3;
-    height: 1000px;
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -310,7 +310,7 @@
 
     .home-main-section {
         grid-row: 3 / 4;
-        height: 600px;
+        min-height: 600px;
     }
 
     .home-footer {

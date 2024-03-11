@@ -13,9 +13,8 @@ const getDestinations = createAsyncThunk(
 const getLocationsAndCategories = createAsyncThunk(
     "locations/get",
     async () => {
-        const res = await api.get("/locations-and-categories");
+        const res = await api.get("/locations-and-categories/");
 
-        console.log(res.data);
         return res.data;
     }
 );
@@ -33,6 +32,7 @@ const getClosestDestinations = createAsyncThunk(
     "destinations/getClosest",
     async (obj: any) => {
         const categories = obj.categories.join(",");
+        console.log(categories);
 
         const res = await api.get("/destinations/closest", {
             params: {
@@ -49,7 +49,7 @@ const getClosestDestinations = createAsyncThunk(
 const getSearchedDestinations = createAsyncThunk(
     "destinations/getSearched",
     async (term: string) => {
-        const res = await api.get(`/destinations/search?query=${term}`);
+        const res = await api.get(`/destinations/search/?query=${term}`);
 
         return res.data;
     }

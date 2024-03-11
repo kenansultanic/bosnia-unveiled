@@ -1,0 +1,22 @@
+@import "../../scss/variables";
+
+.all-dests {
+    display: flex;
+    justify-content: center; // center content on resolutions wider than 1920px
+    padding: 100px 20px 20px;
+    color: $textColor;
+    background-color: $bgColor;
+}
+
+.all-dests-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 1920px; // restrict content to 1920px width
+}
+
+.all-dests-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}

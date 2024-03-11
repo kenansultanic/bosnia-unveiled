@@ -4,6 +4,7 @@ import App from "App";
 import Home from "../pages/Home";
 import Error from "../pages/Error";
 import DestinationShow from "../pages/DestinationShow";
+import AllDestinations from "pages/AllDestinations";
 
 interface Route {
     path: string,
@@ -19,6 +20,7 @@ const routes: Route[] = [
         errorElement: <Error />,
         children: [
             { path: "", element: <Home /> },
+            { path: "/destinations", element: <AllDestinations /> },
             { path: ":id", element: <DestinationShow /> }
         ]
     },
