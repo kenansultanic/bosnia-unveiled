@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from drf_yasg.openapi import Parameter, IN_QUERY, TYPE_STRING, TYPE_NUMBER, TYPE_ARRAY, TYPE_INTEGER, Items, Schema
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
@@ -105,17 +104,14 @@ def get_destination(request, destination_id):
             for schedule in public_transport_schedule
         ]
 
-        serialized_images = []
-
-        for image in images:
-            serialized_images.append(image.to_dict(request))
+        serialized_images = [image.to_dict(request) for image in images]
 
         response = {
             'destination': serialized_destination,
+            'image_gallery': serialized_images,
             'weather': api_response.json() if api_response.status_code == 200 else None,
             'public_transport_schedule': serialized_transport_schedule,
             'similar_destinations': serialized_similar_destinations,
-            'images': serialized_images
         }
 
         return Response(response)

@@ -1,6 +1,5 @@
 from drf_yasg import openapi
 
-
 # Schema for the Category model
 category_schema = openapi.Schema(
     type=openapi.TYPE_OBJECT,
@@ -44,6 +43,7 @@ open_time_schema = openapi.Schema(
 location_schema = openapi.Schema(
     type=openapi.TYPE_OBJECT,
     properties={
+        'id': openapi.Schema(type=openapi.TYPE_STRING),
         'name': openapi.Schema(type=openapi.TYPE_STRING, max_length=200),
         'latitude': openapi.Schema(
             type=openapi.TYPE_NUMBER,
@@ -59,6 +59,17 @@ location_schema = openapi.Schema(
         ),
     },
     required=['name', 'latitude', 'longitude']
+)
+
+# Schema for the ImageGallery model
+image_gallery_schema = openapi.Schema(
+    type=openapi.TYPE_ARRAY,
+    items=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'image_url': openapi.Schema(type=openapi.TYPE_STRING)
+        }
+    )
 )
 
 destination_schema = openapi.Schema(
@@ -184,6 +195,7 @@ get_destination_schema = openapi.Schema(
     type=openapi.TYPE_OBJECT,
     properties={
         'destination': destination_schema,
+        'image_gallery': image_gallery_schema,
         'weather': weather_schema,
         'public_transport_schedule': openapi.Schema(
             type=openapi.TYPE_ARRAY,
@@ -233,6 +245,7 @@ search_for_destinations_schema = openapi.Schema(
     items=openapi.Schema(
         type=openapi.TYPE_OBJECT,
         properties={
+            'id': openapi.Schema(type=openapi.TYPE_STRING),
             'title': openapi.Schema(type=openapi.TYPE_STRING),
             'sub_title': openapi.Schema(type=openapi.TYPE_STRING)
         },

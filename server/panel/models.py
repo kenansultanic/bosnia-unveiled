@@ -3,7 +3,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=200, blank=False, unique=True)  # unique=true
+    name = models.CharField(max_length=200, blank=False, unique=True)
 
     def __str__(self) -> str:
         return self.name
@@ -57,14 +57,13 @@ class Location(models.Model):
         }
 
 
-class Image(models.Model):
+class ImageGallery(models.Model):
     image = models.ImageField(upload_to='images/')
 
-    def to_dict(self,request):
-        serialized_image = {
-            'image': self.get_image_url(request),
+    def to_dict(self, request):
+        return {
+            'image_url': self.get_image_url(request),
         }
-        return serialized_image
 
     def get_image_url(self, request):
         if self.image:
@@ -73,14 +72,14 @@ class Image(models.Model):
 
 
 class Destination(models.Model):
-    title = models.CharField(max_length=200, blank=False, unique=True)  # unique=true
-    sub_title = models.CharField(max_length=200, unique=True)  # unique=true
+    title = models.CharField(max_length=200, blank=False, unique=True)
+    sub_title = models.CharField(max_length=200, unique=True)
     description = models.TextField(max_length=1000, blank=False)
     image = models.ImageField(upload_to='images/', max_length=255, blank=False)
     location = models.OneToOneField(Location, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category, blank=False)
     open_time = models.ForeignKey(OpenTime, on_delete=models.CASCADE)
-    images = models.ManyToManyField(Image)
+    images = models.ManyToManyField(ImageGallery)
 
     def __str__(self) -> str:
         return self.title
@@ -106,7 +105,6 @@ class Destination(models.Model):
 
 
 class PublicTransportLine(models.Model):
-
     class TransportationType(models.TextChoices):
         BUS = 'BU', 'Bus'
         TRAIN = 'TR', 'Train'
@@ -132,6 +130,3 @@ class PublicTransportLine(models.Model):
             'arrival_time': self.arrival_time,
             'transportation_type': self.transportation_type
         }
-
-
-
