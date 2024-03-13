@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q%53r_%b97ko4^8^90j__8!$+gc5h+&qj70uz2z+b@1u&%wh49'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -102,19 +105,19 @@ MEDIA_URL = '/media/'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'e-3*GDG21a6BgE3C2-*-CcAg3a*c11-g',
-        'HOST': 'monorail.proxy.rlwy.net',
-        'PORT': '19515',
+        'ENGINE': os.getenv('DB_ENGINE'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dwhynx6j5',
-    'API_KEY': '184424425752741',
-    'API_SECRET': 'Xvc4KmUQpuJQXJEg5UlRUZWu2CE',
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
 
 # Password validation
@@ -153,7 +156,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'staticfiles')
 MEDIA_URLS = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = os.getenv('DEFAULT_FILE_STORAGE')
 
 # Additional directories where static files are located
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
