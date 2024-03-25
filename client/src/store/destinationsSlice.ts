@@ -2,19 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getDestinations, getLocationsAndCategories, getDestinationById, getClosestDestinations, getSearchedDestinations } from "./getDestinations";
 
 interface DestinationsInitialState {
-    allDestinations: any[],
+    allDestinations: any,
     searchedDestinations: any[],
     searchedDestinationsByName: any[],
     isSearched: boolean,
-    locationsAndCategories: any
+    locationsAndCategories: any,
+    destinationById: any
 }
 
 const initialState: DestinationsInitialState = {
-    allDestinations: [],
+    allDestinations: {},
     searchedDestinations: [],
     searchedDestinationsByName: [],
     isSearched: false,
-    locationsAndCategories: {}
+    locationsAndCategories: {},
+    destinationById: {}
 };
 
 export const destinationsSlice = createSlice({
@@ -23,13 +25,13 @@ export const destinationsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getDestinations.fulfilled, (state, action) => {
-            state.allDestinations = action.payload.results;
+            state.allDestinations = action.payload;
         });
         builder.addCase(getLocationsAndCategories.fulfilled, (state, action) => {
             state.locationsAndCategories = action.payload;
         });
         builder.addCase(getDestinationById.fulfilled, (state, action) => {
-            state.allDestinations.push(action.payload);
+            state.destinationById = action.payload;
         });
         builder.addCase(getClosestDestinations.fulfilled, (state, action) => {
             state.searchedDestinations = action.payload.closest_destinations;

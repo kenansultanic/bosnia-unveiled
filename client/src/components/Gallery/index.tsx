@@ -5,14 +5,15 @@ import { useRef, Dispatch, SetStateAction } from "react";
 import FocusTrap from "focus-trap-react";
 import Slider from "react-slick";
 import Button from "components/Button";
-import images from "images";
+// import images from "images";
 
 interface GalleryProps {
     isGalleryOpen: boolean,
-    setIsGalleryOpen: Dispatch<SetStateAction<boolean>>
+    setIsGalleryOpen: Dispatch<SetStateAction<boolean>>,
+    images: any[]
 }
 
-function SimpleSlider() {
+function SimpleSlider({ images }: { images: any[] }) {
     const slider = useRef<Slider>(null);
 
     var settings = {
@@ -23,10 +24,12 @@ function SimpleSlider() {
         slidesToScroll: 1,
     };
 
+    console.log(images)
+
     const renderedImages = images.map(img => (
-        <div key={img.id}>
+        <div key={img.image_url}>
             <div className="gallery-img-container">
-                <img src={img.src} alt="#" className="gallery-img" />
+                <img src={img.image_url} alt="#" className="gallery-img" />
             </div>
         </div>
     ));
@@ -54,7 +57,7 @@ function SimpleSlider() {
     );
 };
 
-const Gallery = ({ setIsGalleryOpen }: GalleryProps) => {
+const Gallery = ({ setIsGalleryOpen, images }: GalleryProps) => {
     return (
         <FocusTrap>
             <div className="gallery">
@@ -65,7 +68,7 @@ const Gallery = ({ setIsGalleryOpen }: GalleryProps) => {
                     className="gallery-button-close"
                     onClick={() => setIsGalleryOpen(false)}>
                 </Button>
-                <SimpleSlider />
+                <SimpleSlider images={images} />
             </div>
         </FocusTrap>
     );

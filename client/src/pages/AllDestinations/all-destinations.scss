@@ -15,8 +15,89 @@
     width: 1920px; // restrict content to 1920px width
 }
 
+.all-dests-main {
+    padding: 50px;
+    border-radius: $borderRadiusParent;
+    background-color: $primaryColor;
+    background: $noise,
+        // fix for gradient banding
+        // linear-gradient(155deg, #d3926c, #2e405b);
+        linear-gradient(155deg, #f8e9a1, #a8d0e6, #376e6f);
+
+}
+
+.all-dests-main>h1 {
+    padding-bottom: 30px;
+}
+
 .all-dests-cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 10px;
+}
+
+.dest-cards-skeleton {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.dest-cards-skeleton>div {
+    height: 300px;
+    border-radius: 50px;
+    background-color: #fff;
+    background-image: linear-gradient(115deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0) 70%);
+    background-size: 200%;
+    animation: dest-card-skeleton 1000ms linear infinite;
+}
+
+.all-dests-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 30px;
+}
+
+@media screen and (max-width: 1280px) {
+    .all-dests-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dest-cards-skeleton {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .all-dests {
+        padding: 100px 10px 20px 10px;
+    }
+
+    .all-dests-main {
+        padding: 40px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .all-dests-main {
+        padding: 50px 20px 20px 20px;
+    }
+
+    .all-dests-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dest-cards-skeleton {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes dest-card-skeleton {
+    0% {
+        background-position: 200% 0%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
 }

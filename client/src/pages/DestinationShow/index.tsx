@@ -19,7 +19,7 @@ const DestinationShow = () => {
     const { id } = useParams();
     const mapRef = useRef<HTMLDivElement>(null);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-    const destination = useAppSelector(state => state.destinations.allDestinations.find(d => d.destination.id == id));
+    const destination = useAppSelector(state => state.destinations.destinationById);
     //const { data, error, isLoading } = useGetDestinationQuery(2);
     const [getDestById, isDestLoading, destError] = useThunk(getDestinationById);
 
@@ -27,7 +27,7 @@ const DestinationShow = () => {
         getDestById(id);
     }, [id]);
 
-    if (isDestLoading || !destination) {
+    if (isDestLoading || Object.keys(destination).length === 0) {
         return <LoadingScreen />;
     }
 
@@ -62,7 +62,7 @@ const DestinationShow = () => {
             <DestinationCard
                 className="dest-suggested-card"
                 id={dest.id}
-                image={destImg3}
+                image={dest.image}
                 title={dest.title}
                 subTitle={dest.sub_title}
                 categories={dest.categories} />
@@ -71,7 +71,7 @@ const DestinationShow = () => {
 
     return (
         <main className="dest-show">
-            {isGalleryOpen && <Gallery isGalleryOpen={true} setIsGalleryOpen={setIsGalleryOpen} />}
+            {isGalleryOpen && <Gallery isGalleryOpen={true} setIsGalleryOpen={setIsGalleryOpen} images={destination.image_gallery} />}
             <div className="dest-show-container">
                 <header className="dest-heading">
                     <p className="dest-sub-heading">{sub_title}</p>
@@ -83,7 +83,7 @@ const DestinationShow = () => {
                 </header>
                 <section className="dest-image-section">
                     <div className="dest-main-image">
-                        <img src={mainImage} alt="Image showing destination" />
+                        <img src={image} alt="Image showing destination" />
                         <Button
                             onClick={() => setIsGalleryOpen(true)}
                             variant="gallery-button" icon="photo_library" iconAriaLabel="Open gallery"></Button>

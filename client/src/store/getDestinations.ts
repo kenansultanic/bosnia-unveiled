@@ -3,8 +3,13 @@ import api from "api";
 
 const getDestinations = createAsyncThunk(
     "destinations/get",
-    async () => {
-        const res = await api.get("/destinations/");
+    async (obj: any) => {
+        const res = await api.get("/destinations/", {
+            params: {
+                page: obj.page,
+                per_page: obj.perPage
+            }
+        });
 
         return res.data;
     }

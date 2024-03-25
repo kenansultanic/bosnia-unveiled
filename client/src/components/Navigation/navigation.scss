@@ -48,10 +48,17 @@ nav {
 }
 
 .nav-logo {
-    padding-top: 5px;
+    padding: 15px 10px 10px 10px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    transition: border-color 250ms;
 }
-.nav-logo > img {
+.nav-logo img {
     height: 30px;
+}
+.nav-logo:hover {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .25);
 }
 
 .nav-search {

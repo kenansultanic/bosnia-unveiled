@@ -18,7 +18,6 @@ const Navigation = () => {
     const [getSearchedDests, isSearchedDestsLoading, searchedDestsError] = useThunk(getSearchedDestinations);
 
     const { destinations: { searchedDestinationsByName } } = useAppSelector(state => state);
-    console.log(searchedDestinationsByName)
 
     const ref = useRef<HTMLDivElement>(null);
 
@@ -49,7 +48,7 @@ const Navigation = () => {
             if (searchTerm) {
                 getSearchedDests(searchTerm);
             }
-        }, 1000);
+        }, 250);
 
         return () => {
             clearTimeout(timeout);
@@ -63,9 +62,10 @@ const Navigation = () => {
     const renderedSearchedDestinationsByName = searchedDestinationsByName.map((dest, i) => {
         return (
             <Link
-                to={"#"}
+                to={`/${dest.id}`}
                 key={i}
-                className="searched-dest-by-name">
+                className="searched-dest-by-name"
+                onClick={() => setShowSearch(false)}>
                 <p>{dest.title}</p>
                 <p>{dest.sub_title}</p>
             </Link>
@@ -76,14 +76,16 @@ const Navigation = () => {
         <header ref={ref} className="navigation-container">
             <nav className={`nav-${navState}`}>
                 <div className="nav-link">
-                    <Link to={"/"}>
+                    <Link to={"/destinations?page=1"}>
                         <span className="material-symbols-outlined">
-                            home
+                            map
                         </span>
                     </Link>
                 </div>
                 <div className="nav-logo">
-                    <img src={Logo} alt="Word Bosnia written in old Bosnian writing" />
+                    <Link to="/">
+                        <img src={Logo} alt="Word Bosnia written in old Bosnian writing" />
+                    </Link>
                 </div>
                 <div className="nav-link">
                     <Button
@@ -110,7 +112,7 @@ const Navigation = () => {
                                     <div className="searched-dests-by-name-container">
                                         {renderedSearchedDestinationsByName}
                                     </div>
-                                    : null
+                                    : <div>No destinations to show</div>
                         }
                     </div>
                     : null
