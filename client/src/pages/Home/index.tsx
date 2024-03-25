@@ -4,7 +4,7 @@ import pickImg2 from "../../assets/background4.jpg";
 import pickImg3 from "../../assets/background5.jpg";
 import { useState, useEffect, useRef, Fragment } from "react";
 import { useThunk } from "hooks/useThunk";
-import { getDestinations, getLocationsAndCategories, getClosestDestinations, useAppDispatch, useAppSelector } from "store";
+import { getDestinations, getLocationsAndCategories, getClosestDestinations, getRandomDestinations, useAppSelector } from "store";
 import SearchBar from "./SearchBar";
 import Footer from "components/Footer";
 import DestinationCard from "components/DestinationCard";
@@ -17,13 +17,14 @@ const Home = () => {
     const [hoveredPickCard, setHoveredPickCard] = useState<string | null>(null);
     const { destinations } = useAppSelector(state => state);
     const [getClosestDests, isClosestDestsLoading, closestDestsError] = useThunk(getClosestDestinations);
+    const [getRandomDests, isRandomDestsLoading, randomDestsError] = useThunk(getRandomDestinations);
     const [getLocsAndCats, isL, err] = useThunk(getLocationsAndCategories);
-    const [getDests, s, a] = useThunk(getDestinations);
 
     const { locationsAndCategories: { locations, categories } } = destinations;
 
     useEffect(() => {
         getLocsAndCats();
+        getRandomDests(3);
     }, []);
 
     const handleSearchSubmit = (location: string, categories: string[], distance: number) => {
@@ -57,6 +58,24 @@ const Home = () => {
                     categories={dest.categories}
                     borderColor={markerColors[i]} />
             </Fragment>
+        );
+    });
+
+    console.log(destinations.randomDestinations)
+
+    const renderedRandomDestinations = destinations.randomDestinations.map(dest => {
+        return (
+            <div className={`top-pick-card-wrapper ${getOverlayClassname("jajce")}`}
+                onMouseEnter={() => setHoveredPickCard("jajce")}
+                onMouseLeave={() => setHoveredPickCard(null)}>
+                <DestinationCard
+                    className="top-pick-card top-pick-card-1"
+                    id={99}
+                    image={pickImg1}
+                    title={"Jajce"}
+                    subTitle={"neki subtitle"}
+                    categories={["park", "priroda"]} />
+            </div>
         );
     });
 

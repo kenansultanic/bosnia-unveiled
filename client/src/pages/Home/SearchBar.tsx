@@ -42,7 +42,7 @@ const SearchBar = ({ mainSectionRef, handleSearchSubmit, locations, categories }
         } else {
             setLocationError("");
             handleSearchSubmit(
-                locations.find(l => l.name === "tajan").id,
+                locations.find(l => l.name == locationValue).id,
                 categoriesValue.map((c: any) => c.value),
                 distance[0]
             );

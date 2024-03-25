@@ -39,7 +39,7 @@ const getClosestDestinations = createAsyncThunk(
         const categories = obj.categories.join(",");
         console.log(categories);
 
-        const res = await api.get("/destinations/closest", {
+        const res = await api.get("/destinations/closest/", {
             params: {
                 location_id: obj.locationId,
                 distance: obj.distance,
@@ -60,6 +60,15 @@ const getSearchedDestinations = createAsyncThunk(
     }
 );
 
+const getRandomDestinations = createAsyncThunk(
+    "destinations/getRandom",
+    async (n: number) => {
+        const res = await api.get(`/destinations/random/${n}/`);
+
+        return res.data;
+    }
+);
+
 // DEV ONLY
 const pause = (time: number) => {
     return new Promise((resolve) => {
@@ -69,4 +78,4 @@ const pause = (time: number) => {
     });
 };
 
-export { getDestinations, getLocationsAndCategories, getDestinationById, getClosestDestinations, getSearchedDestinations };
+export { getDestinations, getLocationsAndCategories, getDestinationById, getClosestDestinations, getSearchedDestinations, getRandomDestinations };
