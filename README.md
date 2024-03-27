@@ -5,11 +5,11 @@
     Tourist app
     <br />
     <br />
-    <a href="https://project-production-149b.up.railway.app/swagger/">View Server docs</a>
+    <a href="https://bosnia-unveiled.vercel.app/swagger/">View Server docs</a>
     ·
-    <a href="https://project-production-149b.up.railway.app/front/">Demo</a>
+    <a href="https://bosnia-unveiled-client.vercel.app">Demo</a>
     ·
-    <a href="https://project-production-149b.up.railway.app/admin/login/?next=/admin/">Admin login</a>
+    <a href="https://bosnia-unveiled.vercel.app/admin/">Admin login</a>
   </p>
 </div>
 
@@ -37,10 +37,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Screen Shot][product-screenshot]](https://example.com)
-
 A website 
-
 
 ### Built With
 
@@ -74,7 +71,6 @@ The Django server uses PIP as a package-managment system.
   python get-pip.py
   ```
 
-
 ### Installation
 
 This guide will walk you through the steps to install and setup
@@ -95,17 +91,29 @@ Unveiled Bosnia on your local machine.
    ```
 5. Enter your API in your server's `.env` file
    ```env
-   OPENWEATHERMAP_API_KEY = ENTER YOUR API
+   OPENWEATHERMAP_API_KEY = 'ENTER YOUR API'
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+### Starting the project
+
+1. Run the following command in the root's client folder
+   ```sh
+   npm start
+   ```
+2. Run the following commands in the root's server folder
+   ```sh
+   python manage.py makemigrations
+   python manage.py migrate
+   python manage.py runserver
+   ```
 
 <!-- CONTACT -->
 ## Contact
-* Kenan Sultanić - [@Kenan's LinkedIn](https://linkedin.com/in/kenansultanic/) - kenansultanic0805@gmail.com
+* Kenan Sultanić - [Kenan's LinkedIn](https://linkedin.com/in/kenansultanic/) - kenansultanic0805@gmail.com
 * Demir Pašalić - [Demir's LinkedIn](https://www.linkedin.com/in/dpasalic/) - de.pasalicc@gmail.com
-* Admira Bakal - [@Admira's LinkedIn](https://www.linkedin.com/in/admira-bakal-591176238/) - admira.bakal@gmail.com
+* Admira Bakal - [Admira's LinkedIn](https://www.linkedin.com/in/admira-bakal-591176238/) - admira.bakal@gmail.com
 
 Project Link: [https://github.com/kenansultanic/project.git](https://github.com/kenansultanic/project.git)
 
