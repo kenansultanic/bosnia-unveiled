@@ -1,180 +1,117 @@
 @import "../../scss/variables";
 
-.button {
-    position: relative;
-    border: none;
-    border-radius: $borderRadiusChild;
-    padding: 15px 25px;
-}
-.button:not(.button-dest-gallery-open) {
-    overflow: hidden;
-}
-.button:not(.button-dest-gallery-open) > span:first-child {
-    font-size: 24px;
-    padding-right: 7px;
-}
-.button-content {
+.primary, .secondary {
     display: flex;
-    justify-content: center;
     align-items: center;
-    transition: transform 150ms 50ms ease-out;
-}
-.button-content:nth-child(2) {
-    position: absolute;
-    bottom: -60px;
-    z-index: 99;
-}
-.button-content > span:nth-child(2) {
+    gap: 10px;
+    padding: 15px 20px;
     font-size: $bodyFontSize;
-    padding-left: 7px;
+    border: 1px solid #aaa;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transition: background-color 250ms, border-color 250ms;
 }
-.button:hover > .button-content {
-    transform: translateY(-75px);
-}
-
-.button-dest-gallery-open:hover > .button-content {
-    transform: none;
-}
-.button-dest-gallery-open > .button-content:nth-child(2) {
-    color: $textColor;
-}
-
-.button-hover-overlay {
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    border-radius: 50% 50% 0 0;
-    transition: height 150ms, width 150ms, border-color 150ms;
-    background-color: #fff;
-}
-.button:not(.button-dest-gallery-open):hover > .button-hover-overlay {
-    height: 100px;
-}
-
-.button-primary {
+.primary {
     background-color: $primaryColor;
 }
-
-.button-secondary {
-    background-color: $secondaryColor;
-}
-
-.button-submit {
-    background-color: red;
-}
-
-.button-dest-gallery-open {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 45px;
-    outline: 15px solid $primaryColor;
-    border: none;
-    border-radius: 50%;
-    color: $elementTextColor;
-    background-color: rgba(0, 0, 0, 1);
-    transition: color 150ms, background-color 150ms;
-}
-.button-dest-gallery-open:hover {
-    color: $textColor;
+.secondary {
     background-color: #fff;
 }
-.button-dest-gallery-open:hover > span > span {
-    transition: transform 150ms;
+.primary:hover {
+    background-color: #fff;
 }
-.button-dest-gallery-open:hover > span > span {
-    transform: scale(1.5);
+.secondary:hover {
+    border-color: #000;
 }
-.button-dest-gallery-open > span {
-    font-size: 35px;
+.primary:active{
+    box-shadow: 0 0;
+    transform: scale(.9);
 }
-.button-dest-gallery-open::before {
-    // inverted border radius
-    content: "";
-    position: absolute;
-    bottom: 0px;
-    left: -58px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 25px 20px $primaryColor;
-    //background-color: red;
-}
-.button-dest-gallery-open::after {
-    // inverted border radius
-    content: "";
-    position: absolute;
-    top: -58px;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 20px 25px $primaryColor;
+.secondary:active {
+    box-shadow: 0 0;
 }
 
-// Media queries
+.gallery-button {
+    gap: 0;
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    padding: 20px;
+    border: 5px solid $primaryColor;
+    border-radius: 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    background-color: #fff;
+    transition: border-color 250ms;
+}
+.gallery-button:hover {
+    border-color: $textColor;
+}
+.gallery-button:active{
+    transform: scale(.9);
+}
+.gallery-button > span {
+    transform: translateY(2px);
+}
+
+.search-button {
+    padding: 20px;
+    border: none;
+    border: 5px solid $accentColor;
+    border-radius: 32px;
+    // box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    background-color: $accentColor;
+    color: $elementTextColor;
+    transition: background-color 100ms;
+}
+.search-button:hover {
+    background-color: #fff;
+    color: $textColor;
+}
+.search-button:active{
+    transform: scale(.9);
+}
+.search-button > span {
+    transform: translateY(2px);
+}
+
+.search-open {
+    padding: 10px;
+    padding-top: 14px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    transition: border-color 250ms;
+}
+.search-open:hover {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .25);
+}
+
+.all-dests-button {
+    padding: 10px 10px 10px 20px;
+}
+
 @media screen and (max-width: 960px) {
-    .button-dest-gallery-open {
-        padding: 35px;
-    }
-    .button-dest-gallery-open:hover > .button-content {
-        transform: translateY(-95px);
-    }
-    .button-dest-gallery-open > span {
-        font-size: 30px;
-    }
-    .button-dest-gallery-open::before,
-    .button-dest-gallery-open::after {
-        width: 40px;
-        height: 40px;
-    }
-    .button-dest-gallery-open::before {
-        bottom: 1px;
-        left: -49px;
-        box-shadow: 20px 15px $primaryColor;
-    }
-    .button-dest-gallery-open::after {
-        top: -49px;
-        right: 0;
-        box-shadow: 15px 20px $primaryColor;
+    .gallery-button {
+        right: 15px;
+        bottom: 15px;
     }
 }
-@media screen and (max-width: 560px) {
-    .dest-main-cta {
-        width: 100%;
+@media screen and (max-width: 960px) {
+    .gallery-button {
+        right: 10px;
+        bottom: 10px;
     }
-    .button-dest-gallery-open {
-        padding: 30px;
+    .search-button {
+        padding: 28px;
+        border-radius: 50px;
     }
-    .button-dest-gallery-open:hover > .button-content {
-        transform: translateY(-90px);
-    }
-    .button-dest-gallery-open > span {
-        font-size: 25px;
-    }
+}
 
-    .button-dest-gallery-open::before {
-        // inverted border radius
-        content: "";
-        position: absolute;
-        bottom: 0px;
-        left: -63px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        box-shadow: 25px 21px $primaryColor;
-    }
-    .button-dest-gallery-open::after {
-        // inverted border radius
-        content: "";
-        position: absolute;
-        top: -63px;
-        right: 0;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        box-shadow: 20px 25px $primaryColor;
+@media screen and (max-width: 560px) {
+    .search-button {
+        padding: 0px;
+        width: 200px;
+        margin: auto;
     }
 }

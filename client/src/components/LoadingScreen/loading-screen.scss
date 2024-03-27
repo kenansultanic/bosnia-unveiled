@@ -1,0 +1,15 @@
+.loading-screen {
+    height: 100vh;
+}
+
+.loading-wrapper {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loading-text {
+    font-size: 24px;
+    padding-bottom: 15px;
+}

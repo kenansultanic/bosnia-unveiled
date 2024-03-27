@@ -9,7 +9,7 @@
     height: 100vh;
     z-index: 9999999;
     background-color: rgba(255, 255, 255, 0.95);
-    background-image: $noise;
+    //background-image: $noise;
     animation: gallery-fade-in 250ms forwards;
 }
 
@@ -30,89 +30,42 @@
     max-height: 60vh;
     border: 1px solid rgba(255, 255, 255, 0.75);
     border-radius: $borderRadiusParent;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
-.button-gallery-arrow {
+.gallery-button-center {
+    gap: 0;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    background-color: transparent;
     z-index: 999999999;
 }
-.gallery-arrow-next {
+.gallery-button-next {
     right: 30px;
 }
-.gallery-arrow-prev {
+.gallery-button-prev {
     left: 30px;
 }
-.button-gallery-arrow > .button-content > span {
-    display: flex;
-    align-items: center;
-}
-.gallery-arrow-text {
-    font-size: $bodyFontSize;
-    font-style: italic;
-    padding: 0 10px;
-}
-.gallery-arrow-icon {
-    font-size: 24px;
-}
-.gallery-arrow-prev .gallery-arrow-text {
-    padding: 0 10px 0 5px;
-}
 
-.button-gallery-arrow > .button-content:nth-child(2) {
+.gallery-button-close {
+    gap: 0;
     position: absolute;
-    bottom: 15px;
-    z-index: 99;
-}
-.gallery-arrow-next > .button-content:nth-child(2) {
-    left: -190px;
-}
-.gallery-arrow-prev > .button-content:nth-child(2) {
-    right: -190px;
-}
-.gallery-arrow-next:hover > .button-content {
-    transform: translateX(215px);
-}
-.gallery-arrow-prev:hover > .button-content {
-    transform: translateX(-215px);
-}
-.button-gallery-arrow > .button-hover-overlay {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 5px;
-    height: 120%;
-    transition: width 150ms;
-    background-color: #fff;
-}
-.gallery-arrow-next > .button-hover-overlay {
-    left: -10px;
-    border-radius: 0 50% 50% 0;
-}
-.gallery-arrow-prev > .button-hover-overlay {
-    right: -10px;
-    left: unset;
-    border-radius: 50% 0 0 50%;
-}
-.button-gallery-arrow:hover > .button-hover-overlay {
-    width: 170px;
-    height: 120%;
-}
-
-.button-gallery-close {
-    position: absolute;
-    bottom: 75px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
 }
-
+@media screen and (max-width: 1280px) {
+    .gallery-button-center {
+        top: unset;
+        bottom: 30px;
+        transform: none;
+    }
+    
+}
 @media screen and (max-width: 960px) {
     .gallery-slider {
-        height: 70vh;
+        height: 75vh;
     }
-
     .gallery-img-container {
         height: 75vh;
     }
@@ -120,9 +73,6 @@
         max-width: 90vw;
         max-height: 50vh;
         border-radius: calc($borderRadiusParent - 10px);
-    }
-    .button-gallery-arrow {
-        display: none;
     }
 }
 @media screen and (max-width: 560px) {
@@ -139,10 +89,3 @@
         opacity: 1;
     }
 }
-
-// add focus trap
-// fix black outline on images
-// try to add zoom on images
-// implement navigation
-// fix ui (border radius and fonts) at all resolutions
-// especially for home page

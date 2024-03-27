@@ -10,7 +10,8 @@
     text-align: center;
 }
 .footer-logo > img {
-    width: 75px;
+    width: auto !important;
+    height: 50px;
 }
 div.hr {
     width: 50%;
@@ -86,5 +87,10 @@ div.hr {
         flex-direction: column;
         gap: 5px;
         margin-bottom: 50px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .footer-logo > img {
+        height: 40px;
     }
 }

@@ -11,7 +11,7 @@
     color: $textColor;
     border: 1px solid rgba(255, 255, 255, .25);
     border-radius: calc($borderRadiusChild - 10px);
-    background-color: $elementBgColorTransparent;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;    background-color: $elementBgColorTransparent;
 }
 .content-card-icon {
     display: grid;
@@ -36,10 +36,7 @@
     margin-top: 15px;
 }
 .content-card-category {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 15px 5px 10px;
+    padding: 10px 15px;
     margin-top: 5px;
     border-radius: $borderRadiusParent;
     background-color: $elementHighlightBgColor;
@@ -47,8 +44,29 @@
 .dest-description > h3 {
     font-size: 24px;
 }
-.dest-description > .content-card-paragraph > p {
-    padding: 15px 0;
+.dest-description .content-card-paragraph {
+    line-height: 1.75;
+}
+
+.dest-weather .content-card-paragraph {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.dest-weather .content-card-paragraph > div {
+    padding-left: 15px;
+    border-left: 1px solid #fff;
+}
+.dest-weather .content-card-paragraph > div > h4 {
+    font-weight: normal;
+    font-size: 16px;
+}
+.dest-weather .content-card-paragraph > div > p {
+    font-size: 40px;
+}
+.dest-weather .content-card-paragraph > div > p > span {
+    font-weight: normal;
+    font-size: 18px;
 }
 
 // Media queries
@@ -83,6 +101,9 @@
     }
 }
 @media screen and (max-width: 560px) {
+    .content-card {
+        border-radius: calc($borderRadiusChild - 20px);
+    }
     .content-card-icon {
         width: 50px;
         height: 50px;
@@ -93,6 +114,15 @@
         font-size: 18px;
     }
     .content-card-paragraph {
+        font-size: 16px;
+    }
+    .dest-weather .content-card-paragraph > div {
+        padding-left: 10px;
+    }
+    .dest-weather .content-card-paragraph > div > p {
+        font-size: 30px;
+    }
+    .dest-weather .content-card-paragraph > div > p > span {
         font-size: 16px;
     }
 }

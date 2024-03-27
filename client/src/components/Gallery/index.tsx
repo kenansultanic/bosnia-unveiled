@@ -2,16 +2,18 @@ import "./gallery.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRef, Dispatch, SetStateAction } from "react";
+import FocusTrap from "focus-trap-react";
 import Slider from "react-slick";
 import Button from "components/Button";
-import images from "images";
+// import images from "images";
 
 interface GalleryProps {
     isGalleryOpen: boolean,
-    setIsGalleryOpen: Dispatch<SetStateAction<boolean>>
+    setIsGalleryOpen: Dispatch<SetStateAction<boolean>>,
+    images: any[]
 }
 
-function SimpleSlider() {
+function SimpleSlider({ images }: { images: any[] }) {
     const slider = useRef<Slider>(null);
 
     var settings = {
@@ -22,27 +24,31 @@ function SimpleSlider() {
         slidesToScroll: 1,
     };
 
+    console.log(images)
+
     const renderedImages = images.map(img => (
-        <div key={img.id}>
+        <div key={img.image_url}>
             <div className="gallery-img-container">
-                <img src={img.src} alt="#" className="gallery-img" />
+                <img src={img.image_url} alt="#" className="gallery-img" />
             </div>
         </div>
     ));
 
     return (
         <>
-            <Button className="gallery-arrow gallery-arrow-next" onClick={() => slider?.current?.slickNext()}>
-                <span className="gallery-arrow-text">Next</span>
-                <span className="gallery-arrow-icon material-symbols-outlined">
-                    arrow_forward_ios
-                </span>
+            <Button
+                variant="secondary"
+                className="gallery-button-center gallery-button-next"
+                onClick={() => slider?.current?.slickNext()}
+                icon="arrow_forward_ios"
+                iconAriaLabel="Next image">
             </Button>
-            <Button className="gallery-arrow gallery-arrow-prev" onClick={() => slider?.current?.slickPrev()}>
-                <span className="gallery-arrow-icon material-symbols-outlined">
-                    arrow_back_ios
-                </span>
-                <span className="gallery-arrow-text">Prev</span>
+            <Button
+                variant="secondary"
+                className="gallery-button-center gallery-button-prev"
+                onClick={() => slider?.current?.slickPrev()}
+                icon="arrow_back_ios"
+                iconAriaLabel="Previous image">
             </Button>
             <Slider ref={slider} {...settings} className="gallery-slider">
                 {renderedImages}
@@ -51,17 +57,20 @@ function SimpleSlider() {
     );
 };
 
-const Gallery = ({ isGalleryOpen, setIsGalleryOpen }: GalleryProps) => {
+const Gallery = ({ setIsGalleryOpen, images }: GalleryProps) => {
     return (
-        <div className="gallery">
-            <Button
-                icon="close"
-                iconAriaLabel="Close gallery"
-                className="gallery-close"
-                onClick={() => setIsGalleryOpen(false)}
-            >Close</Button>
-            <SimpleSlider />
-        </div>
+        <FocusTrap>
+            <div className="gallery">
+                <Button
+                    icon="close"
+                    iconAriaLabel="Close gallery"
+                    variant="secondary"
+                    className="gallery-button-close"
+                    onClick={() => setIsGalleryOpen(false)}>
+                </Button>
+                <SimpleSlider images={images} />
+            </div>
+        </FocusTrap>
     );
 };
 
