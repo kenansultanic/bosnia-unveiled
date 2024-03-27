@@ -1,17 +1,5 @@
 from drf_yasg import openapi
 
-
-class CategorySchema(openapi.Schema):
-    type = openapi.TYPE_OBJECT
-    properties = {
-        'name': openapi.Schema(
-            type=openapi.TYPE_STRING,
-            max_length=200,
-        ),
-    }
-    required = ['name']
-
-
 # Schema for the Category model
 category_schema = openapi.Schema(
     type=openapi.TYPE_OBJECT,
@@ -23,6 +11,17 @@ category_schema = openapi.Schema(
     },
     required=['name']
 )
+
+# Schema for the Image model
+# image_schema = openapi.Schema(
+#     type=openapi.TYPE_OBJECT,
+#     properties={
+#         'image': openapi.Schema(
+#             type=openapi.TYPE_STRING
+#         ),
+#     },
+#     required=['image']
+# )
 
 # Schema for the OpenTime model
 open_time_schema = openapi.Schema(
@@ -44,6 +43,7 @@ open_time_schema = openapi.Schema(
 location_schema = openapi.Schema(
     type=openapi.TYPE_OBJECT,
     properties={
+        'id': openapi.Schema(type=openapi.TYPE_STRING),
         'name': openapi.Schema(type=openapi.TYPE_STRING, max_length=200),
         'latitude': openapi.Schema(
             type=openapi.TYPE_NUMBER,
@@ -61,6 +61,16 @@ location_schema = openapi.Schema(
     required=['name', 'latitude', 'longitude']
 )
 
+# Schema for the ImageGallery model
+image_gallery_schema = openapi.Schema(
+    type=openapi.TYPE_ARRAY,
+    items=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'image_url': openapi.Schema(type=openapi.TYPE_STRING)
+        }
+    )
+)
 
 destination_schema = openapi.Schema(
     type=openapi.TYPE_OBJECT,
@@ -185,6 +195,7 @@ get_destination_schema = openapi.Schema(
     type=openapi.TYPE_OBJECT,
     properties={
         'destination': destination_schema,
+        'image_gallery': image_gallery_schema,
         'weather': weather_schema,
         'public_transport_schedule': openapi.Schema(
             type=openapi.TYPE_ARRAY,
@@ -234,13 +245,13 @@ search_for_destinations_schema = openapi.Schema(
     items=openapi.Schema(
         type=openapi.TYPE_OBJECT,
         properties={
+            'id': openapi.Schema(type=openapi.TYPE_STRING),
             'title': openapi.Schema(type=openapi.TYPE_STRING),
             'sub_title': openapi.Schema(type=openapi.TYPE_STRING)
         },
         required=['title', 'sub_title']
     )
 )
-
 
 # closest destinations search schema
 closest_destinations_schema = openapi.Schema(
@@ -249,19 +260,8 @@ closest_destinations_schema = openapi.Schema(
     max_items=3
 )
 
-# Schema for the Image model
-image_schema = openapi.Schema(
-    type=openapi.TYPE_OBJECT,
-    properties={
-        'image': openapi.Schema(
-            type=openapi.TYPE_STRING
-        ),
-    },
-    required=['image']
-)
-
-# all images schema
-get_all_images_schema = openapi.Schema(
+# random destinations schema
+random_destinations_schema = openapi.Schema(
     type=openapi.TYPE_ARRAY,
-    items=image_schema
+    items=destination_schema
 )

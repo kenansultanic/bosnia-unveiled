@@ -12,7 +12,7 @@ from geopy.distance import geodesic
 from panel.pagination import DestinationsPagination
 
 from .schemas import get_destination_schema, search_for_destinations_schema, get_all_destinations_schema, \
-    closest_destinations_schema, get_locations_categories_schema, get_all_images_schema
+    closest_destinations_schema, get_locations_categories_schema, random_destinations_schema
 
 load_dotenv()
 
@@ -103,17 +103,15 @@ def get_destination(request, destination_id):
             }
             for schedule in public_transport_schedule
         ]
-        serialized_images = []
 
-        for image in images:
-            serialized_images.append(image.to_dict(request))
+        serialized_images = [image.to_dict(request) for image in images]
 
         response = {
             'destination': serialized_destination,
+            'image_gallery': serialized_images,
             'weather': api_response.json() if api_response.status_code == 200 else None,
             'public_transport_schedule': serialized_transport_schedule,
             'similar_destinations': serialized_similar_destinations,
-            'images': serialized_images
         }
 
         return Response(response)
@@ -139,8 +137,8 @@ def search_destinations(request):
     if not query:
         return Response({'error': 'Missing query parameter'}, status=400)
 
-    results = Destination.objects.filter(Q(title__contains=query) | Q(categories__name__contains=query))
-    data = [{'title': item.title, 'sub_title': item.sub_title} for item in results]
+    results = Destination.objects.filter(Q(title__icontains=query) | Q(categories__name__icontains=query)).distinct()
+    data = [{'id': item.id, 'title': item.title, 'sub_title': item.sub_title} for item in results]
 
     return Response(data)
 
@@ -177,8 +175,12 @@ def find_closest_destinations(request):
 
     try:
         selected_location = Location.objects.get(pk=selected_location_id)
+        destinations = []
 
-        destinations = Destination.objects.filter(Q(categories__name__in=categories))
+        if len(categories) > 1 or categories[0]:
+            destinations = Destination.objects.filter(Q(categories__name__in=categories))
+        else:
+            destinations = Destination.objects.all()
 
         closest_destinations = filter(lambda dest: geodesic(
             (selected_location.latitude, selected_location.longitude),
@@ -202,21 +204,14 @@ def find_closest_destinations(request):
         return Response({'error': str(e)}, status=500)
 
 
-@swagger_auto_schema(
-    method='get',
-    responses={200: get_all_images_schema}
-)
+@swagger_auto_schema(method='get', responses={200: random_destinations_schema})
 @api_view(['GET'])
-def get_all_images(request, destination_id):
+def random_destinations(request, number_of_destinations):
     """
-      Returns all images for specific destination
+        Returns a specified number of destinations randomly
     """
-    destination = Destination.objects.get(pk=destination_id)
-    images = destination.images.all()
+    destinations = Destination.objects.order_by('?')[:number_of_destinations]
 
-    serialized_images = []
+    serialized_destinations = [destination.to_dict(request) for destination in destinations]
 
-    for image in images:
-        serialized_images.append(image.to_dict(request))
-
-    return Response(serialized_images)
+    return Response(serialized_destinations)
