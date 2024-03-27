@@ -12,17 +12,11 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entrypoint script into the container
-COPY entrypoint.sh /app/
-
-# Make the entrypoint script executable
-RUN chmod +x entrypoint.sh
-
 # Copy the rest of your application code into the container
 COPY . /app/
 
 # Expose the port your Django app will run on (e.g., 8000)
 EXPOSE 8000
 
-# Use the entrypoint script as the command
-ENTRYPOINT ["./entrypoint.sh"]
+# Specify the command to run your Django application
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
