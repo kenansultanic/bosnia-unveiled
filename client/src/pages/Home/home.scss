@@ -59,7 +59,7 @@
 
 .home-top-picks-section>h2 {
     padding: 70px 90px;
-    font-size: 48px;
+    font-size: 44px;
     line-height: 1;
 }
 
@@ -128,6 +128,26 @@
     z-index: 9999999;
 }
 
+.top-picks-cards-skeleton {
+    width: 100%;
+    height: 100%;
+}
+.top-picks-cards-container {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+}
+.top-picks-cards-container > div {
+    flex: 1;
+    height: 320px;
+    border-radius: calc($borderRadiusChild - 4px);
+    background-color: #fff;
+    background-image: linear-gradient(115deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0) 70%);
+    background-size: 200%;
+    animation: top-picks-cards-skeleton 1000ms linear infinite;
+}
+
 @media screen and (max-width: 1440px) {
     .home-heading {
         padding: 70px 70px;
@@ -138,7 +158,7 @@
 
     .home-top-picks-section>h2 {
         padding: 70px 70px;
-        font-size: 38px;
+        font-size: 35px;
     }
 
     .home-top-picks-section>h2>span {
@@ -152,6 +172,10 @@
     .home-search-section {
         width: 60%;
     }
+
+    .top-picks-cards-container > div {
+        height: 250px;
+    }
 }
 
 @media screen and (max-width: 1280px) {
@@ -164,7 +188,7 @@
     }
 
     .home-top-picks-section>h2 {
-        font-size: 32px;
+        font-size: 29px;
     }
 
     .home-top-picks-section>h2>span {
@@ -254,6 +278,11 @@
     .home-footer {
         grid-row: 6 / 7;
         grid-column: auto;
+    }
+
+    .top-picks-cards-container > div {
+        height: 320px;
+        border-radius: calc($borderRadiusChild - 20px);
     }
 }
 
@@ -424,4 +453,14 @@
         height: 100%;
     }
     
+}
+
+@keyframes top-picks-cards-skeleton {
+    0% {
+        background-position: 200% 0%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
 }
