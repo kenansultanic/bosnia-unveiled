@@ -11,6 +11,7 @@ import DestinationCard from "components/DestinationCard";
 import Map from "components/Map";
 import SearchMotive from "./SearchMotive";
 import SearchCardsSkeleton from "./SearchCardsSkeleton";
+import TopPicksSkeleton from "./TopPicksSkeleton";
 
 const Home = () => {
     const mainSectionRef = useRef(null);
@@ -20,7 +21,10 @@ const Home = () => {
     const [getRandomDests, isRandomDestsLoading, randomDestsError] = useThunk(getRandomDestinations);
     const [getLocsAndCats, isL, err] = useThunk(getLocationsAndCategories);
 
-    const { locationsAndCategories: { locations, categories } } = destinations;
+    const {
+        locationsAndCategories: { locations, categories },
+        randomDestinations
+    } = destinations;
 
     useEffect(() => {
         getLocsAndCats();
@@ -61,20 +65,18 @@ const Home = () => {
         );
     });
 
-    console.log(destinations.randomDestinations)
-
-    const renderedRandomDestinations = destinations.randomDestinations.map(dest => {
+    const renderedRandomDestinations = randomDestinations.map(dest => {
         return (
-            <div className={`top-pick-card-wrapper ${getOverlayClassname("jajce")}`}
-                onMouseEnter={() => setHoveredPickCard("jajce")}
+            <div key={dest.id} className={`top-pick-card-wrapper ${getOverlayClassname(dest.title)}`}
+                onMouseEnter={() => setHoveredPickCard(dest.title)}
                 onMouseLeave={() => setHoveredPickCard(null)}>
                 <DestinationCard
                     className="top-pick-card top-pick-card-1"
-                    id={99}
-                    image={pickImg1}
-                    title={"Jajce"}
-                    subTitle={"neki subtitle"}
-                    categories={["park", "priroda"]} />
+                    id={dest.id}
+                    image={dest.image}
+                    title={dest.title}
+                    subTitle={dest.sub_title}
+                    categories={dest.categories} />
             </div>
         );
     });
@@ -92,9 +94,10 @@ const Home = () => {
                     locations={locations}
                     categories={categories} />
                 <section className="home-top-picks-section">
-                    <h2>Our top <span>picks</span></h2>
+                    <h2>Random <span>picks</span></h2>
                     <div className="home-top-picks">
-                        <div className={`top-pick-card-wrapper ${getOverlayClassname("jajce")}`}
+                        {randomDestinations.length !== 0 ? renderedRandomDestinations : <TopPicksSkeleton />}
+                        {/* <div className={`top-pick-card-wrapper ${getOverlayClassname("jajce")}`}
                             onMouseEnter={() => setHoveredPickCard("jajce")}
                             onMouseLeave={() => setHoveredPickCard(null)}>
                             <DestinationCard
@@ -126,7 +129,7 @@ const Home = () => {
                                 title={"Sarajevo"}
                                 subTitle={"neki subtitle"}
                                 categories={["park", "priroda"]} />
-                        </div>
+                        </div> */}
                     </div>
                 </section>
                 <section className="home-center-image-section"></section>
