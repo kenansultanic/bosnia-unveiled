@@ -180,7 +180,7 @@
         padding: 20px 25px;
     }
     .top-pick-card .dest-card-img {
-        height: 150px;
+        height: 140px;
     }
 }
 @media screen and (min-width: 961px) {
@@ -207,7 +207,7 @@
         writing-mode: vertical-rl;
         text-orientation: mixed;
         text-transform: uppercase;
-        font-size: 20px;
+        font-size: 16px !important;
         font-weight: 900;
         font-family: "Merriweather", serif;
         background-color: #fff;
@@ -220,43 +220,60 @@
     .top-pick-card-overlay > span:nth-child(2) {
         display: block;
         position: absolute;
+        left: -5px;
+        font-size: 64px;
+        text-wrap: nowrap;
         color: $primaryColor;
         opacity: .3;
     }
-    .top-pick-card-1 + .top-pick-card-overlay > span:nth-child(2) {
-        left: -15px;
-        font-size: 84px;
+    .top-pick-card .dest-card-heading {
+        font-size: 16px;
     }
-    .top-pick-card-2 + .top-pick-card-overlay > span:nth-child(2) {
-        font-size: 36px;
-        text-wrap: nowrap;
+    .top-pick-card .dest-card-sub-heading {
+        font-size: 14px;
     }
-    .top-pick-card-3 + .top-pick-card-overlay > span:nth-child(2) {
-        font-size: 68px;
+    .top-pick-card .dest-card-description {
+        font-size: 12px;
+        padding: 10px 15px;
     }
+    .top-pick-card .dest-card-img {
+        height: 90px;
+    }
+    .top-pick-card-overlay {
+        font-size: 24px;
+    }
+    // .top-pick-card-1 + .top-pick-card-overlay > span:nth-child(2) {
+    //     left: -15px;
+    //     font-size: 84px;
+    // }
+    // .top-pick-card-2 + .top-pick-card-overlay > span:nth-child(2) {
+    //     font-size: 36px;
+    //     text-wrap: nowrap;
+    // }
+    // .top-pick-card-3 + .top-pick-card-overlay > span:nth-child(2) {
+    //     font-size: 68px;
+    // }
 }
 @media screen and (min-width: 1441px) {
     .top-pick-card {
         height: 320px;
     }
-    .top-pick-card .dest-card-description {
-        padding: 10px 15px;
+    .top-pick-card-overlay {
+        font-size: 20px !important;
     }
     .top-pick-card .dest-card-img {
-        height: 155px;
+        height: 130px;
     }
-    .top-pick-card-overlay {
-        font-size: 24px;
-    }
-    .top-pick-card-1 + .top-pick-card-overlay > span:nth-child(2) {
-        left: -20px;
-        font-size: 96px;
-    }
-    .top-pick-card-2 + .top-pick-card-overlay > span:nth-child(2) {
-        font-size: 36px;
-        text-wrap: nowrap;
-    }
-    .top-pick-card-3 + .top-pick-card-overlay > span:nth-child(2) {
-        font-size: 68px;
-    }
+
+    // .top-pick-card-1 + .top-pick-card-overlay > span:nth-child(2) {
+    //     left: -20px;
+    //     font-size: 96px;
+    // }
+    // .top-pick-card-2 + .top-pick-card-overlay > span:nth-child(2) {
+    //     font-size: 36px;
+    //     text-wrap: nowrap;
+    // }
+    // .top-pick-card-3 + .top-pick-card-overlay > span:nth-child(2) {
+    //     font-size: 68px;
+    // }
 }
