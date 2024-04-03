@@ -233,8 +233,13 @@
         font-size: 14px;
     }
     .top-pick-card .dest-card-description {
-        font-size: 12px;
         padding: 10px 15px;
+    }
+    .top-pick-card .dest-card-categories {
+        gap: 2px;
+    }
+    .top-pick-card .content-card-category {
+        font-size: 12px !important;
     }
     .top-pick-card .dest-card-img {
         height: 90px;
