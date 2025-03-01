@@ -19,7 +19,10 @@ const Footer = ({ className }: Props) => {
                         </span>
                     </div>
                     <h2 className="footer-heading">About Us</h2>
-                    <p className="footer-about-paragraph">We are three students who wanted to show the world how beautiful our homeland is.</p>
+                    <p className="footer-about-paragraph">
+                        We are three students who built this website to showcase our skills and knowledge to potential employers.
+                        It is hosted on a free platform and serves as a portfolio piece for our CVs
+                    </p>
                 </div>
                 <div className="footer-contact">
                     <div>
@@ -31,11 +34,11 @@ const Footer = ({ className }: Props) => {
                     <div>
                         <div className="footer-email">
                             <div>Admira</div>
-                            <div>admira@gmail.com</div>
+                            <div>admira.bakal@gmail.com</div>
                         </div>
                         <div className="footer-email">
                             <div>Kenan</div>
-                            <div>keno@gmail.com</div>
+                            <div>kenansultanic0805@gmail.com</div>
                         </div>
                         <div className="footer-email">
                             <div>Demir</div>
