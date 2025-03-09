@@ -37,11 +37,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-A website 
+A Full stack Web application showcasing lesser known natural and man made wonders of Bosnia & Herzegovina. Built by 3 students to showcase our skills and knowledge to potential employers. It is hosted on a free platform and serves as a portfolio piece for our CVs.
 
 ### Built With
 
-This section contains all major frameworks and libraries that we used to develop your project. 
+This section contains all major frameworks and libraries that we used to develop this project. 
 
 * [![React][React.js]][React-url]
 * [![Typescript][TypeScript]][TypeScript-url]
