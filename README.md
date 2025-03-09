@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-<h3 align="center">Unveiled Bosnia</h3>
+<h3 align="center">Bosnia Unveiled</h3>
 <p align="center">
     Tourist app
     <br />
