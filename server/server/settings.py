@@ -33,7 +33,10 @@ DEBUG = os.getenv('ENV') != 'production'
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
 
-CSRF_TRUSTED_ORIGINS = ['https://project-production-149b.up.railway.app']
+CSRF_TRUSTED_ORIGINS = [
+    'https://project-production-149b.up.railway.app',
+    'https://bosnia-unveiled-client-git-production-kenansultanics-projects.vercel.app/'
+]
 
 # Application definition
 
