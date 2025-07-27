@@ -5,11 +5,11 @@
     Tourist app
     <br />
     <br />
-    <a href="https://bosnia-unveiled-git-production-kenansultanics-projects.vercel.app/swagger/">View Server docs</a>
+    <a href="https://bosnia-unveiled.vercel.app/swagger/">View Server docs</a>
     ·
     <a href="https://bosnia-unveiled-client.vercel.app">Demo</a>
     ·
-    <a href="https://bosnia-unveiled-git-production-kenansultanics-projects.vercel.app/admin/">Admin login</a>
+    <a href="https://bosnia-unveiled.vercel.app/admin/">Admin login</a>
   </p>
 </div>
 
